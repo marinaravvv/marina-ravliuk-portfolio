@@ -142,7 +142,7 @@ export type Project = {
   summary: LocalizedText;
   detail: LocalizedText;
   tags: string[];
-  visual: 'aura' | 'mav8' | 'nova' | 'sasha' | 'natalia';
+  visual: 'aura' | 'rodus' | 'mav8' | 'nova' | 'sasha' | 'natalia';
   url?: string;
   inDevelopment?: boolean;
 };
@@ -151,35 +151,42 @@ export const projects: Project[] = [
   {
     id: 'aura', title: 'AURA', visual: 'aura',
     category: { ua: 'Клієнтський проєкт', en: 'Client project', it: 'Progetto cliente' },
-    summary: { ua: 'Цифровий проєкт для Родоси.', en: 'A digital project for Rodosi.', it: 'Un progetto digitale per Rodosi.' },
-    detail: { ua: 'AURA — один із моїх клієнтських проєктів, створений для Родоси. Детальний опис завдання, реалізації та результати буде додано після погодження матеріалів.', en: 'AURA is a client project created for Rodosi. Details of the brief, implementation and outcomes will be added once the materials are confirmed.', it: 'AURA è un progetto cliente realizzato per Rodosi. La descrizione del brief, della realizzazione e dei risultati verrà aggiunta dopo la conferma dei materiali.' },
+    summary: { ua: 'Самостійний креативний цифровий проєкт.', en: 'An independent creative digital project.', it: 'Un progetto digitale creativo indipendente.' },
+    detail: { ua: 'AURA — окремий цифровий проєкт. Деталі концепції, реалізації й візуальні матеріали з’являться після підготовки кейсу.', en: 'AURA is a standalone digital project. Its concept, implementation and visuals will be documented when the case study is ready.', it: 'AURA è un progetto digitale indipendente. Concept, realizzazione e immagini saranno aggiunti quando il case study sarà pronto.' },
     tags: ['Client project'],
+  },
+  {
+    id: 'rodus', title: 'RODUS', visual: 'rodus',
+    category: { ua: 'Освітня цифрова платформа', en: 'Digital education platform', it: 'Piattaforma educativa digitale' },
+    summary: { ua: 'Окремий проєкт освітньої платформи RODUS.', en: 'A separate digital education platform project.', it: 'Un progetto indipendente di piattaforma educativa digitale.' },
+    detail: { ua: 'RODUS — цифрова освітня платформа. Повний опис функціональності, моєї ролі й результати додамо після підготовки матеріалів проєкту.', en: 'RODUS is a digital education platform. Features, my role and results will be documented when the project materials are ready.', it: 'RODUS è una piattaforma educativa digitale. Funzionalità, il mio ruolo e risultati saranno documentati quando i materiali saranno pronti.' },
+    tags: ['Digital Platform', 'Product Design'],
   },
   {
     id: 'mav8', title: 'MAV8', visual: 'mav8',
     category: { ua: 'Платформа / власний бізнес', en: 'Platform / founder project', it: 'Piattaforma / progetto founder' },
-    summary: { ua: 'Екосистема AI, автоматизації, цифрових продуктів та освіти.', en: 'An ecosystem spanning AI, automation, digital products and education.', it: 'Un ecosistema tra AI, automazione, prodotti digitali e formazione.' },
+    summary: { ua: 'Моя бізнес-екосистема AI, автоматизації та цифрових систем.', en: 'My business ecosystem for AI, automation and digital systems.', it: 'Il mio ecosistema imprenditoriale dedicato ad AI, automazione e sistemi digitali.' },
     detail: { ua: 'MAV8 об’єднує три напрями: LEARN — навчання, BUILD / RESOURCES — практичні матеріали, SOLUTIONS — цифрові рішення для бізнесу. Я розвиваю архітектуру продуктів і платформи.', en: 'MAV8 brings together LEARN (education), BUILD / RESOURCES (practical assets), and SOLUTIONS (digital business solutions). I am developing the product and platform architecture.', it: 'MAV8 riunisce LEARN (formazione), BUILD / RESOURCES (risorse pratiche) e SOLUTIONS (soluzioni digitali per le aziende). Sto sviluppando l’architettura dei prodotti e della piattaforma.' },
     tags: ['AI', 'Digital Systems', 'Education'], url: 'https://mav8.site',
   },
   {
     id: 'ai-nova', title: 'AI NOVA', visual: 'nova',
     category: { ua: 'Власний AI-агент', en: 'Independent AI agent', it: 'Agente AI indipendente' },
-    summary: { ua: 'Мій власний проєкт у напрямі AI-агентів.', en: 'My independent AI agent project.', it: 'Il mio progetto personale nel campo degli agenti AI.' },
+    summary: { ua: 'Мій персональний AI-агент для щоденної роботи та цифрових процесів.', en: 'My personal AI agent supporting my everyday work and digital workflows.', it: 'Il mio agente AI personale a supporto del lavoro quotidiano e dei processi digitali.' },
     detail: { ua: 'AI NOVA — мій власний AI-агент. Архітектуру, можливості та демонстраційні матеріали додамо після підготовки кейсу.', en: 'AI NOVA is my personal AI agent project. Its architecture, features and demonstrations will be documented as the case study is prepared.', it: 'AI NOVA è il mio progetto personale di agente AI. Architettura, funzionalità e dimostrazioni saranno documentate nella scheda del progetto.' },
     tags: ['AI Agent'],
   },
   {
     id: 'sasha-game', title: 'ONLINE GAME', visual: 'sasha',
     category: { ua: 'Інтерактивний клієнтський проєкт', en: 'Interactive client project', it: 'Progetto interattivo cliente' },
-    summary: { ua: 'Онлайн-гра, яку я створила для Саші.', en: 'An online game I created for Sasha.', it: 'Un gioco online che ho creato per Sasha.' },
+    summary: { ua: 'Інтерактивна онлайн-гра, створена для сексологині Саші.', en: 'An interactive online game created for Sasha, a sexologist.', it: 'Un gioco online interattivo creato per Sasha, sessuologa.' },
     detail: { ua: 'Інтерактивний цифровий проєкт для Саші. Скриншоти, ігрову механіку та роль у розробці додамо після підготовки матеріалів.', en: 'An interactive digital project created for Sasha. Screenshots, game mechanics and the scope of my work will be added once the materials are ready.', it: 'Un progetto digitale interattivo creato per Sasha. Screenshot, meccaniche di gioco e il mio contributo saranno aggiunti quando i materiali saranno pronti.' },
     tags: ['Interactive', 'Game'],
   },
   {
     id: 'natalia-game', title: 'GAME IN PROGRESS', visual: 'natalia',
     category: { ua: 'Інтерактивний проєкт', en: 'Interactive project', it: 'Progetto interattivo' },
-    summary: { ua: 'Онлайн-гра для Наталії. Зараз у розробці.', en: 'An online game for Natalia. Currently in development.', it: 'Un gioco online per Natalia. Attualmente in sviluppo.' },
+    summary: { ua: 'Онлайн-гра для сімейної психологині. Зараз у розробці.', en: 'An online game for a family psychologist, currently in development.', it: 'Un gioco online per una psicologa familiare, in fase di sviluppo.' },
     detail: { ua: 'Нова онлайн-гра для Наталії перебуває у розробці. Опис, візуали та можливість перегляду з’являться після завершення відповідного етапу роботи.', en: 'A new online game for Natalia is in development. Details, visuals and a demo will be added when the relevant development stage is complete.', it: 'Un nuovo gioco online per Natalia è in fase di sviluppo. Dettagli, immagini e demo verranno aggiunti al termine della relativa fase di lavoro.' },
     tags: ['Interactive', 'Game'], inDevelopment: true,
   },
