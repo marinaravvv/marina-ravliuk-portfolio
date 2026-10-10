@@ -284,4 +284,4 @@ export const processSteps: { number: string; title: LocalizedText; description: 
   { number: '05', title: { ua: 'Запустити', en: 'Launch', it: 'Lanciare' }, description: { ua: 'Перевірити і вдосконалити', en: 'Test and refine', it: 'Verificare e migliorare' } },
 ];
 
-export const stack = ['OpenAI', 'Claude', 'n8n', 'Make', 'Lovable', 'Supabase', 'GitHub', 'Vercel', 'Stripe', 'Resend', 'APIs'];
+export const stack = ['OpenAI', 'ChatGPT', 'Claude', 'n8n', 'Lovable', 'Supabase', 'GitHub', 'Cloudflare', 'Vercel', 'Stripe', 'Resend', 'Telegram', 'Firecrawl', 'Figma', 'Framer', 'Higgsfield', 'Hostinger', 'Three.js', 'Tripo3D', 'Make', 'APIs'];
