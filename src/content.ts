@@ -58,9 +58,9 @@ export const text = {
     expertiseLabel: '02 / НАПРЯМИ', expertiseTitle: 'Що я створюю', selectedLabel: '03 / ВИБРАНІ ПРОЄКТИ',
     selectedTitle: 'Роботи, що', selectedTitleItalic: 'мають сенс.', caseView: 'Відкрити кейс', projectIndex: 'ПРОЄКТ',
     processLabel: '04 / ПІДХІД', processTitle: 'Від ідеї до системи.',
-    mav8Label: '05 / ВЛАСНИЙ ПРОЄКТ', mav8Title: 'Будую більше, ніж продукти.',
+    mav8Label: '04 / МОЯ КОМПАНІЯ', mav8Title: 'AI. Automation. Digital Systems.',
     mav8Body: 'MAV8 — компанія з вісьмома напрямами послуг: від сайтів і AI-агентів до автоматизації, CRM та бізнес-систем.',
-    visitWebsite: 'Переглянути сайт', visitMav8: 'Переглянути послуги MAV8', stackLabel: 'ТЕХНОЛОГІЇ', contactLabel: '06 / КОНТАКТ',
+    visitWebsite: 'Переглянути сайт', visitMav8: 'Переглянути послуги MAV8', stackLabel: 'ТЕХНОЛОГІЇ', contactLabel: '05 / КОНТАКТ',
     contactTitle: 'Маєте ідею?', contactItalic: 'Створімо її разом.',
     contactText: 'AI-агент, автоматизація чи новий digital-продукт — обговорімо вашу задачу.',
     contactButton: 'Написати', footer: 'Створено в Мілані. З увагою до деталей.', backToTop: 'Нагору',
@@ -123,9 +123,9 @@ export const text = {
     expertiseLabel: '02 / EXPERTISE', expertiseTitle: 'What I build', selectedLabel: '03 / SELECTED WORK',
     selectedTitle: 'Work with', selectedTitleItalic: 'purpose.', caseView: 'Explore case study', projectIndex: 'PROJECT',
     processLabel: '04 / PROCESS', processTitle: 'From idea to system.',
-    mav8Label: '05 / FOUNDER PROJECT', mav8Title: 'Building beyond products.',
+    mav8Label: '04 / MY COMPANY', mav8Title: 'AI. Automation. Digital Systems.',
     mav8Body: 'MAV8 is my company with eight service areas, from digital experiences and AI agents to automation, CRM and business systems.',
-    visitWebsite: 'Visit live website', visitMav8: 'Explore MAV8 services', stackLabel: 'TECHNOLOGY', contactLabel: '06 / CONTACT',
+    visitWebsite: 'Visit live website', visitMav8: 'Explore MAV8 services', stackLabel: 'TECHNOLOGY', contactLabel: '05 / CONTACT',
     contactTitle: 'Have an idea?', contactItalic: 'Let’s build it.',
     contactText: 'An AI agent, automation or digital product — let’s discuss your challenge.',
     contactButton: 'Write to me', footer: 'Made in Milan. Built with intention.', backToTop: 'Back to top',
@@ -188,9 +188,9 @@ export const text = {
     expertiseLabel: '02 / COMPETENZE', expertiseTitle: 'Cosa realizzo', selectedLabel: '03 / PROGETTI SELEZIONATI',
     selectedTitle: 'Progetti con', selectedTitleItalic: 'uno scopo.', caseView: 'Scopri il progetto', projectIndex: 'PROGETTO',
     processLabel: '04 / METODO', processTitle: 'Dall’idea al sistema.',
-    mav8Label: '05 / PROGETTO PERSONALE', mav8Title: 'Oltre i singoli prodotti.',
+    mav8Label: '04 / LA MIA AZIENDA', mav8Title: 'AI. Automation. Digital Systems.',
     mav8Body: 'MAV8 è la mia azienda con otto aree di servizi: dai prodotti digitali e agenti AI alle automazioni, CRM e sistemi aziendali.',
-    visitWebsite: 'Visita il sito', visitMav8: 'Scopri i servizi MAV8', stackLabel: 'TECNOLOGIE', contactLabel: '06 / CONTATTI',
+    visitWebsite: 'Visita il sito', visitMav8: 'Scopri i servizi MAV8', stackLabel: 'TECNOLOGIE', contactLabel: '05 / CONTATTI',
     contactTitle: 'Hai un’idea?', contactItalic: 'Realizziamola insieme.',
     contactText: 'Un agente AI, un’automazione o un nuovo prodotto digitale: parliamo della tua sfida.',
     contactButton: 'Scrivimi', footer: 'Creato a Milano, con cura e intenzione.', backToTop: 'Torna su',
@@ -214,7 +214,7 @@ export type Project = {
   summary: LocalizedText;
   detail: LocalizedText;
   tags: string[];
-  visual: 'aura' | 'rodus' | 'mav8' | 'nova' | 'sasha' | 'natalia';
+  visual: 'aura' | 'rodus' | 'pleasure' | 'mav8' | 'nova' | 'sasha' | 'natalia';
   url?: string;
   inDevelopment?: boolean;
 };
@@ -235,12 +235,17 @@ export const projects: Project[] = [
     tags: ['Website', 'Education', 'Community'],
   },
   {
-    id: 'mav8', title: 'MAV8', visual: 'mav8',
-    category: { ua: 'Власна компанія / послуги для бізнесу', en: 'Founder-led company / business services', it: 'Azienda fondata da me / servizi business' },
-    summary: { ua: 'Моя компанія: 8 напрямів digital, AI та automation послуг для бізнесу.', en: 'My company offering 8 areas of digital, AI and automation services for businesses.', it: 'La mia azienda: 8 aree di servizi digitali, AI e automazione per le imprese.' },
-    detail: { ua: 'MAV8 — моя компанія, яка реалізує послуги для бізнесу у восьми напрямах: MAKE, AI, AUTOMATE, AGENTS, BUILD, SELL, DATA та CREATE. На mav8.site клієнт може ознайомитися з напрямами й звернутися, щоб замовити потрібне цифрове рішення або автоматизацію.', en: 'MAV8 is my company delivering business services across eight capabilities: MAKE, AI, AUTOMATE, AGENTS, BUILD, SELL, DATA and CREATE. Clients can explore these areas on mav8.site and enquire about a tailored digital solution or automation.', it: 'MAV8 è la mia azienda che offre servizi business in otto ambiti: MAKE, AI, AUTOMATE, AGENTS, BUILD, SELL, DATA e CREATE. Su mav8.site i clienti possono esplorare i servizi e richiedere una soluzione digitale o un’automazione su misura.' },
-    tags: ['AI', 'Automation', 'Business Systems', 'Services'], url: 'https://mav8.site',
+    id: 'pleasure-map', title: 'Pleasure Map Milano', visual: 'pleasure', url: 'https://pleasuremapmilano.lovable.app/',
+    category: { ua: 'Лендинг / подія в Мілані', en: 'Landing page / Milan event', it: 'Landing page / evento a Milano' },
+    summary: { ua: 'Цифровий простір для камерної зустрічі про тіло, бажання та близькість у Мілані.', en: 'A digital experience for an intimate Milan event about the body, desire and connection.', it: 'Un’esperienza digitale per un incontro intimo a Milano sul corpo, il desiderio e la vicinanza.' },
+    detail: { ua: 'Pleasure Map Milano — сайт події в Мілані, присвяченої дослідженню власних відчуттів, бажань та близькості. Лендинг представляє концепцію зустрічі, атмосферу та інформацію для участі.', en: 'Pleasure Map Milano is an event website centred on exploring body awareness, desire and connection. Its landing page introduces the event concept, atmosphere and participation details.', it: 'Pleasure Map Milano è un sito dedicato a un evento sul corpo, il desiderio e la vicinanza. La landing page presenta il concept, l’atmosfera e le informazioni per partecipare.' },
+    tags: ['Website', 'Landing Page', 'Event'],
   },
+];
+
+// Work in progress: deliberately excluded from public carousel and case navigation.
+// Restore to projects only when the client games are complete and approved.
+export const draftProjects: Project[] = [
   {
     id: 'ai-nova', title: 'AI NOVA', visual: 'nova',
     category: { ua: 'Персональний AI-бот у Telegram', en: 'Personal AI bot on Telegram', it: 'Bot AI personale su Telegram' },
@@ -248,11 +253,6 @@ export const projects: Project[] = [
     detail: { ua: 'AI NOVA — мій власний AI-бот, який працює через Telegram. Його реальний інтерфейс та приклади взаємодії додамо після підготовки демонстрації без особистих даних.', en: 'AI NOVA is my personal AI bot operated through Telegram. An authentic interface preview and selected interactions will be added once a privacy-safe demonstration is ready.', it: 'AI NOVA è il mio bot AI personale su Telegram. Aggiungerò schermate reali e interazioni selezionate quando sarà pronta una dimostrazione senza dati personali.' },
     tags: ['AI Bot', 'Telegram'],
   },
-];
-
-// Work in progress: deliberately excluded from public carousel and case navigation.
-// Restore to projects only when the client games are complete and approved.
-export const draftProjects: Project[] = [
   {
     id: 'sasha-game', title: 'ONLINE GAME', visual: 'sasha',
     category: { ua: 'Інтерактивний клієнтський проєкт', en: 'Interactive client project', it: 'Progetto interattivo cliente' },
