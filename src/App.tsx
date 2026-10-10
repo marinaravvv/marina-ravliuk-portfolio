@@ -41,6 +41,20 @@ function ProjectArt({ project, small = false }: { project: Project; small?: bool
           <span className="art-bottom-label">CREATIVE CONCEPT</span>
         </div>
       )}
+      {project.visual === 'rodus' && (
+        <div className="rodus-layout">
+          <span className="rodus-kicker">DIGITAL EDUCATION / PLATFORM</span>
+          <div className="rodus-sheets" aria-hidden="true">
+            <div className="rodus-sheet rodus-sheet--back"><span>01 / LEARN</span></div>
+            <div className="rodus-sheet rodus-sheet--front">
+              <span>RODUS</span>
+              <i className="rodus-sheet-line" />
+              <small>LEARNING, REIMAGINED.</small>
+            </div>
+          </div>
+          <span className="rodus-title">RODUS</span>
+        </div>
+      )}
       {project.visual === 'mav8' && (
         <div className="mav8-layout">
           <div className="mav8-globe"><span>M</span><span>A</span><span>V</span><span>8</span></div>
@@ -81,6 +95,7 @@ function Reveal({ children, className = '', delay = 0 }: { children: React.React
 
 function WorkSection({ lang, openProject }: { lang: Language; openProject: (id: string) => void }) {
   const [active, setActive] = useState(0);
+  const reducedMotion = useReducedMotion();
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
   const t = text[lang];
   useEffect(() => {
@@ -104,10 +119,27 @@ function WorkSection({ lang, openProject }: { lang: Language; openProject: (id: 
       </div>
       <div className="work-story container">
         <div className="work-sticky">
-          <div className="work-preview-wrap">
+          <div className="work-preview-wrap"
+            onPointerMove={(event) => {
+              if (reducedMotion || event.pointerType !== 'mouse') return;
+              const rect = event.currentTarget.getBoundingClientRect();
+              const x = (event.clientX - rect.left) / rect.width - .5;
+              const y = (event.clientY - rect.top) / rect.height - .5;
+              event.currentTarget.style.setProperty('--preview-tilt-x', `${(-y * 4).toFixed(2)}deg`);
+              event.currentTarget.style.setProperty('--preview-tilt-y', `${(x * 5).toFixed(2)}deg`);
+            }}
+            onPointerLeave={(event) => {
+              event.currentTarget.style.removeProperty('--preview-tilt-x');
+              event.currentTarget.style.removeProperty('--preview-tilt-y');
+            }}
+          >
             <AnimatePresence mode="wait">
-              <motion.div key={current.id} className="work-preview" initial={{ opacity: 0, scale: 0.94, y: 25 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 1.045, y: -20 }} transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}>
-                <ProjectArt project={current} />
+              <motion.div key={current.id} className="work-preview"
+                initial={reducedMotion ? false : { opacity: 0, scale: .975, y: 18 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={reducedMotion ? undefined : { opacity: 0, scale: 1.015, y: -14 }}
+                transition={{ duration: .42, ease: [0.22, 1, 0.36, 1] }}>
+                <div className="work-preview-depth"><ProjectArt project={current} /></div>
               </motion.div>
             </AnimatePresence>
             <div className="preview-bottom"><span>{String(active + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</span><span>{current.category[lang]}</span></div>
@@ -115,9 +147,16 @@ function WorkSection({ lang, openProject }: { lang: Language; openProject: (id: 
         </div>
         <div className="work-steps">
           {projects.map((project, index) => (
-            <div className={`work-step ${active === index ? 'is-active' : ''}`} data-index={index} ref={(node) => { stepRefs.current[index] = node; }} key={project.id}>
+            <div className={`work-step ${active === index ? 'is-active' : ''}`} data-index={index}
+              ref={(node) => { stepRefs.current[index] = node; }} key={project.id}>
               <div className="work-step-number">{String(index + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</div>
-              <div className="work-mobile-art"><ProjectArt project={project} small /></div>
+              <motion.div className="work-mobile-art"
+                initial={reducedMotion ? false : { opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: .18 }}
+                transition={{ duration: .55, ease: [0.22, 1, 0.36, 1] }}>
+                <ProjectArt project={project} small />
+              </motion.div>
               <h3>{project.title}</h3>
               <p className="work-step-category">{project.category[lang]}</p>
               <p className="work-step-desc">{project.summary[lang]}</p>
@@ -128,6 +167,70 @@ function WorkSection({ lang, openProject }: { lang: Language; openProject: (id: 
         </div>
       </div>
     </section>
+  );
+}
+
+function JourneyTimeline({ lang }: { lang: Language }) {
+  const t = text[lang];
+  const reducedMotion = useReducedMotion();
+  const [active, setActive] = useState(0);
+  const itemRefs = useRef<(HTMLElement | null)[]>([]);
+  const items = [
+    { year: '2024', period: '2024 — ' + t.journeyNow, name: t.journeyAI, description: t.journeyAIDescription },
+    { year: '2025', period: '2025', name: t.journeyExit, description: t.journeyExitDescription },
+    { year: '2023', period: '2023', name: t.journeyPlatform, description: t.journeyPlatformDescription },
+    { year: '2021', period: '2021 — 2025', name: t.journeySchool, description: t.journeySchoolDescription },
+    { year: '2018', period: '2018', name: t.journeyEducation, description: t.journeyEducationDescription },
+  ];
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting);
+      if (!visible.length) return;
+      const targetLine = window.innerHeight * .4;
+      const closest = visible.reduce((best, entry) =>
+        Math.abs(entry.boundingClientRect.top + entry.boundingClientRect.height / 2 - targetLine)
+        < Math.abs(best.boundingClientRect.top + best.boundingClientRect.height / 2 - targetLine)
+          ? entry : best
+      );
+      const index = Number((closest.target as HTMLElement).dataset.journeyIndex);
+      if (!Number.isNaN(index)) setActive(index);
+    }, { rootMargin: '-15% 0px -35% 0px', threshold: [0, .1, .25, .45] });
+    itemRefs.current.forEach((node) => { if (node) observer.observe(node); });
+    return () => observer.disconnect();
+  }, []);
+  return (
+    <div className="journey-experience">
+      <div className="journey-rail" aria-hidden="true">
+        <span className="journey-rail-index">{String(active + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}</span>
+        <div className="journey-year-display">
+          <AnimatePresence mode="wait">
+            <motion.span key={items[active].year + '-' + active}
+              initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reducedMotion ? undefined : { opacity: 0, y: -16 }}
+              transition={{ duration: .28 }}>
+              {items[active].year}
+            </motion.span>
+          </AnimatePresence>
+        </div>
+        <div className="journey-progress-track"><span style={{ height: `${(active + 1) / items.length * 100}%` }} /></div>
+      </div>
+      <div className="journey-timeline">
+        {items.map((item, index) => (
+          <article ref={(node) => { itemRefs.current[index] = node; }}
+            data-journey-index={index}
+            className={`journey-item ${active === index ? 'journey-item--active' : ''}`}
+            key={item.year + '-' + index}>
+            <span className="journey-number">{String(index + 1).padStart(2, '0')}</span>
+            <div className="journey-item-content">
+              <span className="journey-year">{item.period}</span>
+              <h3>{item.name}</h3>
+              <p>{item.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -212,24 +315,7 @@ function Portfolio({ lang, navigate }: { lang: Language; navigate: (lang: Langua
               </a>
             </Reveal>
           </div>
-          <div className="journey-timeline">
-            {[
-              { year: '2024 — '+t.journeyNow, name: t.journeyAI, description: t.journeyAIDescription, number: '01' },
-              { year: '2025', name: t.journeyExit, description: t.journeyExitDescription, number: '02' },
-              { year: '2023', name: t.journeyPlatform, description: t.journeyPlatformDescription, number: '03' },
-              { year: '2021 — 2025', name: t.journeySchool, description: t.journeySchoolDescription, number: '04' },
-              { year: '2018', name: t.journeyEducation, description: t.journeyEducationDescription, number: '05' }
-            ].map((item, index) => (
-              <Reveal key={item.number} delay={index * .04}>
-                <article className="journey-item">
-                  <span className="journey-number">{item.number}</span>
-                  <span className="journey-year">{item.year}</span>
-                  <div className="journey-item-content"><h3>{item.name}</h3><p>{item.description}</p></div>
-                  
-                </article>
-              </Reveal>
-            ))}
-          </div>
+          <JourneyTimeline lang={lang} />
         </div>
       </section>
       <WorkSection lang={lang} openProject={(id) => navigate(lang, id)} />
