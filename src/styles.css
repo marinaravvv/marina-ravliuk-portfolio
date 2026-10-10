@@ -3257,10 +3257,10 @@ body,.portfolio{font-family:var(--rav-sans)}
     flex-direction:column;
   }
   .about-section.about-editorial.about-cutout .about-cutout-visual{
-    order:0;
+    order:1;
   }
   .about-section.about-editorial.about-cutout .about-cutout-copy{
-    order:1;
+    order:0;
   }
   .about-section.about-editorial.about-cutout .about-cutout-intro h2{
     max-width:100%;
@@ -3337,4 +3337,37 @@ body,.portfolio{font-family:var(--rav-sans)}
 }
 @media(prefers-reduced-motion:reduce){
   .contact-section .contact-button{transition:none}
+}
+
+
+/* Mobile reading flow — heading first, portrait second, across Hero and About. */
+@media(max-width:760px){
+  .hero.hero-editorial .hero-editorial-stage{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:flex-start;
+    gap:clamp(8px,3vw,18px);
+    min-height:0;
+  }
+  .hero.hero-editorial .hero-editorial-name{
+    order:0;
+    position:relative;
+    margin:clamp(18px,6vw,30px) 0 0;
+    width:100%;
+  }
+  .hero.hero-editorial .hero-photo-scene{
+    order:1;
+    margin:0;
+  }
+  .about-section.about-editorial.about-cutout .about-cutout-grid{
+    display:flex;
+    flex-direction:column;
+  }
+  .about-section.about-editorial.about-cutout .about-cutout-copy{
+    order:0;
+  }
+  .about-section.about-editorial.about-cutout .about-cutout-visual{
+    order:1;
+  }
 }
