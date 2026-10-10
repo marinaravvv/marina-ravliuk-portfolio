@@ -2800,3 +2800,139 @@ body,.portfolio{font-family:var(--rav-sans)}
 @media(prefers-reduced-motion:reduce){
   .hero.hero-editorial .hero-editorial-photo img[src*="marina-hero-black"]{transition:none}
 }
+
+
+/* FINAL LAYOUT: full 16:9 studio photograph + live text in its empty right half. */
+.about-section.about-wide{
+  background:#F3ECE2;
+  padding:clamp(64px,7vw,108px) 0 clamp(58px,6vw,95px);
+}
+.about-wide .about-wide-stage{
+  position:relative;
+  width:100%;
+  aspect-ratio:1672/941;
+  overflow:hidden;
+  background:#DBC9B7;
+  isolation:isolate;
+}
+.about-wide .about-wide-image{
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+}
+.about-wide .about-wide-copy{
+  position:absolute;
+  z-index:1;
+  top:0;
+  bottom:0;
+  right:0;
+  width:46%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:clamp(18px,3.2vw,60px) clamp(24px,3.5vw,65px) clamp(18px,3.2vw,60px) clamp(26px,3.8vw,65px);
+  background:linear-gradient(90deg,rgba(237,224,211,0),rgba(236,222,209,.08) 26%,rgba(236,222,209,.18) 100%);
+}
+.about-wide .about-wide-intro{max-width:520px}
+.about-wide .about-wide-intro .eyebrow{
+  color:#8C6A53;
+  font:600 clamp(9px,.85vw,11px)/1.4 var(--rav-sans);
+  letter-spacing:.15em;
+  margin:0 0 clamp(14px,2vw,26px);
+}
+.about-wide .about-wide-intro h2{
+  font:800 clamp(26px,3.1vw,53px)/1.1 var(--rav-serif);
+  color:#302219;
+  letter-spacing:-.066em;
+  margin:0 0 clamp(14px,2.4vw,32px);
+  text-wrap:balance;
+}
+.about-wide .about-wide-intro h2 em{font-style:normal;color:#997660}
+.about-wide .about-wide-statement{
+  font:600 clamp(13px,1.27vw,21px)/1.5 var(--rav-sans);
+  letter-spacing:-.02em;
+  color:#503A2D;
+  margin:0 0 clamp(10px,1.4vw,21px);
+}
+.about-wide .about-wide-description{
+  font:400 clamp(11px,1vw,16px)/1.7 var(--rav-sans);
+  color:#765E4D;
+  margin:0;
+}
+.about-wide .about-wide-skills{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:11px clamp(20px,3vw,44px);
+  padding:clamp(24px,3.2vw,43px) 0 0;
+  color:#826854;
+  font:500 10px/1.5 var(--rav-sans);
+  letter-spacing:.11em;
+}
+.mav8-company-section .mav8-company-text h2{
+  font-size:clamp(66px,8.4vw,122px);
+  letter-spacing:-.077em;
+  margin:clamp(12px,2.2vw,24px) 0 clamp(14px,1.5vw,23px);
+}
+.mav8-company-section .mav8-company-text .mav8-company-statement{
+  font-size:clamp(21px,1.9vw,28px);
+}
+.mav8-company-section .mav8-feature.mav8-feature-3d::after{
+  background:linear-gradient(180deg,transparent 65%,rgba(20,12,10,.28));
+}
+.mav8-company-section .mav8-image-arrow{
+  position:absolute;
+  z-index:3;
+  right:clamp(16px,2vw,30px);
+  bottom:clamp(16px,2vw,30px);
+  display:grid;
+  place-items:center;
+  width:44px;
+  height:44px;
+  border:1px solid rgba(246,235,223,.7);
+  border-radius:50%;
+  color:#F5E9DC;
+  background:rgba(35,22,17,.44);
+}
+@media(max-width:1050px) and (min-width:761px){
+  .about-wide .about-wide-copy{width:47%;padding:20px 27px}
+  .about-wide .about-wide-intro h2{font-size:clamp(24px,2.9vw,35px);margin-bottom:13px}
+  .about-wide .about-wide-intro .eyebrow{margin-bottom:12px}
+  .about-wide .about-wide-statement{font-size:13px;margin-bottom:10px}
+  .about-wide .about-wide-description{font-size:11px;line-height:1.48}
+}
+@media(max-width:760px){
+  .about-section.about-wide{padding:54px 0 76px}
+  .about-wide .about-wide-stage{
+    display:flex;
+    flex-direction:column;
+    aspect-ratio:auto;
+    background:transparent;
+    overflow:visible;
+  }
+  .about-wide .about-wide-image{
+    position:static;
+    width:100%;
+    height:auto;
+    object-fit:contain;
+    aspect-ratio:1672/941;
+  }
+  .about-wide .about-wide-copy{
+    position:static;
+    width:100%;
+    background:none;
+    padding:clamp(25px,6vw,38px) 0 0;
+  }
+  .about-wide .about-wide-intro h2{font-size:clamp(32px,8.2vw,47px);margin-bottom:20px}
+  .about-wide .about-wide-intro .eyebrow{margin-bottom:18px}
+  .about-wide .about-wide-statement{font-size:18px;margin-bottom:16px}
+  .about-wide .about-wide-description{font-size:15px;line-height:1.7}
+  .about-wide .about-wide-skills{gap:9px 16px;justify-content:flex-start;padding-top:30px}
+  .about-wide .about-wide-skills span{font-size:9px}
+  .mav8-company-section .mav8-company-text h2{font-size:clamp(64px,19vw,115px)}
+  .mav8-company-section .mav8-company-text .mav8-company-statement{font-size:clamp(20px,5.5vw,28px)}
+}
