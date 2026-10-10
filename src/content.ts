@@ -71,7 +71,6 @@ export const text = {
   },
   en: {
     caseScreenshotNote: "Authentic screenshots from the website",
-    caseScreenshotNote: "Screenshot autentici del sito",
     caseViewVisual: "Visual",
     caseViewContext: "Project",
     caseShowcase: "PROJECT PRESENTATION",
@@ -137,6 +136,7 @@ export const text = {
     published: 'Portfolio / selected work', inDevelopment: 'In development', selectedWork: 'Selected work',
   },
   it: {
+    caseScreenshotNote: "Screenshot autentici del sito",
     caseViewVisual: "Visual",
     caseViewContext: "Progetto",
     caseShowcase: "PRESENTAZIONE DEL PROGETTO",
