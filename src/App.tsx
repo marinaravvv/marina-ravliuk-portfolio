@@ -392,7 +392,7 @@ function Portfolio({ lang }: { lang: Language }) {
               </div>
               <motion.div className="hero-editorial-photo" style={reducedMotion ? undefined : { y: heroPhotoY }} initial={reducedMotion ? false : { opacity: 0, scale: 1.025 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}>
                 <div className="hero-photo-fallback" aria-hidden="true"><span>MR</span><small>MARINA RAV</small></div>
-                <img src="/images/marina-hero-v2.webp" alt="Marina Rav — портрет із ноутбуком у чорно-білому editorial-образі" decoding="async" fetchPriority="high" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-hero.webp'; }} />
+                <img src="/images/marina-hero-v3.webp" alt="Marina Rav — діловий editorial-портрет із телефоном та кавою" decoding="async" fetchPriority="high" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-hero-v2.webp'; }} />
               </motion.div>
               </div>
             <motion.div className="hero-editorial-name" initial={reducedMotion ? false : { opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.35 }}>
