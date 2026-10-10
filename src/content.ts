@@ -6,7 +6,7 @@ export const text = {
   ua: {
     navAbout: 'Про мене', navExpertise: 'Напрями', navWork: 'Проєкти', navProcess: 'Підхід', navContact: 'Контакт',
     heroEyebrow: 'Незалежна AI & Digital Systems спеціалістка · Мілан, Італія',
-    heroTop: 'Marina', heroBottom: 'Ravliuk', heroSub: 'AI AUTOMATION / AI AGENTS / DIGITAL SYSTEMS',
+    heroTop: 'Marina', heroBottom: 'Rav', heroSub: 'AI AUTOMATION / AI AGENTS / DIGITAL SYSTEMS',
     heroIntro: 'Створюю технології, які перетворюють складні бізнес-процеси на зрозумілі системи.',
     scroll: 'Гортай, щоб дослідити', discover: 'Переглянути роботи', availability: 'Відкрита до співпраці',
     aboutLabel: '01 / ПРО МЕНЕ', aboutHeadingA: 'Не просто', aboutHeadingB: 'цифрові продукти.', aboutHeadingC: 'Системи, що працюють.',
@@ -28,7 +28,7 @@ export const text = {
   en: {
     navAbout: 'About', navExpertise: 'Expertise', navWork: 'Work', navProcess: 'Process', navContact: 'Contact',
     heroEyebrow: 'Independent AI & Digital Systems specialist · Milan, Italy',
-    heroTop: 'Marina', heroBottom: 'Ravliuk', heroSub: 'AI AUTOMATION / AI AGENTS / DIGITAL SYSTEMS',
+    heroTop: 'Marina', heroBottom: 'Rav', heroSub: 'AI AUTOMATION / AI AGENTS / DIGITAL SYSTEMS',
     heroIntro: 'I turn complex business processes into clear, purposeful digital systems.',
     scroll: 'Scroll to explore', discover: 'Explore selected work', availability: 'Open to collaborations',
     aboutLabel: '01 / ABOUT', aboutHeadingA: 'More than', aboutHeadingB: 'digital products.', aboutHeadingC: 'Systems that work.',
@@ -50,7 +50,7 @@ export const text = {
   it: {
     navAbout: 'Chi sono', navExpertise: 'Competenze', navWork: 'Progetti', navProcess: 'Metodo', navContact: 'Contatti',
     heroEyebrow: 'Specialista indipendente AI & Digital Systems · Milano, Italia',
-    heroTop: 'Marina', heroBottom: 'Ravliuk', heroSub: 'AI AUTOMATION / AI AGENTS / DIGITAL SYSTEMS',
+    heroTop: 'Marina', heroBottom: 'Rav', heroSub: 'AI AUTOMATION / AI AGENTS / DIGITAL SYSTEMS',
     heroIntro: 'Trasformo processi aziendali complessi in sistemi digitali chiari e funzionali.',
     scroll: 'Scorri per esplorare', discover: 'Esplora i progetti', availability: 'Disponibile per collaborazioni',
     aboutLabel: '01 / CHI SONO', aboutHeadingA: 'Più che', aboutHeadingB: 'prodotti digitali.', aboutHeadingC: 'Sistemi che funzionano.',
