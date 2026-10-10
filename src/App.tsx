@@ -551,16 +551,49 @@ export default function App() {
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 130, damping: 35 });
   useEffect(() => {
+    const canonicalOrigin = 'https://marinaravliuk.com';
+    const canonicalUrl = `${canonicalOrigin}/${route.lang}`;
     document.documentElement.lang = route.lang === 'ua' ? 'uk' : route.lang;
     document.title = t.metaTitle;
-    const meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-    if (meta) meta.content = t.heroIntro;
-    languages.forEach((language) => {
-      let link = document.querySelector<HTMLLinkElement>(`link[rel="alternate"][hreflang="${language === 'ua' ? 'uk' : language}"]`);
-      if (!link) { link = document.createElement('link'); link.rel = 'alternate'; link.hreflang = language === 'ua' ? 'uk' : language; document.head.appendChild(link); }
-      link.href = window.location.origin + `/${language}`;
-    });
-  }, [route.lang, t.heroIntro, t.metaTitle]);
+
+    const setMeta = (attribute: 'name' | 'property', key: string, value: string) => {
+      let meta = document.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`);
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute(attribute, key);
+        document.head.appendChild(meta);
+      }
+      meta.content = value;
+    };
+    setMeta('name', 'description', t.metaDescription);
+    setMeta('property', 'og:title', t.metaTitle);
+    setMeta('property', 'og:description', t.metaDescription);
+    setMeta('property', 'og:url', canonicalUrl);
+    setMeta('property', 'og:locale', route.lang === 'ua' ? 'uk_UA' : route.lang === 'it' ? 'it_IT' : 'en_US');
+    setMeta('name', 'twitter:title', t.metaTitle);
+    setMeta('name', 'twitter:description', t.metaDescription);
+
+    let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+    canonical.href = canonicalUrl;
+
+    const alternate = (language: string, url: string) => {
+      let link = document.querySelector<HTMLLinkElement>(`link[rel="alternate"][hreflang="${language}"]`);
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'alternate';
+        link.hreflang = language;
+        document.head.appendChild(link);
+      }
+      link.href = url;
+    };
+    languages.forEach((language) => alternate(language === 'ua' ? 'uk' : language, `${canonicalOrigin}/${language}`));
+    alternate('x-default', `${canonicalOrigin}/`);
+  }, [route.lang, t.metaDescription, t.metaTitle]);
 
   const gotoSection = (id: string) => {
     setMenuOpen(false);
