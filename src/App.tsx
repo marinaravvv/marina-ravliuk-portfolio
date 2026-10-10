@@ -392,7 +392,7 @@ function Portfolio({ lang }: { lang: Language }) {
                 </div>
               </div>
               <motion.div className="hero-editorial-photo" style={reducedMotion ? undefined : { y: heroPhotoY }} initial={reducedMotion ? false : { opacity: 0, scale: 1.025 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}>
-                <img src="/images/marina-hero-cutout.webp" alt="Marina Rav — портрет у чорному жакеті" decoding="async" fetchPriority="high" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-hero-black.webp'; }} />
+                <img src="/images/marina-hero-cutout.webp" alt={t.heroPortraitAlt} decoding="async" fetchPriority="high" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-hero-black.webp'; }} />
               </motion.div>
               </div>
             <motion.div className="hero-editorial-name" initial={reducedMotion ? false : { opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.35 }}>
@@ -406,7 +406,7 @@ function Portfolio({ lang }: { lang: Language }) {
           <div className="about-cutout-visual">
             <img className="about-cutout-image"
               src="/images/marina-about-cutout.webp"
-              alt="Marina Rav — портрет у білій сорочці та чорних підтяжках"
+              alt={t.aboutPortraitAlt}
               loading="lazy" decoding="async"
               onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-about-beige.webp'; }} />
           </div>
@@ -417,7 +417,7 @@ function Portfolio({ lang }: { lang: Language }) {
               <p className="about-cutout-statement">{t.aboutStatement}</p>
               <p className="about-cutout-description">{t.aboutText}</p>
             </Reveal>
-            <div className="about-cutout-skills" aria-label="Specializations">
+            <div className="about-cutout-skills" aria-label={t.specializationsAria}>
               {['AI AGENTS', 'BUSINESS AUTOMATION', 'DIGITAL SYSTEMS', 'DIGITAL PRODUCTS'].map(item => <span key={item}>{item}</span>)}
             </div>
           </div>
@@ -473,7 +473,7 @@ function Portfolio({ lang }: { lang: Language }) {
             <h2 id="mav8-company-heading">MAV8<span className="mav8-company-asterisk">®</span></h2>
             <p className="mav8-company-statement">{t.mav8Title}</p>
             <p>{t.mav8Body}</p>
-            <div className="mav8-company-skills" aria-label="MAV8 skills">
+            <div className="mav8-company-skills" aria-label={t.mav8SkillsAria}>
               {['MAKE', 'AI', 'AUTOMATE', 'AGENTS', 'BUILD', 'SELL', 'DATA', 'CREATE'].map((skill) => <span key={skill}>{skill}</span>)}
             </div>
             <a className="pill-link mav8-company-cta" href="https://mav8.site/" target="_blank" rel="noopener noreferrer">
@@ -494,7 +494,7 @@ function Portfolio({ lang }: { lang: Language }) {
       <section className="contact-section" id="contact"><div className="container">
         <Reveal><p className="eyebrow">{t.contactLabel}</p><h2>{t.contactTitle}<br/><em>{t.contactItalic}</em></h2><p className="contact-intro">{t.contactText}</p>
           <a className="contact-button" href="mailto:info@marinaravliuk.com?subject=Collaboration%20with%20Marina%20Rav" aria-label={t.contactButton}>{t.contactButton}<ArrowUpRight size={22}/></a>
-          <nav className="contact-social-links" aria-label="Social profiles">
+          <nav className="contact-social-links" aria-label={t.socialAria}>
             <a href="https://www.instagram.com/marinaravvv/" target="_blank" rel="noopener noreferrer">Instagram <ArrowUpRight size={14}/></a>
             <a href="https://www.linkedin.com/in/marina-rav-609504b9/" target="_blank" rel="noopener noreferrer">LinkedIn <ArrowUpRight size={14}/></a>
           </nav>
@@ -535,11 +535,11 @@ export default function App() {
   return <div className="portfolio">
     <motion.div className="scroll-progress" style={{ scaleX: progress }} />
     <header className="site-header"><div className="container header-inner">
-      <nav className={`main-nav ${menuOpen ? 'main-nav--open' : ''}`} aria-label="Main navigation">
+      <nav className={`main-nav ${menuOpen ? 'main-nav--open' : ''}`} aria-label={t.navAria}>
         {navItems.map((item) => <button type="button" key={item.id} onClick={() => gotoSection(item.id)}>{item.title}</button>)}
       </nav>
-      <div className="header-end"><div className="language-switch" aria-label="Choose language">{languages.map((language) => <button key={language} type="button" aria-pressed={route.lang === language} className={route.lang === language ? 'is-current' : ''} onClick={() => {setMenuOpen(false);navigate(language);}}>{langNames[language]}</button>)}</div>
-        <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-label={menuOpen ? 'Close menu' : 'Open menu'} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={23}/> : <Menu size={23}/>}</button></div>
+      <div className="header-end"><div className="language-switch" aria-label={t.languagesAria}>{languages.map((language) => <button key={language} type="button" aria-pressed={route.lang === language} className={route.lang === language ? 'is-current' : ''} onClick={() => {setMenuOpen(false);navigate(language);}}>{langNames[language]}</button>)}</div>
+        <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-label={menuOpen ? t.menuCloseAria : t.menuOpenAria} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={23}/> : <Menu size={23}/>}</button></div>
     </div></header>
     <main><Portfolio lang={route.lang}/></main>
     <footer className="site-footer">
