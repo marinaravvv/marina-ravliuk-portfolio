@@ -2281,3 +2281,14 @@ body,.portfolio{font-family:var(--rav-sans)}
     object-position:50% 40%;
   }
 }
+
+/* Homepage: actual studio photograph, neutral-grey backdrop stays within image. */
+.hero-editorial-photo img[src*="marina-hero-v3"]{
+  object-fit:cover;
+  object-position:50% 23%;
+}
+@media(max-width:760px){
+  .hero-editorial-photo img[src*="marina-hero-v3"]{
+    object-position:51% 23%;
+  }
+}
