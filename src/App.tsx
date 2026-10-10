@@ -3,37 +3,40 @@ import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring, useTra
 import { ArrowLeft, ArrowRight, ArrowUpRight, Download, Menu, X } from 'lucide-react';
 import { languages, projects, text, type Language, type Project } from './content';
 
-type RouteState = { lang: Language; project: string | null };
+type RouteState = { lang: Language };
 const langNames: Record<Language, string> = { ua: 'УКР', en: 'ENG', it: 'ITA' };
 
 function readRoute(): RouteState {
-  const match = window.location.pathname.match(/^\/(ua|en|it)(?:\/projects\/([a-z0-9-]+))?\/?$/);
-  return { lang: (match?.[1] as Language) ?? 'ua', project: match?.[2] ?? null };
+  const match = window.location.pathname.match(/^\/(ua|en|it)(?:\/projects\/[a-z0-9-]+)?\/?$/);
+  const lang: Language = (match?.[1] as Language) ?? 'ua';
+  // Old case URLs should never strand visitors on removed internal pages.
+  if (window.location.pathname.includes('/projects/')) {
+    window.history.replaceState(null, '', `/${lang}#work`);
+  }
+  return { lang };
 }
 
 function usePortfolioRoute() {
   const [route, setRoute] = useState<RouteState>(readRoute);
-  const [lastProjectId, setLastProjectId] = useState<string | null>(() => readRoute().project);
   useEffect(() => {
     if (window.location.pathname === '/') window.history.replaceState(null, '', '/ua');
-    const onPop = () => { const nextRoute = readRoute(); setRoute(nextRoute); if (nextRoute.project) setLastProjectId(nextRoute.project); };
+    const onPop = () => setRoute(readRoute());
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
   }, []);
-  const navigate = (lang: Language, project: string | null = null) => {
-    const path = project ? `/${lang}/projects/${project}` : `/${lang}`;
-    if (window.location.pathname !== path) window.history.pushState(null, '', path);
-    setRoute({ lang, project });
-    if (project) setLastProjectId(project);
+  const navigate = (lang: Language) => {
+    const path = `/${lang}`;
+    if (window.location.pathname !== path || window.location.hash) window.history.pushState(null, '', path);
+    setRoute({ lang });
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
-  return { route, navigate, lastProjectId };
+  return { route, navigate };
 }
 
 function ProjectArt({ project, small = false, imageIndex = 0, onImageReady }: { project: Project; small?: boolean; imageIndex?: number; onImageReady?: (ready: boolean) => void }) {
   const imageSrc = project.gallery?.[imageIndex];
   return (
-    <div className={`project-art project-art--${project.visual}${small ? ' project-art--small' : ''}`} aria-label={`${project.title} — ${project.visual === 'aura' || project.visual === 'rodus' || project.visual === 'pleasure' ? 'design interpretation of the live website' : 'conceptual visual placeholder'}`} role="img">
+    <div className={`project-art project-art--${project.visual}${small ? ' project-art--small' : ''}`} aria-label={`${project.title} — ${project.gallery?.length ? 'screenshots from the live website' : 'visual concept'}`} role="img">
       <div className="art-grid" />
       <div className="art-noise" />
       {project.visual === 'aura' && (
@@ -152,8 +155,9 @@ function Reveal({ children, className = '', delay = 0 }: { children: React.React
   return <motion.div className={className} initial={reducedMotion ? false : { opacity: 0, y: 45 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.12 }} transition={{ duration: 0.85, delay, ease: [0.22, 1, 0.36, 1] }}>{children}</motion.div>;
 }
 
-function WorkSection({ lang, openProject, initialProjectId }: { lang: Language; openProject: (id: string) => void; initialProjectId: string | null }) {
-  const [active, setActive] = useState(() => Math.max(0, projects.findIndex((item) => item.id === initialProjectId)));
+function WorkSection({ lang }: { lang: Language }) {
+  const [active, setActive] = useState(0);
+  const [imageIndex, setImageIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const reducedMotion = useReducedMotion();
   const t = text[lang];
@@ -165,6 +169,13 @@ function WorkSection({ lang, openProject, initialProjectId }: { lang: Language; 
     if (target === active) return;
     setDirection(next > active ? 1 : -1);
     setActive(target);
+    setImageIndex(0);
+  }
+
+  function changeImage(delta: number) {
+    const length = current.gallery?.length ?? 0;
+    if (length < 2) return;
+    setImageIndex((index) => (index + delta + length) % length);
   }
 
   return (
@@ -204,10 +215,19 @@ function WorkSection({ lang, openProject, initialProjectId }: { lang: Language; 
                   if (info.offset.x > 65 || info.velocity.x > 450) changeSlide(active - 1);
                 }}
               >
-                <ProjectArt project={current} />
+                <ProjectArt project={current} imageIndex={imageIndex} />
               </motion.div>
             </AnimatePresence>
-            <span className="selected-carousel-visual-caption">{current.title} / {current.category[lang]}</span>
+            <div className="selected-carousel-preview-footer">
+              <span className="selected-carousel-visual-caption">{current.title} / {current.category[lang]}</span>
+              {(current.gallery?.length ?? 0) > 1 && (
+                <div className="selected-carousel-image-nav" aria-label={t.caseScreenshotNote}>
+                  <button type="button" onClick={() => changeImage(-1)} aria-label={t.carouselPrev}><ArrowLeft size={18}/></button>
+                  <span>{String(imageIndex + 1).padStart(2, '0')} / {String(current.gallery?.length ?? 0).padStart(2, '0')}</span>
+                  <button type="button" onClick={() => changeImage(1)} aria-label={t.carouselNext}><ArrowRight size={18}/></button>
+                </div>
+              )}
+            </div>
           </div>
           <div className="selected-carousel-info" aria-live="polite" aria-atomic="true">
             <AnimatePresence mode="wait" initial={false}>
@@ -221,9 +241,13 @@ function WorkSection({ lang, openProject, initialProjectId }: { lang: Language; 
                 <h3>{current.title}</h3>
                 <p>{current.summary[lang]}</p>
                 {current.inDevelopment && <span className="in-dev">{t.inDevelopment}</span>}
-                <button type="button" className="text-link" onClick={() => openProject(current.id)}>
-                  {t.caseView} <ArrowUpRight size={19} />
-                </button>
+                {current.url && (
+                  <a className="text-link selected-carousel-live-link" href={current.url}
+                    target="_blank" rel="noopener noreferrer"
+                    aria-label={`${t.visitWebsite}: ${current.title}`}>
+                    {t.visitWebsite} <ArrowUpRight size={19} />
+                  </a>
+                )}
               </motion.div>
             </AnimatePresence>
             <div className="selected-carousel-bottom">
@@ -309,7 +333,7 @@ function JourneyTimeline({ lang }: { lang: Language }) {
   );
 }
 
-function Portfolio({ lang, navigate, lastProjectId }: { lang: Language; navigate: (lang: Language, project?: string | null) => void; lastProjectId: string | null }) {
+function Portfolio({ lang }: { lang: Language }) {
   const t = text[lang];
   const heroRef = useRef<HTMLElement>(null);
   const reducedMotion = useReducedMotion();
@@ -393,7 +417,7 @@ function Portfolio({ lang, navigate, lastProjectId }: { lang: Language; navigate
           <JourneyTimeline lang={lang} />
         </div>
       </section>
-      <WorkSection lang={lang} initialProjectId={lastProjectId} openProject={(id) => navigate(lang, id)} />
+      <WorkSection lang={lang} />
       <section className="mav8-section mav8-company-section" id="mav8" aria-labelledby="mav8-company-heading">
         <div className="container mav8-grid">
           <Reveal className="mav8-text mav8-company-text">
@@ -431,174 +455,33 @@ function Portfolio({ lang, navigate, lastProjectId }: { lang: Language; navigate
   );
 }
 
-function ProjectPage({ lang, project, navigate }: { lang: Language; project: Project; navigate: (lang: Language, project?: string | null) => void }) {
-  const t = text[lang];
-  const reducedMotion = useReducedMotion();
-  const [view, setView] = useState<'visual' | 'context'>('visual');
-  const [galleryIndex, setGalleryIndex] = useState(0);
-  const [galleryReady, setGalleryReady] = useState(false);
-  const galleryLength = project.gallery?.length ?? 0;
-  const changeGallery = (delta: number) => {
-    if (!galleryLength) return;
-    setGalleryReady(false);
-    setGalleryIndex((current) => (current + delta + galleryLength) % galleryLength);
-  };
-  const index = projects.findIndex((item) => item.id === project.id);
-  const next = projects[(index + 1) % projects.length];
-  const backToWork = () => {
-    navigate(lang);
-    window.requestAnimationFrame(() =>
-      window.requestAnimationFrame(() =>
-        document.getElementById('work')?.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth', block: 'start' })
-      )
-    );
-  };
-
-  return <motion.main className="case-page case-page-v2"
-    initial={reducedMotion ? false : { opacity: 0, y: 24 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: reducedMotion ? 0 : .5, ease: [0.22, 1, 0.36, 1] }}
-  >
-    <div className="container case-head case-head-v2">
-      <button type="button" className="back-link" onClick={backToWork}>
-        <ArrowLeft size={18}/>{t.backToWork}
-      </button>
-      <div className="case-kicker"><span>{t.caseIndexLabel}</span><span>{String(index + 1).padStart(2,'0')} / {String(projects.length).padStart(2,'0')}</span></div>
-      <div className="case-title-row">
-        <h1>{project.title}</h1>
-        <span className="case-title-mark" aria-hidden="true">↗</span>
-      </div>
-      <p className="case-lead">{project.summary[lang]}</p>
-      <div className="case-tag-list" aria-label={t.projectType}>
-        {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
-      </div>
-    </div>
-
-    <section className="container case-showcase" aria-label={t.caseShowcase}>
-      <div className="case-showcase-nav">
-        <span>{t.caseShowcase}</span>
-        <div className="case-view-switch" role="group" aria-label={t.caseShowcase}>
-          <button type="button" className={view === 'visual' ? 'is-selected' : ''}
-            aria-pressed={view === 'visual'} onClick={() => setView('visual')}>
-            <span>01</span> {t.caseViewVisual}
-          </button>
-          <button type="button" className={view === 'context' ? 'is-selected' : ''}
-            aria-pressed={view === 'context'} onClick={() => setView('context')}>
-            <span>02</span> {t.caseViewContext}
-          </button>
-        </div>
-      </div>
-      <div className="case-showcase-stage">
-        <AnimatePresence mode="wait" initial={false}>
-          {view === 'visual'
-            ? <motion.div key="visual" className="case-showcase-slide"
-                drag={galleryReady && !reducedMotion ? 'x' : false}
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={.14}
-                onDragEnd={(_, info) => {
-                  if (info.offset.x < -65 || info.velocity.x < -450) changeGallery(1);
-                  if (info.offset.x > 65 || info.velocity.x > 450) changeGallery(-1);
-                }}
-                initial={reducedMotion ? false : { opacity: 0, y: 18, scale: .99 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={reducedMotion ? undefined : { opacity: 0, y: -15, scale: 1.01 }}
-                transition={{ duration: reducedMotion ? 0 : .35, ease: [0.22, 1, 0.36, 1] }}>
-                <ProjectArt project={project} imageIndex={galleryIndex} onImageReady={setGalleryReady}/>
-              </motion.div>
-            : <motion.div key="context" className="case-showcase-slide case-context-visual"
-                initial={reducedMotion ? false : { opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={reducedMotion ? undefined : { opacity: 0, y: -15 }}
-                transition={{ duration: reducedMotion ? 0 : .35, ease: [0.22, 1, 0.36, 1] }}>
-                <div className="case-context-top"><span>MARINA RAV / {String(index + 1).padStart(2,'0')}</span><span>{project.category[lang]}</span></div>
-                <div className="case-context-main"><span>{t.caseDetailsTitle}</span><h2>{project.title}</h2><p>{project.summary[lang]}</p></div>
-                <div className="case-context-tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
-              </motion.div>}
-        </AnimatePresence>
-      </div>
-      {view === 'visual' && galleryReady && galleryLength > 1 && (
-        <div className="case-screenshot-controls" aria-label={t.carouselChoose}>
-          <div className="case-screenshot-arrows">
-            <button type="button" onClick={() => changeGallery(-1)} aria-label={t.carouselPrev}><ArrowLeft size={21}/></button>
-            <span>{String(galleryIndex + 1).padStart(2, '0')} / {String(galleryLength).padStart(2, '0')}</span>
-            <button type="button" onClick={() => changeGallery(1)} aria-label={t.carouselNext}><ArrowRight size={21}/></button>
-          </div>
-          <div className="case-screenshot-dots" role="group" aria-label={t.carouselChoose}>
-            {project.gallery?.map((src, index) => (
-              <button type="button" key={src} aria-current={galleryIndex === index ? 'true' : undefined}
-                className={galleryIndex === index ? 'is-active' : ''}
-                aria-label={`${t.carouselChoose}: ${index + 1}`}
-                onClick={() => { setGalleryReady(false); setGalleryIndex(index); }}/>
-            ))}
-          </div>
-        </div>
-      )}
-      <div className="case-showcase-caption">
-        <span>{project.title} · {t.caseShowcase}</span>
-        <span>{galleryReady && view === 'visual' ? t.caseScreenshotNote : t.caseVisualNote}</span>
-      </div>
-    </section>
-
-    <section className="container case-content case-content-v2" aria-labelledby="case-about-heading">
-      <Reveal className="case-detail">
-        <p className="eyebrow eyebrow--dark">{t.aboutProject}</p>
-        <h2 id="case-about-heading">{t.caseDetailsTitle}</h2>
-        <p className="case-description">{project.detail[lang]}</p>
-      </Reveal>
-      <aside className="case-aside">
-        <div className="case-fact">
-          <span>{t.projectType}</span>
-          <strong>{project.category[lang]}</strong>
-        </div>
-        <div className="case-fact">
-          <span>{t.projectIndex}</span>
-          <strong>{String(index + 1).padStart(2,'0')} / {String(projects.length).padStart(2,'0')}</strong>
-        </div>
-        {project.inDevelopment && <div className="case-fact"><span>{t.projectStatus}</span><strong>{t.inDevelopment}</strong></div>}
-        {project.url
-          ? <a className="case-site-link" href={project.url} target="_blank" rel="noopener noreferrer">
-              {t.visitWebsite}<ArrowUpRight size={18}/>
-            </a>
-          : <p className="case-muted">{t.comingSoon}</p>}
-      </aside>
-    </section>
-
-    <section className="container next-project case-next-v2">
-      <span>{t.caseNextNote}</span>
-      <button type="button" onClick={() => navigate(lang, next.id)}
-        aria-label={`${t.nextProject}: ${next.title}`}>
-        <span>{next.title}</span><ArrowRight size={33}/>
-      </button>
-    </section>
-  </motion.main>;
-}
-
 export default function App() {
-  const { route, navigate, lastProjectId } = usePortfolioRoute();
+  const { route, navigate } = usePortfolioRoute();
   const [menuOpen, setMenuOpen] = useState(false);
   const t = text[route.lang];
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 130, damping: 35 });
-  const project = projects.find((item) => item.id === route.project);
   useEffect(() => {
     document.documentElement.lang = route.lang === 'ua' ? 'uk' : route.lang;
-    document.title = project ? `${project.title} — Marina Rav` : 'Marina Rav — AI Automation & Digital Systems';
+    document.title = 'Marina Rav — AI Automation & Digital Systems';
     const meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-    if (meta) meta.content = project ? project.summary[route.lang] : t.heroIntro;
+    if (meta) meta.content = t.heroIntro;
     languages.forEach((language) => {
       let link = document.querySelector<HTMLLinkElement>(`link[rel="alternate"][hreflang="${language === 'ua' ? 'uk' : language}"]`);
       if (!link) { link = document.createElement('link'); link.rel = 'alternate'; link.hreflang = language === 'ua' ? 'uk' : language; document.head.appendChild(link); }
-      link.href = window.location.origin + `/${language}` + (project ? `/projects/${project.id}` : '');
+      link.href = window.location.origin + `/${language}`;
     });
-  }, [route.lang, project, t.heroIntro]);
+  }, [route.lang, t.heroIntro]);
 
   const gotoSection = (id: string) => {
     setMenuOpen(false);
-    if (project) {
-      navigate(route.lang);
-      window.requestAnimationFrame(() => window.requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })));
-    } else document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
+  useEffect(() => {
+    if (window.location.hash === '#work') {
+      window.requestAnimationFrame(() => window.requestAnimationFrame(() => document.getElementById('work')?.scrollIntoView({ behavior: 'instant' })));
+    }
+  }, []);
   const navItems = [{ id: 'about', title: t.navAbout }, { id: 'journey', title: t.navJourney }, { id: 'work', title: t.navWork }, { id: 'contact', title: t.navContact }];
   return <div className="portfolio">
     <motion.div className="scroll-progress" style={{ scaleX: progress }} />
@@ -607,15 +490,15 @@ export default function App() {
       <nav className={`main-nav ${menuOpen ? 'main-nav--open' : ''}`} aria-label="Main navigation">
         {navItems.map((item) => <button type="button" key={item.id} onClick={() => gotoSection(item.id)}>{item.title}</button>)}
       </nav>
-      <div className="header-end"><div className="language-switch" aria-label="Choose language">{languages.map((language) => <button key={language} type="button" aria-pressed={route.lang === language} className={route.lang === language ? 'is-current' : ''} onClick={() => {setMenuOpen(false);navigate(language,project?.id ?? null);}}>{langNames[language]}</button>)}</div>
+      <div className="header-end"><div className="language-switch" aria-label="Choose language">{languages.map((language) => <button key={language} type="button" aria-pressed={route.lang === language} className={route.lang === language ? 'is-current' : ''} onClick={() => {setMenuOpen(false);navigate(language);}}>{langNames[language]}</button>)}</div>
         <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-label={menuOpen ? 'Close menu' : 'Open menu'} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={23}/> : <Menu size={23}/>}</button></div>
     </div></header>
-    {project ? <ProjectPage key={project.id} lang={route.lang} project={project} navigate={navigate}/> : <main><Portfolio lang={route.lang} navigate={navigate} lastProjectId={lastProjectId}/></main>}
+    <main><Portfolio lang={route.lang}/></main>
     <footer className="site-footer">
       <div className="container footer-inner footer-bottom">
         <span>© {new Date().getFullYear()} MARINA RAV</span>
         <span>{t.footer}</span>
-        <button type="button" onClick={() => { if (project) navigate(route.lang); else window.scrollTo({top:0,behavior:'smooth'}); }}>{t.backToTop} ↑</button>
+        <button type="button" onClick={() => { window.scrollTo({top:0,behavior:'smooth'}); }}>{t.backToTop} ↑</button>
       </div>
     </footer>
   </div>;
