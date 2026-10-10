@@ -3200,3 +3200,141 @@ body,.portfolio{font-family:var(--rav-sans)}
     transition:none;
   }
 }
+
+
+/* FINAL EDITORIAL BALANCE — founder's story left, transparent portrait right.
+   The existing mobile visual-first sequence remains intact. */
+@media(min-width:761px){
+  .about-section.about-editorial.about-cutout .about-cutout-grid{
+    grid-template-columns:minmax(0,1fr) minmax(0,.96fr);
+    column-gap:clamp(24px,5.5vw,96px);
+  }
+  .about-section.about-editorial.about-cutout .about-cutout-copy{
+    grid-column:1;
+    grid-row:1;
+    padding:clamp(20px,2.5vw,42px) 0;
+  }
+  .about-section.about-editorial.about-cutout .about-cutout-visual{
+    grid-column:2;
+    grid-row:1;
+    justify-content:flex-end;
+  }
+  .about-cutout-image{
+    object-position:right bottom;
+  }
+}
+.about-section.about-editorial.about-cutout{
+  background:#F3ECE2;
+}
+.about-section.about-editorial.about-cutout .about-cutout-intro h2{
+  max-width:640px;
+  font-size:clamp(31px,3.6vw,58px);
+  line-height:1.12;
+  letter-spacing:-.061em;
+}
+.about-section.about-editorial.about-cutout .about-cutout-statement{
+  max-width:575px;
+  font-size:clamp(17px,1.42vw,22px);
+}
+.about-section.about-editorial.about-cutout .about-cutout-description{
+  max-width:575px;
+}
+@media(min-width:761px) and (max-width:1050px){
+  .about-section.about-editorial.about-cutout .about-cutout-grid{
+    grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+    column-gap:clamp(18px,3vw,45px);
+  }
+  .about-section.about-editorial.about-cutout .about-cutout-intro h2{
+    font-size:clamp(30px,3.5vw,38px);
+  }
+  .about-section.about-editorial.about-cutout .about-cutout-statement{
+    font-size:16px;
+  }
+}
+@media(max-width:760px){
+  .about-section.about-editorial.about-cutout .about-cutout-grid{
+    display:flex;
+    flex-direction:column;
+  }
+  .about-section.about-editorial.about-cutout .about-cutout-visual{
+    order:0;
+  }
+  .about-section.about-editorial.about-cutout .about-cutout-copy{
+    order:1;
+  }
+  .about-section.about-editorial.about-cutout .about-cutout-intro h2{
+    max-width:100%;
+    font-size:clamp(33px,8vw,54px);
+    line-height:1.13;
+  }
+  .about-section.about-editorial.about-cutout .about-cutout-statement{
+    font-size:18px;
+  }
+}
+
+/* CHOCOLATE → CREAM: intentional tonal handoff between MAV8 and Contact. */
+.mav8-section.mav8-company-section{
+  position:relative;
+  isolation:isolate;
+  background:#302219;
+  background-image:none;
+  padding-bottom:clamp(175px,18vw,275px);
+}
+.mav8-section.mav8-company-section::after{
+  content:'';
+  position:absolute;
+  z-index:0;
+  pointer-events:none;
+  inset:auto 0 0;
+  height:clamp(160px,20vw,310px);
+  background:linear-gradient(180deg,rgba(48,34,25,0) 0%,rgba(113,87,70,.16) 39%,#F3ECE2 100%);
+}
+.mav8-section.mav8-company-section .mav8-grid{
+  position:relative;
+  z-index:1;
+}
+.contact-section{
+  background:#F3ECE2;
+  color:#302219;
+  padding:clamp(62px,6vw,115px) 0 clamp(100px,12vw,165px);
+}
+.contact-section .eyebrow{color:#947258}
+.contact-section h2{color:#302219}
+.contact-section h2 em{color:#A27A60}
+.contact-section .contact-intro{color:#735949}
+.contact-section .contact-button{
+  background:#302219;
+  border:1px solid #302219;
+  color:#F5ECE1;
+  transition:background .2s,color .2s;
+}
+.contact-section .contact-button:hover{
+  background:#5A4031;
+  border-color:#5A4031;
+  color:#FFF9F2;
+}
+.contact-section .contact-social-links a{
+  color:#5D4334;
+  border-bottom-color:rgba(48,34,25,.35);
+}
+.contact-section .contact-social-links a:hover{
+  color:#302219;
+  border-bottom-color:#302219;
+}
+.contact-section .contact-social-links a:focus-visible{
+  outline-color:#8B6651;
+}
+@media(max-width:760px){
+  .mav8-section.mav8-company-section{
+    padding-bottom:clamp(135px,30vw,210px);
+  }
+  .mav8-section.mav8-company-section::after{
+    height:clamp(135px,31vw,225px);
+  }
+  .contact-section{
+    padding:68px 0 112px;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .contact-section .contact-button{transition:none}
+}
