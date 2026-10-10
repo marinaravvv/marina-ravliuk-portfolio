@@ -4,6 +4,7 @@ export type LocalizedText = Record<Language, string>;
 
 export const text = {
   ua: {
+    caseScreenshotNote: "Реальні скриншоти сайту",
     caseViewVisual: "Візуал",
     caseViewContext: "Про проєкт",
     caseShowcase: "ПРЕЗЕНТАЦІЯ ПРОЄКТУ",
@@ -69,6 +70,8 @@ export const text = {
     published: 'Портфоліо / вибрані роботи', inDevelopment: 'У розробці', selectedWork: 'Вибрані роботи',
   },
   en: {
+    caseScreenshotNote: "Authentic screenshots from the website",
+    caseScreenshotNote: "Screenshot autentici del sito",
     caseViewVisual: "Visual",
     caseViewContext: "Project",
     caseShowcase: "PROJECT PRESENTATION",
@@ -216,12 +219,14 @@ export type Project = {
   tags: string[];
   visual: 'aura' | 'rodus' | 'pleasure' | 'mav8' | 'nova' | 'sasha' | 'natalia';
   url?: string;
+  gallery?: string[];
   inDevelopment?: boolean;
 };
 
 export const projects: Project[] = [
   {
     id: 'aura', title: 'AURA ARC', visual: 'aura', url: 'https://aura-arc.com/',
+    gallery: ['/images/cases/aura-arc-01.webp', '/images/cases/aura-arc-02.webp', '/images/cases/aura-arc-03.webp', '/images/cases/aura-arc-04.webp'],
     category: { ua: 'Цифрова програма / клієнтський проєкт', en: 'Digital program / client project', it: 'Programma digitale / progetto cliente' },
     summary: { ua: 'Цифрова програма AURA ARC про усвідомлену зміну особистої ідентичності.', en: 'AURA ARC is a digital program exploring conscious identity change.', it: 'AURA ARC è un programma digitale sul cambiamento consapevole dell’identità.' },
     detail: { ua: 'AURA ARC — окрема програма розвитку ідентичності з чотирма послідовними етапами: Shadow, Rewiring, Regulation, Awakening. На сайті представлено філософію програми, її структуру та шлях учасника.', en: 'AURA ARC is a standalone identity-development program structured in four stages: Shadow, Rewiring, Regulation and Awakening. The website presents the program philosophy, framework and participant journey.', it: 'AURA ARC è un programma indipendente di sviluppo dell’identità articolato in quattro fasi: Shadow, Rewiring, Regulation e Awakening. Il sito presenta la filosofia, la struttura e il percorso della persona.' },
@@ -229,6 +234,7 @@ export const projects: Project[] = [
   },
   {
     id: 'rodosy', title: 'RòDoSy', visual: 'rodus', url: 'https://rodosy.it/',
+    gallery: ['/images/cases/rodosy-01.webp', '/images/cases/rodosy-02.webp', '/images/cases/rodosy-03.webp'],
     category: { ua: 'Культурно-освітній вебпроєкт', en: 'Cultural and educational website', it: 'Sito culturale ed educativo' },
     summary: { ua: 'Українська освіта, культура й спільнота в Мілані.', en: 'Ukrainian education, culture and community in Milan.', it: 'Educazione, cultura e comunità ucraina a Milano.' },
     detail: { ua: 'RòDoSy — культурно-освітній проєкт асоціації SupportUAchildren APS при Українському домі в Мілані. Сайт знайомить із місією проєкту, напрямами навчання й творчості та можливостями долучитися до спільноти.', en: 'RòDoSy is a cultural and educational initiative of SupportUAchildren APS at the Ukrainian House in Milan. Its website introduces the mission, learning and creative programs, and ways to join the community.', it: 'RòDoSy è un progetto culturale ed educativo dell’associazione SupportUAchildren APS presso la Casa Ucraina di Milano. Il sito presenta la missione, le attività formative e creative e le possibilità di partecipazione.' },
