@@ -30,7 +30,8 @@ function usePortfolioRoute() {
   return { route, navigate, lastProjectId };
 }
 
-function ProjectArt({ project, small = false }: { project: Project; small?: boolean }) {
+function ProjectArt({ project, small = false, imageIndex = 0, onImageReady }: { project: Project; small?: boolean; imageIndex?: number; onImageReady?: (ready: boolean) => void }) {
+  const imageSrc = project.gallery?.[imageIndex];
   return (
     <div className={`project-art project-art--${project.visual}${small ? ' project-art--small' : ''}`} aria-label={`${project.title} — ${project.visual === 'aura' || project.visual === 'rodus' || project.visual === 'pleasure' ? 'design interpretation of the live website' : 'conceptual visual placeholder'}`} role="img">
       <div className="art-grid" />
@@ -125,6 +126,23 @@ function ProjectArt({ project, small = false }: { project: Project; small?: bool
         </div>
       )}
       {project.visual !== 'aura' && project.visual !== 'rodus' && project.visual !== 'pleasure' && <span className="placeholder-note">VISUAL CONCEPT · PLACEHOLDER</span>}
+      {imageSrc && <img
+        key={imageSrc}
+        className="project-art-screenshot"
+        src={imageSrc}
+        alt=""
+        draggable={false}
+        loading={small ? 'lazy' : 'eager'}
+        decoding="async"
+        onLoad={(event) => {
+          event.currentTarget.classList.add('is-loaded');
+          onImageReady?.(true);
+        }}
+        onError={(event) => {
+          event.currentTarget.style.display = 'none';
+          onImageReady?.(false);
+        }}
+      />}
     </div>
   );
 }
@@ -417,6 +435,14 @@ function ProjectPage({ lang, project, navigate }: { lang: Language; project: Pro
   const t = text[lang];
   const reducedMotion = useReducedMotion();
   const [view, setView] = useState<'visual' | 'context'>('visual');
+  const [galleryIndex, setGalleryIndex] = useState(0);
+  const [galleryReady, setGalleryReady] = useState(false);
+  const galleryLength = project.gallery?.length ?? 0;
+  const changeGallery = (delta: number) => {
+    if (!galleryLength) return;
+    setGalleryReady(false);
+    setGalleryIndex((current) => (current + delta + galleryLength) % galleryLength);
+  };
   const index = projects.findIndex((item) => item.id === project.id);
   const next = projects[(index + 1) % projects.length];
   const backToWork = () => {
@@ -466,11 +492,18 @@ function ProjectPage({ lang, project, navigate }: { lang: Language; project: Pro
         <AnimatePresence mode="wait" initial={false}>
           {view === 'visual'
             ? <motion.div key="visual" className="case-showcase-slide"
+                drag={galleryReady && !reducedMotion ? 'x' : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={.14}
+                onDragEnd={(_, info) => {
+                  if (info.offset.x < -65 || info.velocity.x < -450) changeGallery(1);
+                  if (info.offset.x > 65 || info.velocity.x > 450) changeGallery(-1);
+                }}
                 initial={reducedMotion ? false : { opacity: 0, y: 18, scale: .99 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={reducedMotion ? undefined : { opacity: 0, y: -15, scale: 1.01 }}
                 transition={{ duration: reducedMotion ? 0 : .35, ease: [0.22, 1, 0.36, 1] }}>
-                <ProjectArt project={project}/>
+                <ProjectArt project={project} imageIndex={galleryIndex} onImageReady={setGalleryReady}/>
               </motion.div>
             : <motion.div key="context" className="case-showcase-slide case-context-visual"
                 initial={reducedMotion ? false : { opacity: 0, y: 18 }}
@@ -483,9 +516,26 @@ function ProjectPage({ lang, project, navigate }: { lang: Language; project: Pro
               </motion.div>}
         </AnimatePresence>
       </div>
+      {view === 'visual' && galleryReady && galleryLength > 1 && (
+        <div className="case-screenshot-controls" aria-label={t.carouselChoose}>
+          <div className="case-screenshot-arrows">
+            <button type="button" onClick={() => changeGallery(-1)} aria-label={t.carouselPrev}><ArrowLeft size={21}/></button>
+            <span>{String(galleryIndex + 1).padStart(2, '0')} / {String(galleryLength).padStart(2, '0')}</span>
+            <button type="button" onClick={() => changeGallery(1)} aria-label={t.carouselNext}><ArrowRight size={21}/></button>
+          </div>
+          <div className="case-screenshot-dots" role="group" aria-label={t.carouselChoose}>
+            {project.gallery?.map((src, index) => (
+              <button type="button" key={src} aria-current={galleryIndex === index ? 'true' : undefined}
+                className={galleryIndex === index ? 'is-active' : ''}
+                aria-label={`${t.carouselChoose}: ${index + 1}`}
+                onClick={() => { setGalleryReady(false); setGalleryIndex(index); }}/>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="case-showcase-caption">
         <span>{project.title} · {t.caseShowcase}</span>
-        <span>{t.caseVisualNote}</span>
+        <span>{galleryReady && view === 'visual' ? t.caseScreenshotNote : t.caseVisualNote}</span>
       </div>
     </section>
 
