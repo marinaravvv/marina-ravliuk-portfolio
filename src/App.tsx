@@ -173,62 +173,65 @@ function WorkSection({ lang, openProject }: { lang: Language; openProject: (id: 
 function JourneyTimeline({ lang }: { lang: Language }) {
   const t = text[lang];
   const reducedMotion = useReducedMotion();
-  const [active, setActive] = useState(0);
-  const itemRefs = useRef<(HTMLElement | null)[]>([]);
+  const [active, setActive] = useState<number | null>(0);
+  // Most recent milestones first. Overlapping years reflect concurrent work,
+  // not separate full-time positions or invented career stages.
   const items = [
-    { year: '2024', period: '2024 — ' + t.journeyNow, name: t.journeyAI, description: t.journeyAIDescription },
     { year: '2025', period: '2025', name: t.journeyExit, description: t.journeyExitDescription },
+    { year: '2024', period: '2024 — ' + t.journeyNow, name: t.journeyAI, description: t.journeyAIDescription },
     { year: '2023', period: '2023', name: t.journeyPlatform, description: t.journeyPlatformDescription },
     { year: '2021', period: '2021 — 2025', name: t.journeySchool, description: t.journeySchoolDescription },
     { year: '2018', period: '2018', name: t.journeyEducation, description: t.journeyEducationDescription },
   ];
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries.filter((entry) => entry.isIntersecting);
-      if (!visible.length) return;
-      const targetLine = window.innerHeight * .4;
-      const closest = visible.reduce((best, entry) =>
-        Math.abs(entry.boundingClientRect.top + entry.boundingClientRect.height / 2 - targetLine)
-        < Math.abs(best.boundingClientRect.top + best.boundingClientRect.height / 2 - targetLine)
-          ? entry : best
-      );
-      const index = Number((closest.target as HTMLElement).dataset.journeyIndex);
-      if (!Number.isNaN(index)) setActive(index);
-    }, { rootMargin: '-15% 0px -35% 0px', threshold: [0, .1, .25, .45] });
-    itemRefs.current.forEach((node) => { if (node) observer.observe(node); });
-    return () => observer.disconnect();
-  }, []);
+
   return (
-    <div className="journey-experience">
-      <div className="journey-rail" aria-hidden="true">
-        <span className="journey-rail-index">{String(active + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}</span>
-        <div className="journey-year-display">
-          <AnimatePresence mode="wait">
-            <motion.span key={items[active].year + '-' + active}
-              initial={reducedMotion ? false : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reducedMotion ? undefined : { opacity: 0, y: -16 }}
-              transition={{ duration: .28 }}>
-              {items[active].year}
-            </motion.span>
-          </AnimatePresence>
-        </div>
-        <div className="journey-progress-track"><span style={{ height: `${(active + 1) / items.length * 100}%` }} /></div>
-      </div>
-      <div className="journey-timeline">
-        {items.map((item, index) => (
-          <article ref={(node) => { itemRefs.current[index] = node; }}
-            data-journey-index={index}
-            className={`journey-item ${active === index ? 'journey-item--active' : ''}`}
-            key={item.year + '-' + index}>
-            <span className="journey-number">{String(index + 1).padStart(2, '0')}</span>
-            <div className="journey-item-content">
-              <span className="journey-year">{item.period}</span>
-              <h3>{item.name}</h3>
-              <p>{item.description}</p>
-            </div>
-          </article>
-        ))}
+    <div className="journey-accordion">
+      <p className="journey-interaction-hint">{t.journeyHint}</p>
+      <div className="journey-accordion-list">
+        {items.map((item, index) => {
+          const isOpen = active === index;
+          const detailId = `journey-detail-${index}`;
+          return (
+            <article
+              className={`journey-accordion-item ${isOpen ? 'is-open' : ''}`}
+              key={item.period + index}
+              onPointerEnter={(event) => {
+                if (event.pointerType === 'mouse') setActive(index);
+              }}
+            >
+              <button
+                type="button"
+                className="journey-accordion-trigger"
+                aria-expanded={isOpen}
+                aria-controls={detailId}
+                onClick={() => setActive(isOpen ? null : index)}
+              >
+                <span className="journey-accordion-number">{String(index + 1).padStart(2, '0')}</span>
+                <span className="journey-accordion-year">{item.year}</span>
+                <span className="journey-accordion-label">{item.name}</span>
+                <span className="journey-accordion-indicator" aria-hidden="true">{isOpen ? '−' : '+'}</span>
+              </button>
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    key="details"
+                    id={detailId}
+                    className="journey-accordion-panel"
+                    initial={reducedMotion ? false : { height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={reducedMotion ? undefined : { height: 0, opacity: 0 }}
+                    transition={{ duration: reducedMotion ? 0 : .44, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <div className="journey-accordion-panel-inner">
+                      <span className="journey-accordion-period">{item.period}</span>
+                      <p>{item.description}</p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </article>
+          );
+        })}
       </div>
     </div>
   );
