@@ -137,7 +137,6 @@ function Portfolio({ lang, navigate }: { lang: Language; navigate: (lang: Langua
   const reducedMotion = useReducedMotion();
   const { scrollYProgress: heroScrollProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
   const heroPhotoY = useTransform(heroScrollProgress, [0, 1], [0, -26]);
-  const goSection = (section: string) => document.getElementById(section)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   return (
     <>
       <section ref={heroRef} className="hero hero-editorial" id="top">
