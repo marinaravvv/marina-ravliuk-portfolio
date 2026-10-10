@@ -89,3 +89,7 @@
 .hero-editorial-bottom p{font-size:19px}
 }
 @media(prefers-reduced-motion:reduce){.hero-editorial-photo,.hero-giant-words{transform:none}}
+
+/* Motion controls horizontal movement; place headlines with top instead of a conflicting CSS transform. */
+.hero-editorial .hero-giant-words{top:16%;transform:none}
+@media(max-width:760px){.hero-editorial .hero-giant-words{top:21%}}
