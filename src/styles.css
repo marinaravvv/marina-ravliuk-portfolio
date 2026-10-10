@@ -2292,3 +2292,68 @@ body,.portfolio{font-family:var(--rav-sans)}
     object-position:51% 23%;
   }
 }
+
+
+/* EDITORIAL BACKGROUNDS V1 — generated for Marina Rav, optimized WebP assets.
+   A restrained mix of cream parchment and two chocolate textures.
+   All text remains live, selectable and legible; backgrounds are decorative. */
+.hero-editorial .hero-editorial-texture{
+  background-image:
+    linear-gradient(110deg,rgba(255,250,244,.68),rgba(245,236,222,.73)),
+    url('/images/backgrounds/cream-parchment.webp');
+  background-size:cover;
+  background-position:center;
+  opacity:.68;
+}
+.about-section.about-editorial{
+  background-color:#F3ECE2;
+  background-image:
+    linear-gradient(rgba(249,244,236,.84),rgba(249,244,236,.88)),
+    url('/images/backgrounds/cream-parchment.webp');
+  background-size:cover;
+  background-position:center center;
+}
+.journey-section{
+  background-color:#241811;
+  background-image:
+    linear-gradient(110deg,rgba(32,19,14,.86),rgba(38,23,16,.77) 55%,rgba(32,19,14,.84)),
+    url('/images/backgrounds/warm-leather.webp');
+  background-size:cover;
+  background-position:center 46%;
+}
+.mav8-section.mav8-company-section{
+  background-color:#302219;
+  background-image:
+    linear-gradient(105deg,rgba(31,19,14,.82),rgba(39,23,16,.64) 62%,rgba(24,15,11,.76)),
+    url('/images/backgrounds/dark-chocolate.webp');
+  background-size:cover;
+  background-position:center 44%;
+}
+.mav8-company-section .mav8-feature{
+  background-color:#402D23;
+  background-image:linear-gradient(130deg,rgba(61,42,33,.87),rgba(30,20,17,.95));
+}
+@media(max-width:760px){
+  .hero-editorial .hero-editorial-texture{
+    background-position:48% center;
+    opacity:.57;
+  }
+  .about-section.about-editorial{
+    background-position:55% center;
+  }
+  .journey-section{
+    background-image:
+      linear-gradient(110deg,rgba(32,19,14,.91),rgba(38,23,16,.83)),
+      url('/images/backgrounds/warm-leather.webp');
+    background-position:40% center;
+  }
+  .mav8-section.mav8-company-section{
+    background-image:
+      linear-gradient(110deg,rgba(30,18,14,.87),rgba(34,21,16,.78)),
+      url('/images/backgrounds/dark-chocolate.webp');
+    background-position:35% center;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-editorial .hero-editorial-texture{transform:none}
+}
