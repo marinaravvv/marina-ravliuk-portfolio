@@ -136,7 +136,7 @@ function Portfolio({ lang, navigate }: { lang: Language; navigate: (lang: Langua
   const heroRef = useRef<HTMLElement>(null);
   const reducedMotion = useReducedMotion();
   const { scrollYProgress: heroScrollProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
-  const heroPhotoY = useTransform(heroScrollProgress, [0, 1], [0, -26]);
+  const heroPhotoY = useTransform(heroScrollProgress, [0, 1], [0, -16]);
   return (
     <>
       <section ref={heroRef} className="hero hero-editorial" id="top">
@@ -151,19 +151,19 @@ function Portfolio({ lang, navigate }: { lang: Language; navigate: (lang: Langua
               <div className="hero-motion-type" aria-hidden="true">
                 <div className="hero-motion-row hero-motion-row--agents">
                   <div className="hero-motion-track">
-                    <span>AI AGENTS <i>✳</i> AI AGENTS <i>✳</i>&nbsp;</span>
+                    <span>AI AGENTS · AI AGENTS ·&nbsp;</span>
                     <span>AI AGENTS <i>✳</i> AI AGENTS <i>✳</i>&nbsp;</span>
                   </div>
                 </div>
                 <div className="hero-motion-row hero-motion-row--automation">
                   <div className="hero-motion-track">
-                    <span>AUTOMATION <i>✳</i> AUTOMATION <i>✳</i>&nbsp;</span>
+                    <span>AUTOMATION · AUTOMATION ·&nbsp;</span>
                     <span>AUTOMATION <i>✳</i> AUTOMATION <i>✳</i>&nbsp;</span>
                   </div>
                 </div>
                 <div className="hero-motion-row hero-motion-row--systems">
                   <div className="hero-motion-track">
-                    <span>DIGITAL SYSTEMS <i>✳</i> DIGITAL SYSTEMS <i>✳</i>&nbsp;</span>
+                    <span>DIGITAL SYSTEMS · DIGITAL SYSTEMS ·&nbsp;</span>
                     <span>DIGITAL SYSTEMS <i>✳</i> DIGITAL SYSTEMS <i>✳</i>&nbsp;</span>
                   </div>
                 </div>
@@ -184,7 +184,7 @@ function Portfolio({ lang, navigate }: { lang: Language; navigate: (lang: Langua
           <Reveal className="about-editorial-intro">
             <p className="eyebrow eyebrow--dark">{t.aboutLabel}</p>
             <h2 className="section-title">{t.aboutHeadingA}<br/><em>{t.aboutHeadingB}</em><br/>{t.aboutHeadingC}</h2>
-            <p className="about-editorial-lead">{t.aboutStatement}</p>
+            <p className="about-editorial-lead">{t.aboutStatement}</p><div className="about-skills"><span>AI Agents</span><span>Business Automation</span><span>Digital Systems</span><span>Digital Products</span></div>
           </Reveal>
           <Reveal className="about-editorial-portrait" delay={0.1}>
             <figure className="about-photo-frame">
@@ -194,8 +194,8 @@ function Portfolio({ lang, navigate }: { lang: Language; navigate: (lang: Langua
           </Reveal>
           <div className="about-editorial-details">
             <Reveal><p>{t.aboutText}</p></Reveal>
-            <Reveal delay={0.08}><p>{t.aboutSecond}</p></Reveal>
-            <Reveal><div className="about-editorial-foot"><span>{t.aboutPhotoCaption}</span><span>45°27′N · 9°11′E</span></div></Reveal>
+            
+            
           </div>
         </div>
       </section>
@@ -225,27 +225,14 @@ function Portfolio({ lang, navigate }: { lang: Language; navigate: (lang: Langua
                   <span className="journey-number">{item.number}</span>
                   <span className="journey-year">{item.year}</span>
                   <div className="journey-item-content"><h3>{item.name}</h3><p>{item.description}</p></div>
-                  <span className="journey-plus" aria-hidden="true">↗</span>
+                  
                 </article>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
-      <section className="expertise-section" id="expertise"><div className="container">
-        <Reveal><p className="eyebrow">{t.expertiseLabel}</p><h2 className="section-title">{t.expertiseTitle}<em>.</em></h2></Reveal>
-        <div className="expertise-list">{expertise.map((item, index) => <Reveal delay={index * 0.045} key={item.number}><div className="expertise-row"><span>{item.number}</span><h3>{item.title[lang]}</h3><p>{item.description[lang]}</p><ArrowUpRight size={24}/></div></Reveal>)}</div>
-      </div></section>
       <WorkSection lang={lang} openProject={(id) => navigate(lang, id)} />
-      <section className="process-section" id="process"><div className="container">
-        <Reveal><p className="eyebrow eyebrow--dark">{t.processLabel}</p><h2 className="section-title">{t.processTitle}</h2></Reveal>
-        <div className="process-grid">{processSteps.map((step, index) => <Reveal delay={index * 0.07} key={step.number}><div className="process-card"><div className="process-card-head"><span>{step.number}</span><span className="process-line" /></div><h3>{step.title[lang]}</h3><p>{step.description[lang]}</p></div></Reveal>)}</div>
-      </div></section>
-      <section className="mav8-section"><div className="container mav8-grid">
-        <Reveal><div className="mav8-text"><p className="eyebrow">{t.mav8Label}</p><h2>{t.mav8Title}</h2><p>{t.mav8Body}</p><a className="pill-link" href="https://mav8.site" target="_blank" rel="noopener noreferrer">{t.visitMav8}<ArrowUpRight size={17}/></a></div></Reveal>
-        <Reveal delay={0.1}><button type="button" className="mav8-feature mav8-feature-3d" onClick={() => navigate(lang, "mav8")} aria-label={`${t.caseView}: MAV8`}><div className="mav8-feature-circle">M<span>8</span></div><strong>MAV8</strong><small>AI / AUTOMATION / DIGITAL ECOSYSTEM</small><span className="mav8-feature-view">{t.caseView}<ArrowUpRight size={17}/></span></button></Reveal>
-      </div></section>
-      <section className="stack-section"><div className="container"><p className="eyebrow eyebrow--dark">{t.stackLabel}</p><div className="stack-wrap">{stack.map((name) => <span key={name}>{name}</span>)}</div></div></section>
       <section className="contact-section" id="contact"><div className="container">
         <Reveal><p className="eyebrow">{t.contactLabel}</p><h2>{t.contactTitle}<br/><em>{t.contactItalic}</em></h2><p className="contact-intro">{t.contactText}</p><a className="contact-button" href="mailto:info@marinaravliuk.com?subject=Collaboration%20with%20Marina%20Rav">{t.contactButton}<ArrowUpRight size={22}/></a></Reveal>
       </div></section>
@@ -297,7 +284,7 @@ export default function App() {
       window.requestAnimationFrame(() => window.requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })));
     } else document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
-  const navItems = [{ id: 'about', title: t.navAbout }, { id: 'journey', title: t.navJourney }, { id: 'expertise', title: t.navExpertise }, { id: 'work', title: t.navWork }, { id: 'process', title: t.navProcess }, { id: 'contact', title: t.navContact }];
+  const navItems = [{ id: 'about', title: t.navAbout }, { id: 'journey', title: t.navJourney }, { id: 'work', title: t.navWork }, { id: 'contact', title: t.navContact }];
   return <div className="portfolio">
     <motion.div className="scroll-progress" style={{ scaleX: progress }} />
     <header className="site-header"><div className="container header-inner">
