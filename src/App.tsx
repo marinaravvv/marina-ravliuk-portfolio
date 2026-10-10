@@ -47,12 +47,12 @@ function ProjectArt({ project, small = false }: { project: Project; small?: bool
           <div className="rodus-sheets" aria-hidden="true">
             <div className="rodus-sheet rodus-sheet--back"><span>01 / LEARN</span></div>
             <div className="rodus-sheet rodus-sheet--front">
-              <span>RODUS</span>
+              <span>RoDoSy</span>
               <i className="rodus-sheet-line" />
               <small>LEARNING, REIMAGINED.</small>
             </div>
           </div>
-          <span className="rodus-title">RODUS</span>
+          <span className="rodus-title">RoDoSy</span>
         </div>
       )}
       {project.visual === 'mav8' && (
@@ -338,7 +338,7 @@ function ProjectPage({ lang, project, navigate }: { lang: Language; project: Pro
   return <main className="case-page">
     <div className="container case-head">
       <button type="button" className="back-link" onClick={() => navigate(lang)}><ArrowLeft size={17}/>{t.backToWork}</button>
-      <div className="case-kicker"><span>{t.published}</span><span>{String(projects.indexOf(project)+1).padStart(2,'0')} / 05</span></div>
+      <div className="case-kicker"><span>{t.published}</span><span>{String(projects.indexOf(project)+1).padStart(2,'0')} / {String(projects.length).padStart(2,'0')}</span></div>
       <h1>{project.title}<span>↗</span></h1><p>{project.summary[lang]}</p>
     </div>
     <div className="container case-art"><ProjectArt project={project}/></div>
