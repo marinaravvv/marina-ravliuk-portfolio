@@ -2995,3 +2995,32 @@ body,.portfolio{font-family:var(--rav-sans)}
 @media(prefers-reduced-motion:reduce){
   .journey-cv-language{transition:none}
 }
+
+
+/* FINAL HEADER — remove duplicate wordmark; Hero retains the MARINA RAV title.
+   Center navigation and keep locale switch to the right. */
+@media(min-width:901px){
+  .site-header .header-inner{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+    align-items:center;
+    gap:clamp(14px,2vw,32px);
+  }
+  .site-header .main-nav{
+    grid-column:2;
+    justify-self:center;
+    margin:0;
+  }
+  .site-header .header-end{
+    grid-column:3;
+    justify-self:end;
+  }
+}
+@media(max-width:900px){
+  .site-header .header-inner{
+    justify-content:flex-end;
+  }
+  .site-header .header-end{
+    margin-left:auto;
+  }
+}
