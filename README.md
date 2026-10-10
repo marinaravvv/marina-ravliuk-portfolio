@@ -59,3 +59,7 @@ This project is inspired by editorial interactive portfolios including https://k
 - Scroll progress, section reveals, animated typography, and reduced-motion support.
 - Language switch that retains project page context.
 - Client-side SEO metadata; prerendering/static generation recommended later for stronger multilingual SEO.
+
+## Editorial hero (in progress)
+
+The Hero expects a real portrait at `public/images/marina-hero.webp` (served as `/images/marina-hero.webp`). Download the optimized photo provided in ChatGPT and upload it to this path on branch `feat/editorial-hero` using GitHub → Add file → Upload files. The CSS-based fallback is intentionally shown while the asset is missing. The new Hero uses cream background, bold chocolate type, portrait layering, mobile layout and restrained scroll motion.
