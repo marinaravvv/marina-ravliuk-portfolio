@@ -234,6 +234,12 @@ export const projects: Project[] = [
     detail: { ua: 'RòDoSy — культурно-освітній проєкт асоціації SupportUAchildren APS при Українському домі в Мілані. Сайт знайомить із місією проєкту, напрямами навчання й творчості та можливостями долучитися до спільноти.', en: 'RòDoSy is a cultural and educational initiative of SupportUAchildren APS at the Ukrainian House in Milan. Its website introduces the mission, learning and creative programs, and ways to join the community.', it: 'RòDoSy è un progetto culturale ed educativo dell’associazione SupportUAchildren APS presso la Casa Ucraina di Milano. Il sito presenta la missione, le attività formative e creative e le possibilità di partecipazione.' },
     tags: ['Website', 'Education', 'Community'],
   },
+
+];
+
+// Work in progress: deliberately excluded from public carousel and case navigation.
+// Restore to projects only when the client games are complete and approved.
+export const draftProjects: Project[] = [
   {
     id: 'pleasure-map', title: 'Pleasure Map Milano', visual: 'pleasure', url: 'https://pleasuremapmilano.lovable.app/',
     category: { ua: 'Лендинг / подія в Мілані', en: 'Landing page / Milan event', it: 'Landing page / evento a Milano' },
@@ -241,11 +247,6 @@ export const projects: Project[] = [
     detail: { ua: 'Pleasure Map Milano — сайт події в Мілані, присвяченої дослідженню власних відчуттів, бажань та близькості. Лендинг представляє концепцію зустрічі, атмосферу та інформацію для участі.', en: 'Pleasure Map Milano is an event website centred on exploring body awareness, desire and connection. Its landing page introduces the event concept, atmosphere and participation details.', it: 'Pleasure Map Milano è un sito dedicato a un evento sul corpo, il desiderio e la vicinanza. La landing page presenta il concept, l’atmosfera e le informazioni per partecipare.' },
     tags: ['Website', 'Landing Page', 'Event'],
   },
-];
-
-// Work in progress: deliberately excluded from public carousel and case navigation.
-// Restore to projects only when the client games are complete and approved.
-export const draftProjects: Project[] = [
   {
     id: 'ai-nova', title: 'AI NOVA', visual: 'nova',
     category: { ua: 'Персональний AI-бот у Telegram', en: 'Personal AI bot on Telegram', it: 'Bot AI personale su Telegram' },
