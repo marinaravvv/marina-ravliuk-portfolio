@@ -93,3 +93,132 @@
 /* Motion controls horizontal movement; place headlines with top instead of a conflicting CSS transform. */
 .hero-editorial .hero-giant-words{top:16%;transform:none}
 @media(max-width:760px){.hero-editorial .hero-giant-words{top:21%}}
+
+
+/* HERO V3 — resolved mobile collisions and legacy .hero h1 em styling.
+   Keep the photographic collage, but place full MARINA RAV on cream beneath
+   the photo for consistent contrast at every device width. */
+.hero.hero-editorial .hero-editorial-stage{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:670px;
+  gap:0;
+  padding:30px 0 24px;
+}
+.hero.hero-editorial .hero-editorial-photo{
+  flex:none;
+}
+.hero.hero-editorial .hero-editorial-name{
+  position:relative;
+  inset:auto;
+  width:100%;
+  flex:none;
+  margin-top:14px;
+  text-align:center;
+  z-index:3;
+  mix-blend-mode:normal;
+}
+.hero.hero-editorial .hero-editorial-name h1{
+  font-family:'Playfair Display',Georgia,serif;
+  display:block;
+  position:static;
+  font-weight:500;
+  font-size:clamp(62px,8.1vw,128px);
+  line-height:1.04;
+  letter-spacing:-.075em;
+  color:#2a1913;
+  text-shadow:none;
+  white-space:nowrap;
+  margin:0;
+}
+.hero.hero-editorial .hero-editorial-name h1 em{
+  font-family:inherit;
+  font-size:inherit;
+  font-style:italic;
+  font-weight:400;
+  letter-spacing:inherit;
+  line-height:inherit;
+  color:#684330;
+  position:static;
+  top:auto;
+  vertical-align:baseline;
+  margin:0;
+}
+.hero.hero-editorial .hero-giant-words{
+  top:19%;
+  left:0;
+  right:0;
+  width:100%;
+  gap:9px;
+  font-size:clamp(64px,8.4vw,137px);
+  line-height:.98;
+  letter-spacing:-.09em;
+  transform:none;
+  color:#281913;
+  overflow:visible;
+}
+.hero.hero-editorial .hero-giant-words span{
+  align-self:center;
+  padding:0;
+}
+.hero.hero-editorial .hero-giant-words span:nth-child(3){
+  font-size:.78em;
+}
+@media(max-width:760px){
+  .hero.hero-editorial .hero-editorial-inner{
+    padding-top:94px;
+    padding-bottom:25px;
+    gap:9px;
+  }
+  .hero.hero-editorial .hero-editorial-meta{
+    padding-bottom:8px;
+  }
+  .hero.hero-editorial .hero-editorial-stage{
+    min-height:425px;
+    padding:18px 0 8px;
+  }
+  .hero.hero-editorial .hero-editorial-photo{
+    width:min(63vw,300px);
+    height:min(78vw,378px);
+    box-shadow:0 16px 40px rgba(49,30,21,.13);
+  }
+  .hero.hero-editorial .hero-editorial-name{
+    margin-top:13px;
+  }
+  .hero.hero-editorial .hero-editorial-name h1{
+    font-size:clamp(42px,12.4vw,72px);
+    letter-spacing:-.074em;
+    line-height:1.03;
+  }
+  .hero.hero-editorial .hero-giant-words{
+    top:16%;
+    left:-4%;
+    right:-4%;
+    width:108%;
+    gap:20px;
+    font-size:clamp(50px,12.8vw,80px);
+    line-height:1.08;
+    letter-spacing:-.088em;
+  }
+  .hero.hero-editorial .hero-giant-words span:nth-child(2){
+    font-size:.95em;
+  }
+  .hero.hero-editorial .hero-giant-words span:nth-child(3){
+    font-size:.68em;
+  }
+  .hero.hero-editorial .hero-editorial-bottom{
+    gap:13px;
+  }
+  .hero.hero-editorial .hero-editorial-bottom p{
+    font-size:clamp(20px,5vw,27px);
+    line-height:1.25;
+  }
+}
+@media(max-width:390px){
+  .hero.hero-editorial .hero-editorial-stage{min-height:390px}
+  .hero.hero-editorial .hero-editorial-photo{width:64vw;height:77vw}
+  .hero.hero-editorial .hero-editorial-name h1{font-size:12.2vw}
+  .hero.hero-editorial .hero-giant-words{top:15%;font-size:12.6vw;gap:18px}
+}
