@@ -1,0 +1,139 @@
+export const languages = ['ua', 'en', 'it'] as const;
+export type Language = (typeof languages)[number];
+export type LocalizedText = Record<Language, string>;
+
+export const text = {
+  ua: {
+    navAbout: 'Про мене', navExpertise: 'Напрями', navWork: 'Проєкти', navProcess: 'Підхід', navContact: 'Контакт',
+    heroEyebrow: 'Незалежна AI & Digital Systems спеціалістка · Мілан, Італія',
+    heroTop: 'Marina', heroBottom: 'Rav', heroSub: 'AI AUTOMATION / AI AGENTS / DIGITAL SYSTEMS',
+    heroIntro: 'Створюю технології, які перетворюють складні бізнес-процеси на зрозумілі системи.',
+    scroll: 'Гортай, щоб дослідити', discover: 'Переглянути роботи', availability: 'Відкрита до співпраці',
+    aboutLabel: '01 / ПРО МЕНЕ', aboutHeadingA: 'Не просто', aboutHeadingB: 'цифрові продукти.', aboutHeadingC: 'Системи, що працюють.',
+    aboutText: 'Я працюю на перетині штучного інтелекту, автоматизації та цифрових продуктів. Проєктую практичні рішення — від AI-агентів до систем, які об’єднують процеси бізнесу.',
+    aboutSecond: 'Я базуюся в Мілані та розвиваю MAV8 — екосистему AI, Automation, Agents, Digital Systems, Products і Education.',
+    expertiseLabel: '02 / НАПРЯМИ', expertiseTitle: 'Що я створюю', selectedLabel: '03 / ВИБРАНІ ПРОЄКТИ',
+    selectedTitle: 'Роботи, що', selectedTitleItalic: 'мають сенс.', caseView: 'Відкрити кейс', projectIndex: 'ПРОЄКТ',
+    processLabel: '04 / ПІДХІД', processTitle: 'Від ідеї до системи.',
+    mav8Label: '05 / ВЛАСНИЙ ПРОЄКТ', mav8Title: 'Будую більше, ніж продукти.',
+    mav8Body: 'MAV8 — моя digital-екосистема, яка поєднує навчання, практичні ресурси та рішення для бізнесу у сферах AI, автоматизації й цифрових систем.',
+    visitMav8: 'Відкрити MAV8', stackLabel: 'ТЕХНОЛОГІЇ', contactLabel: '06 / КОНТАКТ',
+    contactTitle: 'Маєте ідею?', contactItalic: 'Створімо її разом.',
+    contactText: 'AI-агент, автоматизація чи новий digital-продукт — обговорімо вашу задачу.',
+    contactButton: 'Написати мені', footer: 'Розроблено з увагою до деталей.',
+    backToWork: 'Назад до проєктів', aboutProject: 'Про проєкт', projectType: 'Категорія',
+    projectStatus: 'Статус', nextProject: 'Наступний проєкт', comingSoon: 'Деталі та матеріали кейсу скоро з’являться.',
+    published: 'Портфоліо / вибрані роботи', inDevelopment: 'У розробці', selectedWork: 'Вибрані роботи',
+  },
+  en: {
+    navAbout: 'About', navExpertise: 'Expertise', navWork: 'Work', navProcess: 'Process', navContact: 'Contact',
+    heroEyebrow: 'Independent AI & Digital Systems specialist · Milan, Italy',
+    heroTop: 'Marina', heroBottom: 'Rav', heroSub: 'AI AUTOMATION / AI AGENTS / DIGITAL SYSTEMS',
+    heroIntro: 'I turn complex business processes into clear, purposeful digital systems.',
+    scroll: 'Scroll to explore', discover: 'Explore selected work', availability: 'Open to collaborations',
+    aboutLabel: '01 / ABOUT', aboutHeadingA: 'More than', aboutHeadingB: 'digital products.', aboutHeadingC: 'Systems that work.',
+    aboutText: 'I work at the intersection of artificial intelligence, automation and digital products. I design practical solutions — from AI agents to connected business systems.',
+    aboutSecond: 'Based in Milan, I am building MAV8 — an ecosystem of AI, Automation, Agents, Digital Systems, Products and Education.',
+    expertiseLabel: '02 / EXPERTISE', expertiseTitle: 'What I build', selectedLabel: '03 / SELECTED WORK',
+    selectedTitle: 'Work with', selectedTitleItalic: 'purpose.', caseView: 'Explore case study', projectIndex: 'PROJECT',
+    processLabel: '04 / PROCESS', processTitle: 'From idea to system.',
+    mav8Label: '05 / FOUNDER PROJECT', mav8Title: 'Building beyond products.',
+    mav8Body: 'MAV8 is the digital ecosystem I am building — bringing together learning, practical resources and business solutions across AI, automation and digital systems.',
+    visitMav8: 'Visit MAV8', stackLabel: 'TECHNOLOGY', contactLabel: '06 / CONTACT',
+    contactTitle: 'Have an idea?', contactItalic: 'Let’s build it.',
+    contactText: 'An AI agent, automation or digital product — let’s discuss your challenge.',
+    contactButton: 'Get in touch', footer: 'Made with intention.',
+    backToWork: 'Back to selected work', aboutProject: 'About this project', projectType: 'Category',
+    projectStatus: 'Status', nextProject: 'Next project', comingSoon: 'Case details and visuals coming soon.',
+    published: 'Portfolio / selected work', inDevelopment: 'In development', selectedWork: 'Selected work',
+  },
+  it: {
+    navAbout: 'Chi sono', navExpertise: 'Competenze', navWork: 'Progetti', navProcess: 'Metodo', navContact: 'Contatti',
+    heroEyebrow: 'Specialista indipendente AI & Digital Systems · Milano, Italia',
+    heroTop: 'Marina', heroBottom: 'Rav', heroSub: 'AI AUTOMATION / AI AGENTS / DIGITAL SYSTEMS',
+    heroIntro: 'Trasformo processi aziendali complessi in sistemi digitali chiari e funzionali.',
+    scroll: 'Scorri per esplorare', discover: 'Esplora i progetti', availability: 'Disponibile per collaborazioni',
+    aboutLabel: '01 / CHI SONO', aboutHeadingA: 'Più che', aboutHeadingB: 'prodotti digitali.', aboutHeadingC: 'Sistemi che funzionano.',
+    aboutText: 'Lavoro all’intersezione tra intelligenza artificiale, automazione e prodotti digitali. Progetto soluzioni pratiche: dagli agenti AI ai sistemi aziendali integrati.',
+    aboutSecond: 'Vivo a Milano e sto sviluppando MAV8, un ecosistema di AI, Automation, Agents, Digital Systems, Products ed Education.',
+    expertiseLabel: '02 / COMPETENZE', expertiseTitle: 'Cosa realizzo', selectedLabel: '03 / PROGETTI SELEZIONATI',
+    selectedTitle: 'Progetti con', selectedTitleItalic: 'uno scopo.', caseView: 'Scopri il progetto', projectIndex: 'PROGETTO',
+    processLabel: '04 / METODO', processTitle: 'Dall’idea al sistema.',
+    mav8Label: '05 / PROGETTO PERSONALE', mav8Title: 'Oltre i singoli prodotti.',
+    mav8Body: 'MAV8 è l’ecosistema digitale che sto sviluppando: formazione, risorse pratiche e soluzioni aziendali nei settori AI, automazione e sistemi digitali.',
+    visitMav8: 'Visita MAV8', stackLabel: 'TECNOLOGIE', contactLabel: '06 / CONTATTI',
+    contactTitle: 'Hai un’idea?', contactItalic: 'Realizziamola insieme.',
+    contactText: 'Un agente AI, un’automazione o un nuovo prodotto digitale: parliamo della tua sfida.',
+    contactButton: 'Contattami', footer: 'Creato con cura.',
+    backToWork: 'Torna ai progetti', aboutProject: 'Il progetto', projectType: 'Categoria',
+    projectStatus: 'Stato', nextProject: 'Prossimo progetto', comingSoon: 'Dettagli e immagini del progetto in arrivo.',
+    published: 'Portfolio / progetti selezionati', inDevelopment: 'In sviluppo', selectedWork: 'Progetti selezionati',
+  },
+} as const;
+
+export const expertise: { number: string; title: LocalizedText; description: LocalizedText }[] = [
+  { number: '01', title: { ua: 'AI Agents', en: 'AI Agents', it: 'AI Agents' }, description: { ua: 'Розумні асистенти та агентні системи.', en: 'Intelligent assistants and agent-based systems.', it: 'Assistenti intelligenti e sistemi agentici.' } },
+  { number: '02', title: { ua: 'Business Automation', en: 'Business Automation', it: 'Business Automation' }, description: { ua: 'Менше ручних дій. Більше керованості.', en: 'Less manual work. More control.', it: 'Meno lavoro manuale. Più controllo.' } },
+  { number: '03', title: { ua: 'Digital Systems', en: 'Digital Systems', it: 'Digital Systems' }, description: { ua: 'Платформи, внутрішні інструменти та інтеграції.', en: 'Platforms, internal tools and integrations.', it: 'Piattaforme, strumenti interni e integrazioni.' } },
+  { number: '04', title: { ua: 'Digital Products', en: 'Digital Products', it: 'Digital Products' }, description: { ua: 'Цифрові продукти з чіткою логікою й користю.', en: 'Purposeful digital products built to be used.', it: 'Prodotti digitali utili, pensati per essere usati.' } },
+];
+
+export type Project = {
+  id: string;
+  title: string;
+  category: LocalizedText;
+  summary: LocalizedText;
+  detail: LocalizedText;
+  tags: string[];
+  visual: 'aura' | 'mav8' | 'nova' | 'sasha' | 'natalia';
+  url?: string;
+  inDevelopment?: boolean;
+};
+
+export const projects: Project[] = [
+  {
+    id: 'aura', title: 'AURA', visual: 'aura',
+    category: { ua: 'Клієнтський проєкт', en: 'Client project', it: 'Progetto cliente' },
+    summary: { ua: 'Цифровий проєкт для Родоси.', en: 'A digital project for Rodosi.', it: 'Un progetto digitale per Rodosi.' },
+    detail: { ua: 'AURA — один із моїх клієнтських проєктів, створений для Родоси. Детальний опис завдання, реалізації та результати буде додано після погодження матеріалів.', en: 'AURA is a client project created for Rodosi. Details of the brief, implementation and outcomes will be added once the materials are confirmed.', it: 'AURA è un progetto cliente realizzato per Rodosi. La descrizione del brief, della realizzazione e dei risultati verrà aggiunta dopo la conferma dei materiali.' },
+    tags: ['Client project'],
+  },
+  {
+    id: 'mav8', title: 'MAV8', visual: 'mav8',
+    category: { ua: 'Платформа / власний бізнес', en: 'Platform / founder project', it: 'Piattaforma / progetto founder' },
+    summary: { ua: 'Екосистема AI, автоматизації, цифрових продуктів та освіти.', en: 'An ecosystem spanning AI, automation, digital products and education.', it: 'Un ecosistema tra AI, automazione, prodotti digitali e formazione.' },
+    detail: { ua: 'MAV8 об’єднує три напрями: LEARN — навчання, BUILD / RESOURCES — практичні матеріали, SOLUTIONS — цифрові рішення для бізнесу. Я розвиваю архітектуру продуктів і платформи.', en: 'MAV8 brings together LEARN (education), BUILD / RESOURCES (practical assets), and SOLUTIONS (digital business solutions). I am developing the product and platform architecture.', it: 'MAV8 riunisce LEARN (formazione), BUILD / RESOURCES (risorse pratiche) e SOLUTIONS (soluzioni digitali per le aziende). Sto sviluppando l’architettura dei prodotti e della piattaforma.' },
+    tags: ['AI', 'Digital Systems', 'Education'], url: 'https://mav8.site',
+  },
+  {
+    id: 'ai-nova', title: 'AI NOVA', visual: 'nova',
+    category: { ua: 'Власний AI-агент', en: 'Independent AI agent', it: 'Agente AI indipendente' },
+    summary: { ua: 'Мій власний проєкт у напрямі AI-агентів.', en: 'My independent AI agent project.', it: 'Il mio progetto personale nel campo degli agenti AI.' },
+    detail: { ua: 'AI NOVA — мій власний AI-агент. Архітектуру, можливості та демонстраційні матеріали додамо після підготовки кейсу.', en: 'AI NOVA is my personal AI agent project. Its architecture, features and demonstrations will be documented as the case study is prepared.', it: 'AI NOVA è il mio progetto personale di agente AI. Architettura, funzionalità e dimostrazioni saranno documentate nella scheda del progetto.' },
+    tags: ['AI Agent'],
+  },
+  {
+    id: 'sasha-game', title: 'ONLINE GAME', visual: 'sasha',
+    category: { ua: 'Інтерактивний клієнтський проєкт', en: 'Interactive client project', it: 'Progetto interattivo cliente' },
+    summary: { ua: 'Онлайн-гра, яку я створила для Саші.', en: 'An online game I created for Sasha.', it: 'Un gioco online che ho creato per Sasha.' },
+    detail: { ua: 'Інтерактивний цифровий проєкт для Саші. Скриншоти, ігрову механіку та роль у розробці додамо після підготовки матеріалів.', en: 'An interactive digital project created for Sasha. Screenshots, game mechanics and the scope of my work will be added once the materials are ready.', it: 'Un progetto digitale interattivo creato per Sasha. Screenshot, meccaniche di gioco e il mio contributo saranno aggiunti quando i materiali saranno pronti.' },
+    tags: ['Interactive', 'Game'],
+  },
+  {
+    id: 'natalia-game', title: 'GAME IN PROGRESS', visual: 'natalia',
+    category: { ua: 'Інтерактивний проєкт', en: 'Interactive project', it: 'Progetto interattivo' },
+    summary: { ua: 'Онлайн-гра для Наталії. Зараз у розробці.', en: 'An online game for Natalia. Currently in development.', it: 'Un gioco online per Natalia. Attualmente in sviluppo.' },
+    detail: { ua: 'Нова онлайн-гра для Наталії перебуває у розробці. Опис, візуали та можливість перегляду з’являться після завершення відповідного етапу роботи.', en: 'A new online game for Natalia is in development. Details, visuals and a demo will be added when the relevant development stage is complete.', it: 'Un nuovo gioco online per Natalia è in fase di sviluppo. Dettagli, immagini e demo verranno aggiunti al termine della relativa fase di lavoro.' },
+    tags: ['Interactive', 'Game'], inDevelopment: true,
+  },
+];
+
+export const processSteps: { number: string; title: LocalizedText; description: LocalizedText }[] = [
+  { number: '01', title: { ua: 'Дослідити', en: 'Discover', it: 'Esplorare' }, description: { ua: 'Розібратися в задачі', en: 'Understand the challenge', it: 'Capire la sfida' } },
+  { number: '02', title: { ua: 'Спроєктувати', en: 'Architect', it: 'Progettare' }, description: { ua: 'Побудувати логіку рішення', en: 'Design the system logic', it: 'Disegnare la logica del sistema' } },
+  { number: '03', title: { ua: 'Реалізувати', en: 'Build', it: 'Realizzare' }, description: { ua: 'Створити продукт', en: 'Bring the product to life', it: 'Realizzare il prodotto' } },
+  { number: '04', title: { ua: 'Автоматизувати', en: 'Automate', it: 'Automatizzare' }, description: { ua: 'Поєднати процеси', en: 'Connect workflows', it: 'Collegare i processi' } },
+  { number: '05', title: { ua: 'Запустити', en: 'Launch', it: 'Lanciare' }, description: { ua: 'Перевірити і вдосконалити', en: 'Test and refine', it: 'Verificare e migliorare' } },
+];
+
+export const stack = ['OpenAI', 'Claude', 'n8n', 'Make', 'Lovable', 'Supabase', 'GitHub', 'Vercel', 'Stripe', 'Resend', 'APIs'];
