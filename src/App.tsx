@@ -5,10 +5,38 @@ import { languages, projects, stack, text, type Language, type Project } from '.
 
 type RouteState = { lang: Language };
 const langNames: Record<Language, string> = { ua: 'УКР', en: 'ENG', it: 'ITA' };
+const LANGUAGE_PREFERENCE_KEY = 'marina-rav:preferred-language';
+
+function isSupportedLanguage(value: unknown): value is Language {
+  return value === 'ua' || value === 'en' || value === 'it';
+}
+
+function detectVisitorLanguage(): Language {
+  // A manually chosen language takes priority on future visits to the homepage.
+  // If storage is blocked, the language switcher and browser detection still work.
+  try {
+    const saved = window.localStorage.getItem(LANGUAGE_PREFERENCE_KEY);
+    if (isSupportedLanguage(saved)) return saved;
+  } catch {
+    // Private browsing or blocked storage: use browser preferences.
+  }
+
+  // The browser reports a person's preferred languages, not their nationality.
+  // Use the first supported one; Ukrainian is the platform's default fallback.
+  const preferences = navigator.languages?.length ? navigator.languages : [navigator.language];
+  for (const preference of preferences) {
+    const code = preference.toLowerCase().split('-')[0];
+    if (code === 'uk' || code === 'ua') return 'ua';
+    if (code === 'it') return 'it';
+    if (code === 'en') return 'en';
+  }
+  return 'ua';
+}
 
 function readRoute(): RouteState {
+  // Explicit /ua, /en and /it links always win over automatic detection.
   const match = window.location.pathname.match(/^\/(ua|en|it)(?:\/projects\/[a-z0-9-]+)?\/?$/);
-  const lang: Language = (match?.[1] as Language) ?? 'ua';
+  const lang: Language = (match?.[1] as Language) ?? detectVisitorLanguage();
   // Old case URLs should never strand visitors on removed internal pages.
   if (window.location.pathname.includes('/projects/')) {
     window.history.replaceState(null, '', `/${lang}#work`);
@@ -19,12 +47,26 @@ function readRoute(): RouteState {
 function usePortfolioRoute() {
   const [route, setRoute] = useState<RouteState>(readRoute);
   useEffect(() => {
-    if (window.location.pathname === '/') window.history.replaceState(null, '', '/ua');
+    // Keep the URL, metadata and language toggle consistent on a first visit.
+    // Preserve referral parameters and in-page anchors for the homepage.
+    if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+      window.history.replaceState(
+        null,
+        '',
+        `/${route.lang}${window.location.search}${window.location.hash}`,
+      );
+    }
     const onPop = () => setRoute(readRoute());
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
   }, []);
   const navigate = (lang: Language) => {
+    // Remember only an intentional selection, never a guessed browser language.
+    try {
+      window.localStorage.setItem(LANGUAGE_PREFERENCE_KEY, lang);
+    } catch {
+      // Language switching works even without local storage.
+    }
     const path = `/${lang}`;
     if (window.location.pathname !== path || window.location.hash) window.history.pushState(null, '', path);
     setRoute({ lang });
