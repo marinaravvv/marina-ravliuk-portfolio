@@ -208,7 +208,7 @@ function Portfolio({ lang, navigate }: { lang: Language; navigate: (lang: Langua
               <p className="journey-intro">{t.journeyIntro}</p>
             </Reveal>
             <Reveal delay={0.1}>
-              <a className="journey-cv-link" href="/cv-marina-ravliuk.html" target="_blank" rel="noopener noreferrer">
+              <a className="journey-cv-link" href="/images/marina-ravliuk-cv.pdf" download="Marina_Ravliuk_CV.pdf">
                 <span>{t.cvDownload}</span><Download size={21}/>
               </a>
             </Reveal>
