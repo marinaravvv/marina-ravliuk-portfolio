@@ -173,62 +173,57 @@ function WorkSection({ lang, openProject }: { lang: Language; openProject: (id: 
 function JourneyTimeline({ lang }: { lang: Language }) {
   const t = text[lang];
   const reducedMotion = useReducedMotion();
-  const [active, setActive] = useState<number | null>(0);
-  // Most recent milestones first. Overlapping years reflect concurrent work,
-  // not separate full-time positions or invented career stages.
+
+  // Chronological chapters. Several business and education projects ran in
+  // parallel; their dates are intentionally allowed to overlap.
   const items = [
-    { year: '2025', period: '2025', name: t.journeyExit, description: t.journeyExitDescription },
-    { year: '2024', period: '2024 — ' + t.journeyNow, name: t.journeyAI, description: t.journeyAIDescription },
-    { year: '2023', period: '2023', name: t.journeyPlatform, description: t.journeyPlatformDescription },
-    { year: '2021', period: '2021 — 2025', name: t.journeySchool, description: t.journeySchoolDescription },
-    { year: '2018', period: '2018', name: t.journeyEducation, description: t.journeyEducationDescription },
+    { year: '2018', period: '2018', title: t.journeyEducation, description: t.journeyEducationDescription },
+    { year: '2019', period: '2019 — 2023', title: t.journeyEarlyTitle, description: t.journeyEarlyDescription },
+    { year: '2021', period: '2021', title: t.journeyFirstExitTitle, description: t.journeyFirstExitDescription },
+    { year: '2023', period: '2023', title: t.journeyPlatform, description: t.journeyPlatformDescription },
+    { year: '2024', period: '2024 — ' + t.journeyNow, title: t.journeyAI, description: t.journeyAIDescription },
+    { year: '2025', period: '2025', title: t.journeyExit, description: t.journeyExitDescription },
+    { year: '2026', period: t.journeyMav8Period, title: t.journeyMav8Title, description: t.journeyMav8Description },
   ];
 
   return (
-    <div className="journey-accordion">
-      <p className="journey-interaction-hint">{t.journeyHint}</p>
-      <div className="journey-accordion-list">
+    <div className="journey-story">
+      <p className="journey-story-hint">{t.journeyScrollHint}<span aria-hidden="true"> ↓</span></p>
+      <div className="journey-story-stack">
         {items.map((item, index) => {
-          const isOpen = active === index;
-          const detailId = `journey-detail-${index}`;
+          const finalChapter = index === items.length - 1;
           return (
             <article
-              className={`journey-accordion-item ${isOpen ? 'is-open' : ''}`}
-              key={item.period + index}
-              onPointerEnter={(event) => {
-                if (event.pointerType === 'mouse') setActive(index);
-              }}
+              key={item.year + '-' + index}
+              className={`journey-story-card${finalChapter ? ' journey-story-card--final' : ''}`}
+              style={{ zIndex: index + 1 }}
+              aria-label={`${item.period}: ${item.title}`}
             >
-              <button
-                type="button"
-                className="journey-accordion-trigger"
-                aria-expanded={isOpen}
-                aria-controls={detailId}
-                onClick={() => setActive(isOpen ? null : index)}
-              >
-                <span className="journey-accordion-number">{String(index + 1).padStart(2, '0')}</span>
-                <span className="journey-accordion-year">{item.year}</span>
-                <span className="journey-accordion-label">{item.name}</span>
-                <span className="journey-accordion-indicator" aria-hidden="true">{isOpen ? '−' : '+'}</span>
-              </button>
-              <AnimatePresence initial={false}>
-                {isOpen && (
+              <div className="journey-story-card-inner">
+                <div className="journey-story-meta">
+                  <span>{t.journeyChapter} {String(index + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}</span>
+                  <span>{item.period}</span>
+                </div>
+                <div className="journey-story-main">
+                  <span className="journey-story-year" aria-hidden="true">{item.year}</span>
                   <motion.div
-                    key="details"
-                    id={detailId}
-                    className="journey-accordion-panel"
-                    initial={reducedMotion ? false : { height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={reducedMotion ? undefined : { height: 0, opacity: 0 }}
-                    transition={{ duration: reducedMotion ? 0 : .44, ease: [0.22, 1, 0.36, 1] }}
+                    className="journey-story-copy"
+                    initial={reducedMotion ? false : { opacity: 0, y: 28 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: .25 }}
+                    transition={{ duration: .65, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    <div className="journey-accordion-panel-inner">
-                      <span className="journey-accordion-period">{item.period}</span>
-                      <p>{item.description}</p>
-                    </div>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
                   </motion.div>
-                )}
-              </AnimatePresence>
+                </div>
+                <div className="journey-story-bottom">
+                  <span>MARINA RAV · MY JOURNEY</span>
+                  {finalChapter
+                    ? <a href="https://mav8.site/" target="_blank" rel="noopener noreferrer">{t.visitMav8}<ArrowUpRight size={16}/></a>
+                    : <span>{t.journeyNext} <span aria-hidden="true">↓</span></span>}
+                </div>
+              </div>
             </article>
           );
         })}
