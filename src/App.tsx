@@ -247,7 +247,7 @@ function Portfolio({ lang, navigate }: { lang: Language; navigate: (lang: Langua
       </div></section>
       <section className="stack-section"><div className="container"><p className="eyebrow eyebrow--dark">{t.stackLabel}</p><div className="stack-wrap">{stack.map((name) => <span key={name}>{name}</span>)}</div></div></section>
       <section className="contact-section" id="contact"><div className="container">
-        <Reveal><p className="eyebrow">{t.contactLabel}</p><h2>{t.contactTitle}<br/><em>{t.contactItalic}</em></h2><p className="contact-intro">{t.contactText}</p><a className="contact-button" href="mailto:info@mav8.site?subject=Collaboration%20with%20Marina%20Rav">{t.contactButton}<ArrowUpRight size={22}/></a></Reveal>
+        <Reveal><p className="eyebrow">{t.contactLabel}</p><h2>{t.contactTitle}<br/><em>{t.contactItalic}</em></h2><p className="contact-intro">{t.contactText}</p><a className="contact-button" href="mailto:info@marinaravliuk.com?subject=Collaboration%20with%20Marina%20Rav">{t.contactButton}<ArrowUpRight size={22}/></a></Reveal>
       </div></section>
     </>
   );
