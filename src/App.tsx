@@ -30,29 +30,47 @@ function usePortfolioRoute() {
 
 function ProjectArt({ project, small = false }: { project: Project; small?: boolean }) {
   return (
-    <div className={`project-art project-art--${project.visual}${small ? ' project-art--small' : ''}`} aria-label={`${project.title} — conceptual visual placeholder`} role="img">
+    <div className={`project-art project-art--${project.visual}${small ? ' project-art--small' : ''}`} aria-label={`${project.title} — ${project.visual === 'aura' || project.visual === 'rodus' ? 'design interpretation of the live website' : 'conceptual visual placeholder'}`} role="img">
       <div className="art-grid" />
       <div className="art-noise" />
       {project.visual === 'aura' && (
-        <div className="aura-layout">
-          <span className="art-side-label">AURA / EDITION 01</span>
-          <div className="aura-orb"><span /></div>
-          <div className="aura-title">AURA</div>
-          <span className="art-bottom-label">CREATIVE CONCEPT</span>
+        <div className="real-site-scene real-site-scene--aura">
+          <div className="real-site-window">
+            <div className="real-site-toolbar" aria-hidden="true">
+              <span className="real-site-window-dots">● ● ●</span>
+              <span>aura-arc.com</span>
+            </div>
+            <div className="real-site-content real-site-content--aura">
+              <img className="real-site-aura-logo"
+                src="https://aura-arc.com/__l5e/assets-v1/189467cc-271b-4f27-9c16-41659b099c09/aura-arc-logo.png"
+                alt="" loading="lazy"
+                onError={(event) => { event.currentTarget.style.display = 'none'; }}
+              />
+              <span className="real-site-eyebrow">A NEURO-IDENTITY PROGRAM</span>
+              <strong>AURA ARC</strong>
+              <p>A guided transformation from inherited patterns to a conscious identity.</p>
+              <div className="real-site-aura-stages" aria-hidden="true">
+                <span>SHADOW</span><span>REWIRING</span><span>REGULATION</span><span>AWAKENING</span>
+              </div>
+            </div>
+          </div>
         </div>
       )}
       {project.visual === 'rodus' && (
-        <div className="rodus-layout">
-          <span className="rodus-kicker">DIGITAL EDUCATION / PLATFORM</span>
-          <div className="rodus-sheets" aria-hidden="true">
-            <div className="rodus-sheet rodus-sheet--back"><span>01 / LEARN</span></div>
-            <div className="rodus-sheet rodus-sheet--front">
-              <span>RoDoSy</span>
-              <i className="rodus-sheet-line" />
-              <small>LEARNING, REIMAGINED.</small>
+        <div className="real-site-scene real-site-scene--rodosy">
+          <div className="real-site-window">
+            <div className="real-site-toolbar" aria-hidden="true">
+              <span className="real-site-window-dots">● ● ●</span>
+              <span>rodosy.it</span>
+            </div>
+            <div className="real-site-content real-site-content--rodosy">
+              <div className="real-site-rodosy-nav"><span>RòDoSy</span><span>UA / IT</span></div>
+              <span className="real-site-eyebrow">РÒДОСИ · ЦЕНТР КУЛЬТУРИ ТА РОЗВИТКУ</span>
+              <strong>Українська освіта,<br />культура та спільнота<br />в Мілані</strong>
+              <p>Місце, де ваші ідеї знаходять підтримку, а таланти — можливість розкритися.</p>
+              <span className="real-site-rodosy-pill">Освіта · Культура · Спільнота</span>
             </div>
           </div>
-          <span className="rodus-title">RoDoSy</span>
         </div>
       )}
       {project.visual === 'mav8' && (
@@ -83,7 +101,7 @@ function ProjectArt({ project, small = false }: { project: Project; small?: bool
           <span className="natalia-caption">WORK IN PROGRESS</span>
         </div>
       )}
-      <span className="placeholder-note">VISUAL CONCEPT · PLACEHOLDER</span>
+      {project.visual !== 'aura' && project.visual !== 'rodus' && <span className="placeholder-note">VISUAL CONCEPT · PLACEHOLDER</span>}
     </div>
   );
 }
@@ -342,7 +360,7 @@ function ProjectPage({ lang, project, navigate }: { lang: Language; project: Pro
     <div className="container case-art"><ProjectArt project={project}/></div>
     <div className="container case-content">
       <div className="case-detail"><p className="eyebrow eyebrow--dark">{t.aboutProject}</p><p>{project.detail[lang]}</p><p className="case-muted">{t.comingSoon}</p></div>
-      <aside><div><span>{t.projectType}</span><strong>{project.category[lang]}</strong></div>{project.inDevelopment && <div><span>{t.projectStatus}</span><strong>{t.inDevelopment}</strong></div>}{project.url && <a href={project.url} target="_blank" rel="noopener noreferrer">{t.visitMav8}<ArrowUpRight size={17}/></a>}</aside>
+      <aside><div><span>{t.projectType}</span><strong>{project.category[lang]}</strong></div>{project.inDevelopment && <div><span>{t.projectStatus}</span><strong>{t.inDevelopment}</strong></div>}{project.url && <a href={project.url} target="_blank" rel="noopener noreferrer">{project.id === 'mav8' ? t.visitMav8 : t.visitWebsite}<ArrowUpRight size={17}/></a>}</aside>
     </div>
     <div className="container next-project"><span>{t.nextProject}</span><button onClick={() => navigate(lang,next.id)} type="button">{next.title}<ArrowRight size={34}/></button></div>
   </main>;
