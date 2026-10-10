@@ -673,3 +673,55 @@
 @media(prefers-reduced-motion:reduce){
   .about-photo-frame img{transition:none!important}
 }
+
+
+/* An intentionally light 3D interaction for the MAV8 project */
+.mav8-section .mav8-grid{perspective:1250px;perspective-origin:70% 50%}
+.mav8-section .mav8-feature-3d{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  color:inherit;
+  font:inherit;
+  text-align:center;
+  cursor:pointer;
+  appearance:none;
+  transform-style:preserve-3d;
+  transform:rotateX(0deg) rotateY(0deg) translateY(0);
+  transform-origin:50% 50%;
+  transition:transform 750ms cubic-bezier(.22,1,.36,1),box-shadow 750ms cubic-bezier(.22,1,.36,1);
+}
+.mav8-section .mav8-feature-3d .mav8-feature-circle{
+  transform:translateZ(32px);
+  transition:transform 750ms cubic-bezier(.22,1,.36,1);
+}
+.mav8-section .mav8-feature-3d strong{transform:translateZ(18px)}
+.mav8-section .mav8-feature-3d small{transform:translateZ(15px)}
+.mav8-feature-view{
+  display:inline-flex;
+  gap:14px;
+  align-items:center;
+  font-family:var(--rav-sans);
+  text-transform:uppercase;
+  letter-spacing:.13em;
+  font-size:10px;
+  padding:13px 0 9px;
+  border-bottom:1px solid currentColor;
+  margin-top:25px;
+  transform:translateZ(35px);
+}
+@media(hover:hover) and (pointer:fine){
+  .mav8-section .mav8-feature-3d:hover{
+    transform:rotateX(4deg) rotateY(-6deg) translateY(-9px);
+    box-shadow:22px 28px 55px rgba(38,21,13,.21);
+  }
+}
+@media(hover:none),(prefers-reduced-motion:reduce){
+  .mav8-section .mav8-feature-3d,
+  .mav8-section .mav8-feature-3d .mav8-feature-circle{
+    transform:none;
+    transition:none;
+  }
+}
