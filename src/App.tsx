@@ -471,10 +471,16 @@ function Portfolio({ lang }: { lang: Language }) {
           </Reveal>
           <Reveal delay={0.12} className="mav8-company-feature">
             <a className="mav8-feature mav8-feature-3d" href="https://mav8.site/" target="_blank" rel="noopener noreferrer" aria-label={t.visitMav8}>
-              <div className="mav8-feature-circle">M<span>8</span></div>
-              <strong>MAV8</strong>
-              <small>AI · AUTOMATION · DIGITAL SYSTEMS</small>
-              <span className="mav8-feature-view">{t.visitMav8}<ArrowUpRight size={15}/></span>
+              <div className="mav8-earth-art" aria-hidden="true">
+                <img src="/images/mav8-earth.webp" alt="" loading="lazy" decoding="async"
+                  onError={(event) => { event.currentTarget.style.display = 'none'; }} />
+              </div>
+              <div className="mav8-earth-brand">
+                <span className="mav8-earth-eyebrow">FOUNDER / COMPANY</span>
+                <strong>MAV8</strong>
+                <small>AI · AUTOMATION · DIGITAL SYSTEMS</small>
+                <span className="mav8-feature-view">{t.visitMav8}<ArrowUpRight size={15}/></span>
+              </div>
             </a>
           </Reveal>
         </div>
