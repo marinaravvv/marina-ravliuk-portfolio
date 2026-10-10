@@ -3024,3 +3024,179 @@ body,.portfolio{font-family:var(--rav-sans)}
     margin-left:auto;
   }
 }
+
+
+/* PORTRAIT CUTOUTS V1 — transparent WebP photographs.
+   Both photographs are separate image elements; no baked-in UI or background box. */
+.hero.hero-editorial .hero-photo-scene{
+  height:clamp(460px,49vw,665px);
+}
+.hero.hero-editorial .hero-editorial-photo{
+  width:min(57vw,630px);
+  height:clamp(455px,48vw,650px);
+  max-width:100%;
+  background:transparent;
+  box-shadow:none;
+  border:0;
+  overflow:visible;
+}
+.hero.hero-editorial .hero-editorial-photo img[src*="marina-hero-cutout"]{
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center bottom;
+  background:transparent;
+  filter:none;
+}
+.hero.hero-editorial .hero-editorial-name{
+  margin-top:clamp(13px,2vw,27px);
+}
+
+/* ABOUT: cutout on cream at left, live multilingual typography at right. */
+.about-section.about-editorial.about-cutout{
+  background:#F3ECE2;
+  background-image:none;
+  padding:clamp(64px,7vw,110px) 0 clamp(65px,7.5vw,118px);
+  overflow:hidden;
+}
+.about-cutout-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);
+  align-items:center;
+  column-gap:clamp(20px,5vw,90px);
+  min-height:clamp(500px,49vw,725px);
+}
+.about-cutout-visual{
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  min-width:0;
+  width:100%;
+  height:clamp(490px,50vw,740px);
+  overflow:visible;
+}
+.about-cutout-image{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center bottom;
+  max-width:100%;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+}
+.about-cutout-copy{
+  min-width:0;
+  align-self:center;
+  padding:clamp(20px,2vw,34px) 0;
+}
+.about-cutout-intro .eyebrow{
+  margin:0 0 clamp(22px,3vw,38px);
+  color:#876850;
+  font:600 10px/1.45 var(--rav-sans);
+  letter-spacing:.16em;
+}
+.about-cutout-intro h2{
+  margin:0 0 clamp(24px,2.8vw,39px);
+  font:800 clamp(32px,3.5vw,58px)/1.08 var(--rav-serif);
+  letter-spacing:-.065em;
+  color:#302219;
+  text-wrap:balance;
+}
+.about-cutout-intro h2 em{
+  color:#997761;
+  font:inherit;
+  font-style:normal;
+}
+.about-cutout-statement{
+  margin:0 0 clamp(13px,1.8vw,21px);
+  max-width:520px;
+  font:600 clamp(17px,1.47vw,23px)/1.53 var(--rav-sans);
+  letter-spacing:-.025em;
+  color:#4C352A;
+}
+.about-cutout-description{
+  margin:0;
+  max-width:520px;
+  font:400 clamp(14px,1.06vw,17px)/1.73 var(--rav-sans);
+  color:#765F50;
+}
+.about-cutout-skills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px 20px;
+  margin-top:clamp(25px,2.8vw,42px);
+  font:500 10px/1.5 var(--rav-sans);
+  letter-spacing:.07em;
+  color:#846B59;
+}
+.about-cutout-skills span{
+  border-bottom:1px solid rgba(93,65,47,.22);
+  padding-bottom:6px;
+}
+@media(max-width:900px) and (min-width:761px){
+  .about-cutout-grid{
+    grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+    column-gap:25px;
+    min-height:530px;
+  }
+  .about-cutout-visual{height:540px}
+  .about-cutout-intro h2{font-size:clamp(29px,4vw,41px)}
+  .about-cutout-statement{font-size:16px}
+  .about-cutout-description{font-size:13px}
+}
+@media(max-width:760px){
+  .hero.hero-editorial .hero-photo-scene{
+    height:clamp(365px,108vw,525px);
+  }
+  .hero.hero-editorial .hero-editorial-photo{
+    width:min(83vw,460px);
+    height:clamp(360px,104vw,510px);
+    max-width:100%;
+    background:transparent;
+    box-shadow:none;
+  }
+  .hero.hero-editorial .hero-editorial-photo img[src*="marina-hero-cutout"]{
+    object-fit:contain;
+    object-position:center bottom;
+  }
+  .hero.hero-editorial .hero-editorial-name{margin-top:15px}
+  .about-section.about-editorial.about-cutout{padding:46px 0 82px}
+  .about-cutout-grid{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    min-height:0;
+    gap:clamp(21px,5vw,36px);
+  }
+  .about-cutout-visual{
+    height:clamp(390px,115vw,570px);
+    width:100%;
+  }
+  .about-cutout-image{
+    object-fit:contain;
+    object-position:center bottom;
+  }
+  .about-cutout-copy{
+    padding:0;
+    width:100%;
+  }
+  .about-cutout-intro .eyebrow{margin-bottom:22px}
+  .about-cutout-intro h2{
+    font-size:clamp(36px,9vw,57px);
+    line-height:1.1;
+    margin-bottom:22px;
+  }
+  .about-cutout-statement{font-size:19px;margin-bottom:16px}
+  .about-cutout-description{font-size:15px;line-height:1.68}
+  .about-cutout-skills{margin-top:29px;gap:10px 16px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero.hero-editorial .hero-editorial-photo img[src*="marina-hero-cutout"]{
+    transition:none;
+  }
+}
