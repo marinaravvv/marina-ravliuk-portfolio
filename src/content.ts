@@ -243,11 +243,16 @@ export const projects: Project[] = [
   },
   {
     id: 'ai-nova', title: 'AI NOVA', visual: 'nova',
-    category: { ua: 'Власний AI-агент', en: 'Independent AI agent', it: 'Agente AI indipendente' },
-    summary: { ua: 'Мій персональний AI-агент для щоденної роботи та цифрових процесів.', en: 'My personal AI agent supporting my everyday work and digital workflows.', it: 'Il mio agente AI personale a supporto del lavoro quotidiano e dei processi digitali.' },
-    detail: { ua: 'AI NOVA — мій власний AI-агент. Архітектуру, можливості та демонстраційні матеріали додамо після підготовки кейсу.', en: 'AI NOVA is my personal AI agent project. Its architecture, features and demonstrations will be documented as the case study is prepared.', it: 'AI NOVA è il mio progetto personale di agente AI. Architettura, funzionalità e dimostrazioni saranno documentate nella scheda del progetto.' },
-    tags: ['AI Agent'],
+    category: { ua: 'Персональний AI-бот у Telegram', en: 'Personal AI bot on Telegram', it: 'Bot AI personale su Telegram' },
+    summary: { ua: 'Мій персональний AI-бот у Telegram.', en: 'My personal AI bot built for Telegram.', it: 'Il mio bot AI personale su Telegram.' },
+    detail: { ua: 'AI NOVA — мій власний AI-бот, який працює через Telegram. Його реальний інтерфейс та приклади взаємодії додамо після підготовки демонстрації без особистих даних.', en: 'AI NOVA is my personal AI bot operated through Telegram. An authentic interface preview and selected interactions will be added once a privacy-safe demonstration is ready.', it: 'AI NOVA è il mio bot AI personale su Telegram. Aggiungerò schermate reali e interazioni selezionate quando sarà pronta una dimostrazione senza dati personali.' },
+    tags: ['AI Bot', 'Telegram'],
   },
+];
+
+// Work in progress: deliberately excluded from public carousel and case navigation.
+// Restore to projects only when the client games are complete and approved.
+export const draftProjects: Project[] = [
   {
     id: 'sasha-game', title: 'ONLINE GAME', visual: 'sasha',
     category: { ua: 'Інтерактивний клієнтський проєкт', en: 'Interactive client project', it: 'Progetto interattivo cliente' },
