@@ -235,7 +235,7 @@ function Portfolio({ lang, navigate }: { lang: Language; navigate: (lang: Langua
       <WorkSection lang={lang} openProject={(id) => navigate(lang, id)} />
       <section className="contact-section" id="contact"><div className="container">
         <Reveal><p className="eyebrow">{t.contactLabel}</p><h2>{t.contactTitle}<br/><em>{t.contactItalic}</em></h2><p className="contact-intro">{t.contactText}</p>
-          <a className="contact-button" href="mailto:info@marinaravliuk.com?subject=Collaboration%20with%20Marina%20Rav">info@marinaravliuk.com <ArrowUpRight size={22}/></a>
+          <a className="contact-button" href="mailto:info@marinaravliuk.com?subject=Collaboration%20with%20Marina%20Rav" aria-label={t.contactButton}>{t.contactButton}<ArrowUpRight size={22}/></a>
           <nav className="contact-social-links" aria-label="Social profiles">
             <a href="https://www.instagram.com/marinaravvv/" target="_blank" rel="noopener noreferrer">Instagram <ArrowUpRight size={14}/></a>
             <a href="https://www.linkedin.com/in/marina-rav-609504b9/" target="_blank" rel="noopener noreferrer">LinkedIn <ArrowUpRight size={14}/></a>
@@ -303,17 +303,6 @@ export default function App() {
     </div></header>
     {project ? <ProjectPage lang={route.lang} project={project} navigate={navigate}/> : <main><Portfolio lang={route.lang} navigate={navigate}/></main>}
     <footer className="site-footer">
-      <div className="container footer-main">
-        <div className="footer-identity">
-          <strong>MARINA RAV</strong>
-          <span>AI · AUTOMATION · DIGITAL SYSTEMS</span>
-        </div>
-        <nav className="footer-social-links" aria-label="Social media and email">
-          <a href="https://www.instagram.com/marinaravvv/" target="_blank" rel="noopener noreferrer">Instagram <ArrowUpRight size={16}/></a>
-          <a href="https://www.linkedin.com/in/marina-rav-609504b9/" target="_blank" rel="noopener noreferrer">LinkedIn <ArrowUpRight size={16}/></a>
-          <a href="mailto:info@marinaravliuk.com">Email <ArrowUpRight size={16}/></a>
-        </nav>
-      </div>
       <div className="container footer-inner footer-bottom">
         <span>© {new Date().getFullYear()} MARINA RAV</span>
         <span>{t.footer}</span>
