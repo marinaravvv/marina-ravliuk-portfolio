@@ -2487,3 +2487,123 @@ body,.portfolio{font-family:var(--rav-sans)}
     background-position:36% center;
   }
 }
+
+
+/* FINAL EDITORIAL PASS — clean, crisp colour replaces low-resolution wall textures */
+.hero-editorial .hero-editorial-texture{
+  background-image:none;
+  background:radial-gradient(ellipse at 75% 20%,rgba(255,255,255,.42),transparent 58%);
+  opacity:.65;
+}
+.about-section.about-editorial{
+  background:#F3ECE2;
+}
+.journey-section{
+  background:#302219;
+  background-image:none;
+}
+.journey-section::before{
+  background:radial-gradient(ellipse at 80% 15%,rgba(153,98,62,.075),transparent 60%);
+}
+.mav8-section.mav8-company-section{
+  background:#302219;
+  background-image:none;
+}
+
+/* MAV8: genuine featured imagery, not a decorative fake website or a second logo. */
+.mav8-company-section .mav8-feature.mav8-feature-3d{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  justify-content:flex-end;
+  aspect-ratio:1;
+  overflow:hidden;
+  background:#1D120D;
+  border:1px solid rgba(244,232,215,.22);
+  text-decoration:none;
+  isolation:isolate;
+  box-shadow:0 36px 80px rgba(18,10,7,.22);
+}
+.mav8-earth-art{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  background:radial-gradient(circle at 65% 35%,#8c5638,#281710 58%,#120C0A 96%);
+}
+.mav8-earth-art img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:56% center;
+  display:block;
+  transition:transform .85s cubic-bezier(.22,1,.36,1);
+}
+.mav8-company-section .mav8-feature.mav8-feature-3d::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(180deg,transparent 34%,rgba(12,8,7,.26) 52%,rgba(11,7,6,.92) 100%);
+  pointer-events:none;
+}
+.mav8-earth-brand{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:13px;
+  width:100%;
+  padding:clamp(24px,4vw,52px);
+  color:#F5ECE1;
+}
+.mav8-earth-eyebrow{
+  font:600 10px/1.4 var(--rav-sans);
+  letter-spacing:.18em;
+  color:#E0C5AB;
+}
+.mav8-company-section .mav8-earth-brand strong{
+  margin:0;
+  color:#F7F0E5;
+  font:800 clamp(55px,6vw,95px)/.94 var(--rav-serif);
+  letter-spacing:-.085em;
+}
+.mav8-company-section .mav8-earth-brand small{
+  margin:0;
+  color:#E7D3BF;
+  font:500 clamp(8px,.7vw,11px)/1.5 var(--rav-sans);
+  letter-spacing:.14em;
+}
+.mav8-company-section .mav8-earth-brand .mav8-feature-view{
+  display:flex;
+  width:100%;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:13px 0 0;
+  margin-top:12px;
+  border-top:1px solid rgba(243,232,217,.42);
+  color:#F5ECE1;
+  font:500 10px/1.5 var(--rav-sans);
+  letter-spacing:.07em;
+}
+@media(hover:hover) and (pointer:fine){
+  .mav8-company-section .mav8-feature.mav8-feature-3d:hover .mav8-earth-art img{
+    transform:scale(1.055);
+  }
+}
+@media(max-width:760px){
+  .hero-editorial .hero-editorial-texture{background-image:none}
+  .about-section.about-editorial{background:#F3ECE2}
+  .journey-section{background:#302219;background-image:none}
+  .mav8-section.mav8-company-section{background:#302219;background-image:none}
+  .mav8-company-section .mav8-earth-brand{padding:clamp(22px,6vw,34px)}
+  .mav8-company-section .mav8-earth-brand strong{font-size:clamp(50px,15vw,85px)}
+  .mav8-company-section .mav8-earth-brand small{font-size:8px;letter-spacing:.07em}
+  .mav8-company-section .mav8-feature.mav8-feature-3d{aspect-ratio:1/1.03}
+}
+@media(prefers-reduced-motion:reduce){
+  .mav8-earth-art img{transition:none}
+}
