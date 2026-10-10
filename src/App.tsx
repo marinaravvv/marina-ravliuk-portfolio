@@ -222,9 +222,9 @@ function WorkSection({ lang }: { lang: Language }) {
               <span className="selected-carousel-visual-caption">{current.title} / {current.category[lang]}</span>
               {(current.gallery?.length ?? 0) > 1 && (
                 <div className="selected-carousel-image-nav" aria-label={t.caseScreenshotNote}>
-                  <button type="button" onClick={() => changeImage(-1)} aria-label={t.carouselPrev}><ArrowLeft size={18}/></button>
-                  <span>{String(imageIndex + 1).padStart(2, '0')} / {String(current.gallery?.length ?? 0).padStart(2, '0')}</span>
-                  <button type="button" onClick={() => changeImage(1)} aria-label={t.carouselNext}><ArrowRight size={18}/></button>
+                  <button type="button" onClick={() => changeImage(-1)} aria-label={`${t.caseScreenshotNote}: ${((imageIndex - 1 + (current.gallery?.length ?? 1)) % (current.gallery?.length ?? 1)) + 1}`}><ArrowLeft size={18}/></button>
+                  <span aria-live="polite">{String(imageIndex + 1).padStart(2, '0')} / {String(current.gallery?.length ?? 0).padStart(2, '0')}</span>
+                  <button type="button" onClick={() => changeImage(1)} aria-label={`${t.caseScreenshotNote}: ${((imageIndex + 1) % (current.gallery?.length ?? 1)) + 1}`}><ArrowRight size={18}/></button>
                 </div>
               )}
             </div>
@@ -240,6 +240,9 @@ function WorkSection({ lang }: { lang: Language }) {
                 <span className="selected-carousel-category">{current.category[lang]}</span>
                 <h3>{current.title}</h3>
                 <p>{current.summary[lang]}</p>
+                <div className="selected-carousel-tags" aria-label={t.projectType}>
+                  {current.tags.slice(0, 3).map((tag) => <span key={tag}>{tag}</span>)}
+                </div>
                 {current.inDevelopment && <span className="in-dev">{t.inDevelopment}</span>}
                 {current.url && (
                   <a className="text-link selected-carousel-live-link" href={current.url}
