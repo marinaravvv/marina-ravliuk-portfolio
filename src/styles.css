@@ -2040,3 +2040,91 @@ body,.portfolio{font-family:var(--rav-sans)}
 @media(prefers-reduced-motion:reduce){
   .real-site-scene--pleasure .real-site-window{transform:none!important}
 }
+
+
+/* Uploaded case galleries: source screenshots, never generated UI imitations.
+   Display a conceptual fallback until the matching files are uploaded. */
+.project-art-screenshot{
+  position:absolute;
+  inset:0;
+  z-index:12;
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:contain;
+  object-position:center;
+  opacity:0;
+  pointer-events:none;
+  user-select:none;
+  -webkit-user-drag:none;
+  transition:opacity .38s cubic-bezier(.22,1,.36,1);
+}
+.project-art-screenshot.is-loaded{opacity:1}
+.project-art--aura .project-art-screenshot{background:#111114}
+.project-art--rodus .project-art-screenshot{background:#E6DDD0}
+.case-screenshot-controls{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:22px;
+  padding:18px 0 10px;
+  border-bottom:1px solid rgba(48,34,25,.18);
+}
+.case-screenshot-arrows{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.case-screenshot-arrows>span{
+  font:600 11px/1.3 var(--rav-sans);
+  letter-spacing:.12em;
+  color:#8D735E;
+  font-variant-numeric:tabular-nums;
+}
+.case-screenshot-arrows button{
+  display:grid;
+  place-items:center;
+  width:46px;
+  height:46px;
+  border:1px solid #B7A490;
+  border-radius:50%;
+  background:transparent;
+  color:#302219;
+  cursor:pointer;
+  transition:background .22s,color .22s;
+}
+.case-screenshot-arrows button:hover{background:#302219;color:#F6F2EA}
+.case-screenshot-dots{display:flex;align-items:center;gap:9px}
+.case-screenshot-dots button{
+  width:10px;
+  height:10px;
+  padding:0;
+  border:0;
+  border-radius:50%;
+  background:#BBA894;
+  cursor:pointer;
+  transition:width .25s,background .25s,border-radius .25s;
+}
+.case-screenshot-dots button.is-active{
+  width:27px;
+  border-radius:8px;
+  background:#302219;
+}
+.case-screenshot-arrows button:focus-visible,
+.case-screenshot-dots button:focus-visible{
+  outline:2px solid #B28A62;
+  outline-offset:4px;
+}
+@media(max-width:760px){
+  .case-screenshot-controls{padding:15px 0 8px;gap:12px}
+  .case-screenshot-arrows{gap:12px}
+  .case-screenshot-arrows button{width:44px;height:44px}
+  .case-screenshot-arrows>span{font-size:10px}
+  .case-screenshot-dots{gap:7px}
+  .case-screenshot-dots button{width:9px;height:9px}
+  .case-screenshot-dots button.is-active{width:24px}
+  .case-showcase-slide:has(.project-art-screenshot.is-loaded){touch-action:pan-y}
+}
+@media(prefers-reduced-motion:reduce){
+  .project-art-screenshot,.case-screenshot-arrows button,.case-screenshot-dots button{transition:none}
+}
