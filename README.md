@@ -1,4 +1,4 @@
-# Marina Ravliuk — Interactive Portfolio
+# Marina Rav — Interactive Portfolio
 
 A multilingual personal portfolio with cinematic editorial design, scroll-driven project showcases and five selected projects.
 
