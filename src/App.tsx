@@ -34,6 +34,23 @@ function usePortfolioRoute() {
 }
 
 function ProjectArt({ project, small = false, imageIndex = 0, onImageReady }: { project: Project; small?: boolean; imageIndex?: number; onImageReady?: (ready: boolean) => void }) {
+  // Keep every real screenshot mounted so switching images never reveals a
+  // conceptual mockup or flashes while a new <img> starts decoding.
+  if (project.gallery?.length) {
+    return (
+      <div className={`project-art project-art--${project.visual} project-art--gallery${small ? ' project-art--small' : ''}`}
+        role="img" aria-label={`${project.title} — website screenshots`}>
+        {project.gallery.map((src, index) => (
+          <img key={src} src={src} alt=""
+            className={`project-gallery-image${index === imageIndex ? ' is-active' : ''}`}
+            draggable={false} loading="eager" decoding="async"
+            onLoad={(event) => onImageReady?.(event.currentTarget.complete)}
+            onError={(event) => { event.currentTarget.style.visibility = 'hidden'; onImageReady?.(false); }}
+          />
+        ))}
+      </div>
+    );
+  }
   const imageSrc = project.gallery?.[imageIndex];
   return (
     <div className={`project-art project-art--${project.visual}${small ? ' project-art--small' : ''}`} aria-label={`${project.title} — ${project.gallery?.length ? 'screenshots from the live website' : 'visual concept'}`} role="img">
@@ -375,7 +392,7 @@ function Portfolio({ lang }: { lang: Language }) {
               </div>
               <motion.div className="hero-editorial-photo" style={reducedMotion ? undefined : { y: heroPhotoY }} initial={reducedMotion ? false : { opacity: 0, scale: 1.025 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}>
                 <div className="hero-photo-fallback" aria-hidden="true"><span>MR</span><small>MARINA RAV</small></div>
-                <img src="/images/marina-hero.webp" alt="Marina Rav — портрет у шоколадному костюмі" decoding="async" fetchPriority="high" onError={(event) => { event.currentTarget.style.display = 'none'; }} />
+                <img src="/images/marina-hero-v2.webp" alt="Marina Rav — портрет із ноутбуком у чорно-білому editorial-образі" decoding="async" fetchPriority="high" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-hero.webp'; }} />
               </motion.div>
               </div>
             <motion.div className="hero-editorial-name" initial={reducedMotion ? false : { opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.35 }}>
@@ -393,7 +410,7 @@ function Portfolio({ lang }: { lang: Language }) {
           </Reveal>
           <Reveal className="about-editorial-portrait" delay={0.1}>
             <figure className="about-photo-frame">
-              <img src="/images/marina-about.webp" alt="Marina Rav — digital products, AI and business systems" loading="lazy" decoding="async" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-hero.webp'; }} />
+              <img src="/images/marina-about-v2.webp" alt="Marina Rav — editorial-фото з ноутбуком" loading="lazy" decoding="async" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-about.webp'; }} />
               <figcaption><span>MARINA RAV</span><span>MILANO · ITALIA</span></figcaption>
             </figure>
           </Reveal>
