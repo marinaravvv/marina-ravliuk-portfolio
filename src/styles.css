@@ -2128,3 +2128,101 @@ body,.portfolio{font-family:var(--rav-sans)}
 @media(prefers-reduced-motion:reduce){
   .project-art-screenshot,.case-screenshot-arrows button,.case-screenshot-dots button{transition:none}
 }
+
+
+/* DIRECT-LINK SELECTED WORKS — minimal screenshot gallery and real website CTA */
+.selected-carousel-preview-footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:clamp(10px,1.7vw,26px);
+  flex-wrap:wrap;
+  padding:12px 0 4px;
+}
+.selected-carousel-preview-footer .selected-carousel-visual-caption{
+  flex:1;
+  min-width:175px;
+  padding:0;
+}
+.selected-carousel-image-nav{
+  display:inline-flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:clamp(7px,1.1vw,17px);
+  flex-shrink:0;
+}
+.selected-carousel-image-nav button{
+  display:grid;
+  place-items:center;
+  width:36px;
+  height:36px;
+  border:1px solid #C0AF9F;
+  border-radius:50%;
+  background:transparent;
+  color:#4A3428;
+  cursor:pointer;
+  transition:background .22s,color .22s,border-color .22s;
+}
+.selected-carousel-image-nav button:hover{
+  color:#F6F2EA;
+  background:#302219;
+  border-color:#302219;
+}
+.selected-carousel-image-nav button:focus-visible{
+  outline:2px solid #B28A62;
+  outline-offset:3px;
+}
+.selected-carousel-image-nav>span{
+  color:#816A57;
+  font:600 10px/1 var(--rav-sans);
+  letter-spacing:.12em;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+.selected-carousel-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:0 0 19px;
+}
+.selected-carousel-tags span{
+  border:1px solid rgba(48,34,25,.23);
+  border-radius:50px;
+  padding:7px 10px;
+  color:#705646;
+  font:500 10px/1.2 var(--rav-sans);
+}
+.selected-carousel-info a.selected-carousel-live-link{
+  width:fit-content;
+  text-decoration:none;
+  cursor:pointer;
+  margin-top:12px;
+}
+.selected-carousel-info a.selected-carousel-live-link:focus-visible{
+  outline:2px solid #B28A62;
+  outline-offset:4px;
+}
+@media(max-width:760px){
+  .selected-carousel-preview-footer{
+    gap:10px 15px;
+    padding:12px 0 0;
+  }
+  .selected-carousel-preview-footer .selected-carousel-visual-caption{
+    min-width:160px;
+    font-size:9px;
+    line-height:1.5;
+  }
+  .selected-carousel-image-nav{gap:10px}
+  .selected-carousel-image-nav button{width:41px;height:41px}
+  .selected-carousel-image-nav>span{font-size:9px}
+  .selected-carousel-tags{margin:0 0 14px}
+  .selected-carousel-tags span{font-size:9px;padding:6px 9px}
+  .selected-carousel-info a.selected-carousel-live-link{
+    display:inline-flex;
+    align-items:center;
+    min-height:44px;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .selected-carousel-image-nav button{transition:none}
+}
