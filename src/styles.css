@@ -320,3 +320,74 @@
 @media(prefers-reduced-motion:reduce){
   .hero.hero-editorial .hero-motion-track{animation:none!important;will-change:auto}
 }
+
+
+/* HERO V5 — frame moving type behind the portrait only, not the name.
+   Preserve strong readable typography beneath the image. */
+.hero.hero-editorial .hero-editorial-stage{
+  gap:0;
+}
+.hero.hero-editorial .hero-photo-scene{
+  position:relative;
+  isolation:isolate;
+  display:grid;
+  place-items:center;
+  flex:none;
+  width:100%;
+  height:clamp(360px,36vw,525px);
+}
+.hero.hero-editorial .hero-motion-type{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  overflow:visible;
+}
+.hero.hero-editorial .hero-motion-row--agents{top:9%}
+.hero.hero-editorial .hero-motion-row--automation{top:39%}
+.hero.hero-editorial .hero-motion-row--systems{top:70%}
+.hero.hero-editorial .hero-editorial-photo{
+  position:relative;
+  z-index:2;
+}
+.hero.hero-editorial .hero-editorial-photo img{
+  transform:scale(1);
+  transition:transform 850ms cubic-bezier(.22,1,.36,1);
+}
+.hero.hero-editorial .hero-editorial-name{
+  position:relative;
+  z-index:3;
+  margin-top:25px;
+}
+.hero.hero-editorial .hero-editorial-name h1{
+  font-size:clamp(62px,7.75vw,124px);
+  line-height:1.1;
+}
+@media(hover:hover) and (pointer:fine){
+  .hero.hero-editorial .hero-editorial-photo:hover img{
+    transform:scale(1.035);
+  }
+}
+@media(max-width:760px){
+  .hero.hero-editorial .hero-photo-scene{
+    height:min(78vw,378px);
+  }
+  .hero.hero-editorial .hero-motion-row--agents{top:12%}
+  .hero.hero-editorial .hero-motion-row--automation{top:60%}
+  .hero.hero-editorial .hero-editorial-name{margin-top:21px}
+  .hero.hero-editorial .hero-editorial-name h1{
+    font-size:clamp(42px,11.75vw,70px);
+    line-height:1.07;
+  }
+}
+@media(max-width:390px){
+  .hero.hero-editorial .hero-photo-scene{height:77vw}
+  .hero.hero-editorial .hero-editorial-name h1{font-size:11.8vw}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero.hero-editorial .hero-editorial-photo img{
+    transition:none!important;
+  }
+  .hero.hero-editorial .hero-editorial-photo:hover img{
+    transform:none!important;
+  }
+}
