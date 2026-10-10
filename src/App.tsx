@@ -392,8 +392,7 @@ function Portfolio({ lang }: { lang: Language }) {
                 </div>
               </div>
               <motion.div className="hero-editorial-photo" style={reducedMotion ? undefined : { y: heroPhotoY }} initial={reducedMotion ? false : { opacity: 0, scale: 1.025 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}>
-                <div className="hero-photo-fallback" aria-hidden="true"><span>MR</span><small>MARINA RAV</small></div>
-                <img src="/images/marina-hero-black.webp" alt="Marina Rav — портрет у чорному жакеті" decoding="async" fetchPriority="high" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-hero-v3.webp'; }} />
+                <img src="/images/marina-hero-cutout.webp" alt="Marina Rav — портрет у чорному жакеті" decoding="async" fetchPriority="high" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-hero-black.webp'; }} />
               </motion.div>
               </div>
             <motion.div className="hero-editorial-name" initial={reducedMotion ? false : { opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.35 }}>
@@ -402,25 +401,25 @@ function Portfolio({ lang }: { lang: Language }) {
           </div>
         </div>
       </section>
-      <section className="about-section about-editorial about-wide" id="about">
-        <div className="container">
-          <div className="about-wide-stage">
-            <img className="about-wide-image"
-              src="/images/marina-about-beige.webp"
-              alt="Marina Rav — портрет у білій сорочці на теплому бежевому фоні"
+      <section className="about-section about-editorial about-cutout" id="about">
+        <div className="container about-cutout-grid">
+          <div className="about-cutout-visual">
+            <img className="about-cutout-image"
+              src="/images/marina-about-cutout.webp"
+              alt="Marina Rav — портрет у білій сорочці та чорних підтяжках"
               loading="lazy" decoding="async"
-              onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-about-v2.webp'; }} />
-            <div className="about-wide-copy">
-              <Reveal className="about-wide-intro">
-                <p className="eyebrow eyebrow--dark">{t.aboutLabel}</p>
-                <h2>{t.aboutHeadingA} <em>{t.aboutHeadingB}</em><br/>{t.aboutHeadingC}</h2>
-                <p className="about-wide-statement">{t.aboutStatement}</p>
-                <p className="about-wide-description">{t.aboutText}</p>
-              </Reveal>
-            </div>
+              onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-about-beige.webp'; }} />
           </div>
-          <div className="about-wide-skills" aria-label="Specializations">
-            {['AI AGENTS', 'BUSINESS AUTOMATION', 'DIGITAL SYSTEMS', 'DIGITAL PRODUCTS'].map(item => <span key={item}>{item}</span>)}
+          <div className="about-cutout-copy">
+            <Reveal className="about-cutout-intro">
+              <p className="eyebrow eyebrow--dark">{t.aboutLabel}</p>
+              <h2>{t.aboutHeadingA} <em>{t.aboutHeadingB}</em><br/>{t.aboutHeadingC}</h2>
+              <p className="about-cutout-statement">{t.aboutStatement}</p>
+              <p className="about-cutout-description">{t.aboutText}</p>
+            </Reveal>
+            <div className="about-cutout-skills" aria-label="Specializations">
+              {['AI AGENTS', 'BUSINESS AUTOMATION', 'DIGITAL SYSTEMS', 'DIGITAL PRODUCTS'].map(item => <span key={item}>{item}</span>)}
+            </div>
           </div>
         </div>
       </section>
