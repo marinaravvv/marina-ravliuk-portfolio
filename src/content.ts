@@ -90,7 +90,7 @@ export const text = {
   it: {
     navJourney: "Percorso",
     journeyLabel: "02 / IL MIO PERCORSO",
-    journeyHint: "Passa sul'anno o tocca per scoprire la storia", 
+    journeyHint: "Passa sull'anno o tocca per scoprire la storia", 
     journeyTitle: "Dal business ai",
     journeyItalic: "sistemi digitali.",
     journeyIntro: "Ho iniziato costruendo un'attività, poi i prodotti digitali per gestirla. Oggi unisco strategia di prodotto, visione imprenditoriale e automazione AI.",
