@@ -2936,3 +2936,62 @@ body,.portfolio{font-family:var(--rav-sans)}
   .mav8-company-section .mav8-company-text h2{font-size:clamp(64px,19vw,115px)}
   .mav8-company-section .mav8-company-text .mav8-company-statement{font-size:clamp(20px,5.5vw,28px)}
 }
+
+
+/* CV downloads: real language choice beside My Journey. */
+.journey-cv-select{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  gap:14px;
+}
+.journey-cv-label{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  color:#F2E7DC;
+  font:600 12px/1.5 var(--rav-sans);
+  letter-spacing:.04em;
+}
+.journey-cv-languages{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.journey-cv-language{
+  display:grid;
+  place-items:center;
+  width:54px;
+  height:44px;
+  border:1px solid rgba(244,230,214,.40);
+  border-radius:4px;
+  background:transparent;
+  color:#EEDBCC;
+  font:600 11px/1 var(--rav-sans);
+  letter-spacing:.06em;
+  text-decoration:none;
+  transition:color .22s,background .22s,border-color .22s;
+}
+.journey-cv-language:hover,
+.journey-cv-language:focus-visible{
+  background:#F4EADF;
+  border-color:#F4EADF;
+  color:#302219;
+}
+.journey-cv-language.is-current{
+  border-color:#CFB69F;
+  background:rgba(244,230,214,.15);
+}
+.journey-cv-language:focus-visible{
+  outline:2px solid #B28A62;
+  outline-offset:4px;
+}
+@media(max-width:760px){
+  .journey-cv-select{gap:12px;margin-top:6px}
+  .journey-cv-languages{gap:9px}
+  .journey-cv-language{width:56px;height:46px}
+}
+@media(prefers-reduced-motion:reduce){
+  .journey-cv-language{transition:none}
+}
