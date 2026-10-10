@@ -3371,3 +3371,75 @@ body,.portfolio{font-family:var(--rav-sans)}
     order:1;
   }
 }
+
+
+/* Wordmark in header across breakpoints; Hero portrait stays full-width and uncluttered. */
+.site-header .logo.logo-editorial{
+  display:inline-flex;
+  align-items:center;
+  flex:0 0 auto;
+  min-width:0;
+  padding:0;
+  margin:0;
+  border:0;
+  background:transparent;
+  color:#302219;
+  font-family:var(--rav-serif);
+  font-size:clamp(18px,1.6vw,25px);
+  line-height:1.15;
+  font-weight:800;
+  letter-spacing:-.065em;
+  white-space:nowrap;
+  cursor:pointer;
+}
+.hero-accessible-heading{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+@media(min-width:901px){
+  .site-header .header-inner{
+    grid-template-columns:minmax(180px,1fr) auto minmax(180px,1fr);
+  }
+  .site-header .logo.logo-editorial{
+    grid-column:1;
+    grid-row:1;
+    justify-self:start;
+  }
+  .site-header .main-nav{
+    grid-column:2;
+    grid-row:1;
+  }
+  .site-header .header-end{
+    grid-column:3;
+    grid-row:1;
+  }
+}
+@media(max-width:900px){
+  .site-header .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .site-header .logo.logo-editorial{
+    font-size:clamp(16px,4.8vw,21px);
+    letter-spacing:-.07em;
+  }
+  .site-header .header-end{
+    margin-left:auto;
+  }
+}
+@media(max-width:380px){
+  .site-header .logo.logo-editorial{
+    font-size:16px;
+  }
+  .site-header .header-end{
+    gap:6px;
+  }
+}
