@@ -473,8 +473,8 @@ function Portfolio({ lang }: { lang: Language }) {
           <Reveal delay={0.12} className="mav8-company-feature">
             <a className="mav8-feature mav8-feature-3d" href="https://mav8.site/" target="_blank" rel="noopener noreferrer" aria-label={t.visitMav8}>
               <div className="mav8-earth-art" aria-hidden="true">
-                <img src="/images/mav8-earth.webp" alt="" loading="lazy" decoding="async"
-                  onError={(event) => { event.currentTarget.style.display = 'none'; }} />
+                <img src="/images/mav8-earth-hq.webp" alt="" loading="lazy" decoding="async"
+                  onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/mav8-earth.webp'; }} />
               </div>
               <div className="mav8-earth-brand">
                 <span className="mav8-earth-eyebrow">FOUNDER / COMPANY</span>
