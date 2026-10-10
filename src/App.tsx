@@ -137,7 +137,6 @@ function Portfolio({ lang, navigate }: { lang: Language; navigate: (lang: Langua
   const reducedMotion = useReducedMotion();
   const { scrollYProgress: heroScrollProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
   const heroPhotoY = useTransform(heroScrollProgress, [0, 1], [0, -75]);
-  const heroWordsX = useTransform(heroScrollProgress, [0, 1], [0, 110]);
   const goSection = (section: string) => document.getElementById(section)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   return (
     <>
@@ -149,11 +148,26 @@ function Portfolio({ lang, navigate }: { lang: Language; navigate: (lang: Langua
             <span className="hero-editorial-availability"><span className="availability-dot" />{t.availability}</span>
           </div>
           <div className="hero-editorial-stage">
-            <motion.div className="hero-giant-words" style={reducedMotion ? undefined : { x: heroWordsX }} aria-hidden="true">
-              <span>AI AGENTS</span>
-              <span>AUTOMATION</span>
-              <span>DIGITAL SYSTEMS</span>
-            </motion.div>
+            <div className="hero-motion-type" aria-hidden="true">
+              <div className="hero-motion-row hero-motion-row--agents">
+                <div className="hero-motion-track">
+                  <span>AI AGENTS <i>✳</i> AI AGENTS <i>✳</i>&nbsp;</span>
+                  <span>AI AGENTS <i>✳</i> AI AGENTS <i>✳</i>&nbsp;</span>
+                </div>
+              </div>
+              <div className="hero-motion-row hero-motion-row--automation">
+                <div className="hero-motion-track">
+                  <span>AUTOMATION <i>✳</i> AUTOMATION <i>✳</i>&nbsp;</span>
+                  <span>AUTOMATION <i>✳</i> AUTOMATION <i>✳</i>&nbsp;</span>
+                </div>
+              </div>
+              <div className="hero-motion-row hero-motion-row--systems">
+                <div className="hero-motion-track">
+                  <span>DIGITAL SYSTEMS <i>✳</i> DIGITAL SYSTEMS <i>✳</i>&nbsp;</span>
+                  <span>DIGITAL SYSTEMS <i>✳</i> DIGITAL SYSTEMS <i>✳</i>&nbsp;</span>
+                </div>
+              </div>
+            </div>
             <motion.div className="hero-editorial-photo" style={reducedMotion ? undefined : { y: heroPhotoY }} initial={reducedMotion ? false : { opacity: 0, scale: 1.06 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}>
               <div className="hero-photo-fallback" aria-hidden="true"><span>MR</span><small>MARINA RAV</small></div>
               <img src="/images/marina-hero.webp" alt="Marina Rav — портрет у шоколадному костюмі" decoding="async" fetchPriority="high" onError={(event) => { event.currentTarget.style.display = 'none'; }} />
