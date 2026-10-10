@@ -1862,3 +1862,181 @@ body,.portfolio{font-family:var(--rav-sans)}
   .hero-motion-track,.hero-motion-row,.aura-orb{animation:none!important}
   .selected-carousel-slide,.case-showcase-slide{transition:none!important}
 }
+
+
+/* MAV8 is a founder-led company, intentionally outside Selected Work/case studies. */
+.mav8-section.mav8-company-section{
+  background:#302219;
+  color:#F0E9DD;
+  padding:clamp(90px,10vw,155px) 0;
+}
+.mav8-company-section .mav8-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,.92fr);
+  align-items:center;
+  gap:clamp(42px,7vw,125px);
+}
+.mav8-company-section .mav8-company-text{min-width:0}
+.mav8-company-section .mav8-company-text .eyebrow{
+  color:#B28A62;
+  font:600 10px/1.5 var(--rav-sans);
+  letter-spacing:.15em;
+}
+.mav8-company-section .mav8-company-text h2{
+  display:flex;
+  gap:5px;
+  align-items:flex-start;
+  font:800 clamp(90px,12vw,185px)/.96 var(--rav-serif);
+  letter-spacing:-.09em;
+  margin:clamp(20px,3vw,40px) 0 clamp(14px,2vw,29px);
+  color:#F6F2EA;
+}
+.mav8-company-asterisk{
+  font:500 clamp(16px,2vw,26px)/1.4 var(--rav-sans);
+  letter-spacing:0;
+  color:#B28A62;
+}
+.mav8-company-section .mav8-company-text .mav8-company-statement{
+  color:#F6F2EA;
+  font:600 clamp(22px,2.25vw,32px)/1.35 var(--rav-serif);
+  letter-spacing:-.04em;
+  margin:0 0 22px;
+}
+.mav8-company-section .mav8-company-text>p:not(.eyebrow):not(.mav8-company-statement){
+  color:#CCB7A3;
+  font:400 clamp(15px,1.25vw,19px)/1.75 var(--rav-sans);
+  max-width:535px;
+  margin:0;
+}
+.mav8-company-skills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:28px;
+}
+.mav8-company-skills span{
+  display:inline-flex;
+  border:1px solid rgba(240,233,221,.25);
+  border-radius:50px;
+  padding:7px 10px;
+  color:#CDB6A1;
+  font:600 9px/1.4 var(--rav-sans);
+  letter-spacing:.1em;
+}
+.mav8-company-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:space-between;
+  min-height:50px;
+  transition:background .25s,color .25s,transform .25s;
+}
+.mav8-company-cta:hover{background:#FFF7ED;transform:translateY(-2px)}
+.mav8-company-cta:focus-visible,
+.mav8-company-section .mav8-feature-3d:focus-visible{outline:2px solid #B28A62;outline-offset:6px}
+.mav8-company-feature{width:100%;min-width:0}
+.mav8-company-section .mav8-feature{
+  aspect-ratio:1;
+  background:#4A3428;
+  border:1px solid rgba(240,233,221,.27);
+  color:#F6F2EA;
+  text-decoration:none;
+}
+.mav8-company-section .mav8-feature-circle{width:52%;font-weight:800}
+.mav8-company-section .mav8-feature strong{
+  font:800 clamp(56px,7.4vw,120px)/1 var(--rav-serif);
+  letter-spacing:-.095em;
+  margin-top:-35px;
+}
+.mav8-company-section .mav8-feature small{
+  font:500 9px/1.5 var(--rav-sans);
+  letter-spacing:.14em;
+  color:#D4C0AC;
+  margin-top:24px;
+}
+.mav8-company-section .mav8-feature-view{font-size:9px;margin-top:24px;color:#F0E9DD}
+@media(max-width:920px){
+  .mav8-company-section .mav8-grid{grid-template-columns:1fr;gap:50px}
+  .mav8-company-feature{max-width:570px;margin:0 auto}
+  .mav8-company-section .mav8-company-text h2{font-size:clamp(75px,17vw,150px)}
+}
+@media(max-width:760px){
+  .mav8-section.mav8-company-section{padding:90px 0}
+  .mav8-company-section .mav8-grid{gap:42px}
+  .mav8-company-section .mav8-company-text h2{font-size:clamp(78px,23vw,140px)}
+  .mav8-company-section .mav8-company-text .mav8-company-statement{font-size:clamp(21px,6vw,30px)}
+  .mav8-company-section .mav8-company-text>p:not(.eyebrow):not(.mav8-company-statement){font-size:15px}
+  .mav8-company-skills{margin-top:24px}
+  .mav8-company-section .mav8-feature strong{font-size:clamp(60px,14vw,90px)}
+  .mav8-company-section .mav8-feature small{font-size:8px;letter-spacing:.08em}
+  .mav8-company-section .mav8-feature-view{font-size:8px;letter-spacing:.05em}
+}
+
+/* Pleasure Map Milano — real site hero photograph in a website-inspired mockup. */
+.real-site-scene--pleasure{background:#E0D0BF}
+.real-site-scene--pleasure .real-site-window{
+  width:min(93%,890px);
+  transform:rotateY(-3deg) rotateX(2deg);
+}
+.real-site-pleasure-screen{
+  display:flex;
+  flex:1;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+  background:#AD9687;
+}
+.real-site-pleasure-screen img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center;
+}
+.real-site-pleasure-screen::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(34,24,27,.37);
+}
+.real-site-pleasure-overlay{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:clamp(12px,2vw,22px);
+  max-width:85%;
+  color:#F8EFE7;
+  text-align:center;
+}
+.real-site-pleasure-overlay>span{
+  font:600 clamp(9px,.9vw,13px)/1.4 var(--rav-sans);
+  letter-spacing:.23em;
+}
+.real-site-pleasure-overlay strong{
+  font:600 clamp(37px,5.5vw,85px)/1 var(--rav-serif);
+  letter-spacing:-.055em;
+  text-wrap:balance;
+}
+.real-site-pleasure-overlay strong em{font-weight:400}
+.real-site-pleasure-overlay p{
+  margin:0;
+  font:500 clamp(11px,1.1vw,16px)/1.5 var(--rav-sans);
+  letter-spacing:.06em;
+}
+@media(hover:hover) and (pointer:fine){
+  .work-preview-wrap:hover .real-site-scene--pleasure .real-site-window{transform:rotateY(-1deg) rotateX(1deg)}
+}
+@media(max-width:760px){
+  .real-site-scene--pleasure .real-site-window{width:96%;height:87%;transform:none}
+  .real-site-pleasure-overlay{gap:9px}
+  .real-site-pleasure-overlay strong{font-size:clamp(32px,9vw,58px)}
+  .real-site-pleasure-overlay>span{font-size:8px}
+  .real-site-pleasure-overlay p{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  .real-site-scene--pleasure .real-site-window{transform:none!important}
+}
