@@ -32,7 +32,7 @@ function usePortfolioRoute() {
 
 function ProjectArt({ project, small = false }: { project: Project; small?: boolean }) {
   return (
-    <div className={`project-art project-art--${project.visual}${small ? ' project-art--small' : ''}`} aria-label={`${project.title} — ${project.visual === 'aura' || project.visual === 'rodus' ? 'design interpretation of the live website' : 'conceptual visual placeholder'}`} role="img">
+    <div className={`project-art project-art--${project.visual}${small ? ' project-art--small' : ''}`} aria-label={`${project.title} — ${project.visual === 'aura' || project.visual === 'rodus' || project.visual === 'pleasure' ? 'design interpretation of the live website' : 'conceptual visual placeholder'}`} role="img">
       <div className="art-grid" />
       <div className="art-noise" />
       {project.visual === 'aura' && (
@@ -75,6 +75,27 @@ function ProjectArt({ project, small = false }: { project: Project; small?: bool
           </div>
         </div>
       )}
+      {project.visual === 'pleasure' && (
+        <div className="real-site-scene real-site-scene--pleasure">
+          <div className="real-site-window real-site-window--pleasure">
+            <div className="real-site-toolbar" aria-hidden="true">
+              <span className="real-site-window-dots">● ● ●</span>
+              <span>pleasuremapmilano.lovable.app</span>
+            </div>
+            <div className="real-site-pleasure-screen">
+              <img
+                src="https://pleasuremapmilano.lovable.app/__l5e/assets-v1/45e7d195-eb12-4725-8ee1-7c8af75efdb1/hero.png"
+                alt="" loading="lazy"
+              />
+              <div className="real-site-pleasure-overlay">
+                <span>PLEASURE MAP</span>
+                <strong>Pleasure Map <em>Milano</em></strong>
+                <p>Жива зустріч · 18 жовтня · Мілан</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       {project.visual === 'mav8' && (
         <div className="mav8-layout">
           <div className="mav8-globe"><span>M</span><span>A</span><span>V</span><span>8</span></div>
@@ -103,7 +124,7 @@ function ProjectArt({ project, small = false }: { project: Project; small?: bool
           <span className="natalia-caption">WORK IN PROGRESS</span>
         </div>
       )}
-      {project.visual !== 'aura' && project.visual !== 'rodus' && <span className="placeholder-note">VISUAL CONCEPT · PLACEHOLDER</span>}
+      {project.visual !== 'aura' && project.visual !== 'rodus' && project.visual !== 'pleasure' && <span className="placeholder-note">VISUAL CONCEPT · PLACEHOLDER</span>}
     </div>
   );
 }
@@ -355,6 +376,30 @@ function Portfolio({ lang, navigate, lastProjectId }: { lang: Language; navigate
         </div>
       </section>
       <WorkSection lang={lang} initialProjectId={lastProjectId} openProject={(id) => navigate(lang, id)} />
+      <section className="mav8-section mav8-company-section" id="mav8" aria-labelledby="mav8-company-heading">
+        <div className="container mav8-grid">
+          <Reveal className="mav8-text mav8-company-text">
+            <p className="eyebrow">{t.mav8Label}</p>
+            <h2 id="mav8-company-heading">MAV8<span className="mav8-company-asterisk">®</span></h2>
+            <p className="mav8-company-statement">{t.mav8Title}</p>
+            <p>{t.mav8Body}</p>
+            <div className="mav8-company-skills" aria-label="MAV8 skills">
+              {['MAKE', 'AI', 'AUTOMATE', 'AGENTS', 'BUILD', 'SELL', 'DATA', 'CREATE'].map((skill) => <span key={skill}>{skill}</span>)}
+            </div>
+            <a className="pill-link mav8-company-cta" href="https://mav8.site/" target="_blank" rel="noopener noreferrer">
+              {t.visitMav8}<ArrowUpRight size={19}/>
+            </a>
+          </Reveal>
+          <Reveal delay={0.12} className="mav8-company-feature">
+            <a className="mav8-feature mav8-feature-3d" href="https://mav8.site/" target="_blank" rel="noopener noreferrer" aria-label={t.visitMav8}>
+              <div className="mav8-feature-circle">M<span>8</span></div>
+              <strong>MAV8</strong>
+              <small>AI · AUTOMATION · DIGITAL SYSTEMS</small>
+              <span className="mav8-feature-view">{t.visitMav8}<ArrowUpRight size={15}/></span>
+            </a>
+          </Reveal>
+        </div>
+      </section>
       <section className="contact-section" id="contact"><div className="container">
         <Reveal><p className="eyebrow">{t.contactLabel}</p><h2>{t.contactTitle}<br/><em>{t.contactItalic}</em></h2><p className="contact-intro">{t.contactText}</p>
           <a className="contact-button" href="mailto:info@marinaravliuk.com?subject=Collaboration%20with%20Marina%20Rav" aria-label={t.contactButton}>{t.contactButton}<ArrowUpRight size={22}/></a>
@@ -462,7 +507,7 @@ function ProjectPage({ lang, project, navigate }: { lang: Language; project: Pro
         {project.inDevelopment && <div className="case-fact"><span>{t.projectStatus}</span><strong>{t.inDevelopment}</strong></div>}
         {project.url
           ? <a className="case-site-link" href={project.url} target="_blank" rel="noopener noreferrer">
-              {project.id === 'mav8' ? t.visitMav8 : t.visitWebsite}<ArrowUpRight size={18}/>
+              {t.visitWebsite}<ArrowUpRight size={18}/>
             </a>
           : <p className="case-muted">{t.comingSoon}</p>}
       </aside>
