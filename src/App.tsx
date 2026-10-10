@@ -244,7 +244,7 @@ function Portfolio({ lang, navigate }: { lang: Language; navigate: (lang: Langua
       </div></section>
       <section className="mav8-section"><div className="container mav8-grid">
         <Reveal><div className="mav8-text"><p className="eyebrow">{t.mav8Label}</p><h2>{t.mav8Title}</h2><p>{t.mav8Body}</p><a className="pill-link" href="https://mav8.site" target="_blank" rel="noopener noreferrer">{t.visitMav8}<ArrowUpRight size={17}/></a></div></Reveal>
-        <Reveal delay={0.1}><div className="mav8-feature"><div className="mav8-feature-circle">M<span>8</span></div><strong>MAV8</strong><small>AI / AUTOMATION / DIGITAL ECOSYSTEM</small></div></Reveal>
+        <Reveal delay={0.1}><button type="button" className="mav8-feature mav8-feature-3d" onClick={() => navigate(lang, "mav8")} aria-label={`${t.caseView}: MAV8`}><div className="mav8-feature-circle">M<span>8</span></div><strong>MAV8</strong><small>AI / AUTOMATION / DIGITAL ECOSYSTEM</small><span className="mav8-feature-view">{t.caseView}<ArrowUpRight size={17}/></span></button></Reveal>
       </div></section>
       <section className="stack-section"><div className="container"><p className="eyebrow eyebrow--dark">{t.stackLabel}</p><div className="stack-wrap">{stack.map((name) => <span key={name}>{name}</span>)}</div></div></section>
       <section className="contact-section" id="contact"><div className="container">
