@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react';
 import { expertise, languages, processSteps, projects, stack, text, type Language, type Project } from './content';
 
@@ -133,21 +133,42 @@ function WorkSection({ lang, openProject }: { lang: Language; openProject: (id: 
 
 function Portfolio({ lang, navigate }: { lang: Language; navigate: (lang: Language, project?: string | null) => void }) {
   const t = text[lang];
+  const heroRef = useRef<HTMLElement>(null);
+  const reducedMotion = useReducedMotion();
+  const { scrollYProgress: heroScrollProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
+  const heroPhotoY = useTransform(heroScrollProgress, [0, 1], [0, -75]);
+  const heroWordsX = useTransform(heroScrollProgress, [0, 1], [0, 110]);
   const goSection = (section: string) => document.getElementById(section)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   return (
     <>
-      <section className="hero" id="top">
-        <div className="hero-grain" /><div className="hero-inner container">
-          <div className="hero-meta"><span>{t.heroEyebrow}</span><span className="hero-availability"><span className="availability-dot" />{t.availability}</span></div>
-          <div className="hero-center">
-            <motion.div initial={{ opacity: 0, y: 75 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}>
-              <h1>Marina <span>Rav</span></h1>
-            </motion.div>
-            <div className="hero-middle"><p>{t.heroSub}</p><div className="hero-visual"><div className="hero-orb"><div className="hero-orb-center" /></div></div></div>
+      <section ref={heroRef} className="hero hero-editorial" id="top">
+        <div className="hero-editorial-texture" aria-hidden="true" />
+        <div className="container hero-editorial-inner">
+          <div className="hero-editorial-meta">
+            <span className="hero-editorial-kicker">{t.heroEyebrow}</span>
+            <span className="hero-editorial-availability"><span className="availability-dot" />{t.availability}</span>
           </div>
-          <div className="hero-bottom"><p>{t.heroIntro}</p><button type="button" onClick={() => goSection('about')} className="scroll-button"><span>{t.scroll}</span><ArrowDown size={18}/></button></div>
+          <div className="hero-editorial-stage">
+            <motion.div className="hero-giant-words" style={reducedMotion ? undefined : { x: heroWordsX }} aria-hidden="true">
+              <span>AI AGENTS</span>
+              <span>AUTOMATION</span>
+              <span>DIGITAL SYSTEMS</span>
+            </motion.div>
+            <motion.div className="hero-editorial-photo" style={reducedMotion ? undefined : { y: heroPhotoY }} initial={reducedMotion ? false : { opacity: 0, scale: 1.06 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}>
+              <div className="hero-photo-fallback" aria-hidden="true"><span>MR</span><small>MARINA RAV</small></div>
+              <img src="/images/marina-hero.webp" alt="Marina Rav — портрет у шоколадному костюмі" decoding="async" fetchPriority="high" onError={(event) => { event.currentTarget.style.display = 'none'; }} />
+            </motion.div>
+            <motion.div className="hero-editorial-name" initial={reducedMotion ? false : { opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.35 }}>
+              <h1>MARINA <em>RAV</em></h1>
+            </motion.div>
+            <div className="hero-edge-text">AI / AUTOMATION / DIGITAL SYSTEMS</div>
+          </div>
+          <div className="hero-editorial-bottom">
+            <p>{t.heroIntro}</p>
+            <button type="button" onClick={() => goSection('about')} className="hero-editorial-scroll"><span>{t.scroll}</span><ArrowDown size={19} /></button>
+          </div>
         </div>
-        <div className="marquee" aria-hidden="true"><div className="marquee-track">{Array.from({ length: 4 }, (_, i) => <span key={i}>AI AGENTS <b>✳</b> DIGITAL SYSTEMS <b>✳</b> AUTOMATION <b>✳</b>&nbsp;</span>)}</div></div>
+        <div className="marquee editorial-marquee" aria-hidden="true"><div className="marquee-track">{Array.from({ length: 4 }, (_, i) => <span key={i}>AI AGENTS <b>✳</b> DIGITAL SYSTEMS <b>✳</b> AUTOMATION <b>✳</b>&nbsp;</span>)}</div></div>
       </section>
       <section className="about-section" id="about">
         <div className="container about-grid">
@@ -228,7 +249,7 @@ export default function App() {
   return <div className="portfolio">
     <motion.div className="scroll-progress" style={{ scaleX: progress }} />
     <header className="site-header"><div className="container header-inner">
-      <button className="logo" aria-label="Home" type="button" onClick={() => { setMenuOpen(false); navigate(route.lang); }}>MR<span>®</span></button>
+      <button className="logo logo-editorial" aria-label="Home" type="button" onClick={() => { setMenuOpen(false); navigate(route.lang); }}>MARINA RAV</button>
       <nav className={`main-nav ${menuOpen ? 'main-nav--open' : ''}`} aria-label="Main navigation">
         {navItems.map((item) => <button type="button" key={item.id} onClick={() => gotoSection(item.id)}>{item.title}</button>)}
       </nav>
