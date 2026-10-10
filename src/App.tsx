@@ -141,7 +141,7 @@ function Portfolio({ lang, navigate }: { lang: Language; navigate: (lang: Langua
           <div className="hero-meta"><span>{t.heroEyebrow}</span><span className="hero-availability"><span className="availability-dot" />{t.availability}</span></div>
           <div className="hero-center">
             <motion.div initial={{ opacity: 0, y: 75 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}>
-              <h1>Marina <span>Ravliuk<em>®</em></span></h1>
+              <h1>Marina <span>Rav</span></h1>
             </motion.div>
             <div className="hero-middle"><p>{t.heroSub}</p><div className="hero-visual"><div className="hero-orb"><div className="hero-orb-center" /></div></div></div>
           </div>
@@ -174,7 +174,7 @@ function Portfolio({ lang, navigate }: { lang: Language; navigate: (lang: Langua
       </div></section>
       <section className="stack-section"><div className="container"><p className="eyebrow eyebrow--dark">{t.stackLabel}</p><div className="stack-wrap">{stack.map((name) => <span key={name}>{name}</span>)}</div></div></section>
       <section className="contact-section" id="contact"><div className="container">
-        <Reveal><p className="eyebrow">{t.contactLabel}</p><h2>{t.contactTitle}<br/><em>{t.contactItalic}</em></h2><p className="contact-intro">{t.contactText}</p><a className="contact-button" href="mailto:info@mav8.site?subject=Collaboration%20with%20Marina%20Ravliuk">{t.contactButton}<ArrowUpRight size={22}/></a></Reveal>
+        <Reveal><p className="eyebrow">{t.contactLabel}</p><h2>{t.contactTitle}<br/><em>{t.contactItalic}</em></h2><p className="contact-intro">{t.contactText}</p><a className="contact-button" href="mailto:info@mav8.site?subject=Collaboration%20with%20Marina%20Rav">{t.contactButton}<ArrowUpRight size={22}/></a></Reveal>
       </div></section>
     </>
   );
@@ -207,7 +207,7 @@ export default function App() {
   const project = projects.find((item) => item.id === route.project);
   useEffect(() => {
     document.documentElement.lang = route.lang === 'ua' ? 'uk' : route.lang;
-    document.title = project ? `${project.title} — Marina Ravliuk` : 'Marina Ravliuk — AI Automation & Digital Systems';
+    document.title = project ? `${project.title} — Marina Rav` : 'Marina Rav — AI Automation & Digital Systems';
     const meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
     if (meta) meta.content = project ? project.summary[route.lang] : t.heroIntro;
     languages.forEach((language) => {
@@ -236,6 +236,6 @@ export default function App() {
         <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-label={menuOpen ? 'Close menu' : 'Open menu'} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={23}/> : <Menu size={23}/>}</button></div>
     </div></header>
     {project ? <ProjectPage lang={route.lang} project={project} navigate={navigate}/> : <main><Portfolio lang={route.lang} navigate={navigate}/></main>}
-    <footer className="site-footer"><div className="container footer-inner"><span>© {new Date().getFullYear()} MARINA RAVLIUK</span><span>{t.footer}</span><button type="button" onClick={() => { if (project) navigate(route.lang); else window.scrollTo({top:0,behavior:'smooth'}); }}>BACK TO TOP ↑</button></div></footer>
+    <footer className="site-footer"><div className="container footer-inner"><span>© {new Date().getFullYear()} MARINA RAV</span><span>{t.footer}</span><button type="button" onClick={() => { if (project) navigate(route.lang); else window.scrollTo({top:0,behavior:'smooth'}); }}>BACK TO TOP ↑</button></div></footer>
   </div>;
 }
