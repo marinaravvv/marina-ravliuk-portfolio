@@ -6,6 +6,7 @@ export const text = {
   ua: {
     navJourney: "Мій шлях",
     journeyLabel: "02 / МІЙ ШЛЯХ",
+    journeyHint: "Наведи на рік або натисни, щоб прочитати історію", 
     journeyTitle: "Від бізнесу до",
     journeyItalic: "цифрових систем.",
     journeyIntro: "Спочатку я будувала бізнес. Потім — цифрові продукти для нього. Сьогодні поєдную бізнес-мислення, продуктову стратегію та AI-автоматизацію.",
@@ -47,6 +48,7 @@ export const text = {
   en: {
     navJourney: "My journey",
     journeyLabel: "02 / MY JOURNEY",
+    journeyHint: "Hover over a year or tap to explore", 
     journeyTitle: "From business to",
     journeyItalic: "digital systems.",
     journeyIntro: "I began by building a business, then digital products to run it. Today I bring together business insight, product strategy and AI automation.",
@@ -88,6 +90,7 @@ export const text = {
   it: {
     navJourney: "Percorso",
     journeyLabel: "02 / IL MIO PERCORSO",
+    journeyHint: "Passa sul'anno o tocca per scoprire la storia", 
     journeyTitle: "Dal business ai",
     journeyItalic: "sistemi digitali.",
     journeyIntro: "Ho iniziato costruendo un'attività, poi i prodotti digitali per gestirla. Oggi unisco strategia di prodotto, visione imprenditoriale e automazione AI.",
