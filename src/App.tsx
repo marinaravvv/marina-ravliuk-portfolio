@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import { ArrowLeft, ArrowRight, ArrowUpRight, Download, Menu, X } from 'lucide-react';
-import { languages, projects, text, type Language, type Project } from './content';
+import { languages, projects, stack, text, type Language, type Project } from './content';
 
 type RouteState = { lang: Language };
 const langNames: Record<Language, string> = { ua: 'УКР', en: 'ENG', it: 'ITA' };
@@ -418,6 +418,23 @@ function Portfolio({ lang }: { lang: Language }) {
             <Reveal><p>{t.aboutText}</p></Reveal>
             
             
+          </div>
+        </div>
+      </section>
+      <section className="tools-ribbon" aria-label={t.stackLabel}>
+        <div className="container tools-ribbon-heading">
+          <span>{t.stackLabel}</span>
+          <span aria-hidden="true">AI · AUTOMATION · DIGITAL SYSTEMS</span>
+        </div>
+        <div className="tools-ribbon-mask">
+          <div className="tools-ribbon-track">
+            {[0, 1].map((copy) => (
+              <div className="tools-ribbon-sequence" key={copy} aria-hidden={copy === 1}>
+                {stack.map((tool) => (
+                  <span className="tools-ribbon-name" key={tool}>{tool}</span>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </section>
