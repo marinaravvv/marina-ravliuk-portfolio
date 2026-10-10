@@ -406,10 +406,10 @@ function Portfolio({ lang }: { lang: Language }) {
         <div className="container">
           <div className="about-wide-stage">
             <img className="about-wide-image"
-              src="/images/marina-about-landscape.webp"
+              src="/images/marina-about-beige.webp"
               alt="Marina Rav — портрет у білій сорочці на теплому бежевому фоні"
               loading="lazy" decoding="async"
-              onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-about-beige.webp'; }} />
+              onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-about-v2.webp'; }} />
             <div className="about-wide-copy">
               <Reveal className="about-wide-intro">
                 <p className="eyebrow eyebrow--dark">{t.aboutLabel}</p>
@@ -448,10 +448,19 @@ function Portfolio({ lang }: { lang: Language }) {
               <h2>{t.journeyTitle}<br/><em>{t.journeyItalic}</em></h2>
               <p className="journey-intro">{t.journeyIntro}</p>
             </Reveal>
-            <Reveal delay={0.1}>
-              <a className="journey-cv-link" href="/images/marina-ravliuk-cv.pdf" download="Marina_Ravliuk_CV.pdf">
-                <span>{t.cvDownload}</span><Download size={21}/>
-              </a>
+            <Reveal delay={0.1} className="journey-cv-select">
+              <span className="journey-cv-label">{t.cvDownload} <Download size={18}/></span>
+              <div className="journey-cv-languages" role="group" aria-label={t.cvDownload}>
+                {languages.map((language) => (
+                  <a key={language}
+                    className={`journey-cv-language${language === lang ? ' is-current' : ''}`}
+                    href={`/cv/Marina_Ravliuk_CV_${language.toUpperCase()}.pdf`}
+                    download={`Marina_Ravliuk_CV_${language.toUpperCase()}.pdf`}
+                    aria-label={`${t.cvDownload}: ${language.toUpperCase()} (PDF)`}>
+                    {language.toUpperCase()}
+                  </a>
+                ))}
+              </div>
             </Reveal>
           </div>
           <JourneyTimeline lang={lang} />
