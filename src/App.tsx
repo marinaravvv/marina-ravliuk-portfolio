@@ -33,13 +33,13 @@ function usePortfolioRoute() {
   return { route, navigate };
 }
 
-function ProjectArt({ project, small = false, imageIndex = 0, onImageReady }: { project: Project; small?: boolean; imageIndex?: number; onImageReady?: (ready: boolean) => void }) {
+function ProjectArt({ project, lang, small = false, imageIndex = 0, onImageReady }: { project: Project; lang: Language; small?: boolean; imageIndex?: number; onImageReady?: (ready: boolean) => void }) {
   // Keep every real screenshot mounted so switching images never reveals a
   // conceptual mockup or flashes while a new <img> starts decoding.
   if (project.gallery?.length) {
     return (
       <div className={`project-art project-art--${project.visual} project-art--gallery${small ? ' project-art--small' : ''}`}
-        role="img" aria-label={`${project.title} — website screenshots`}>
+        role="img" aria-label={`${project.title} — ${text[lang].caseScreenshotNote}`}>
         {project.gallery.map((src, index) => (
           <img key={src} src={src} alt=""
             className={`project-gallery-image${index === imageIndex ? ' is-active' : ''}`}
@@ -53,7 +53,7 @@ function ProjectArt({ project, small = false, imageIndex = 0, onImageReady }: { 
   }
   const imageSrc = project.gallery?.[imageIndex];
   return (
-    <div className={`project-art project-art--${project.visual}${small ? ' project-art--small' : ''}`} aria-label={`${project.title} — ${project.gallery?.length ? 'screenshots from the live website' : 'visual concept'}`} role="img">
+    <div className={`project-art project-art--${project.visual}${small ? ' project-art--small' : ''}`} aria-label={`${project.title} — ${project.gallery?.length ? text[lang].caseScreenshotNote : text[lang].caseViewVisual}`} role="img">
       <div className="art-grid" />
       <div className="art-noise" />
       {project.visual === 'aura' && (
@@ -233,7 +233,7 @@ function WorkSection({ lang }: { lang: Language }) {
                   if (info.offset.x > 65 || info.velocity.x > 450) changeSlide(active - 1);
                 }}
               >
-                <ProjectArt project={current} imageIndex={imageIndex} />
+                <ProjectArt project={current} lang={lang} imageIndex={imageIndex} />
               </motion.div>
             </AnimatePresence>
             <div className="selected-carousel-preview-footer">
@@ -493,7 +493,7 @@ function Portfolio({ lang }: { lang: Language }) {
       </section>
       <section className="contact-section" id="contact"><div className="container">
         <Reveal><p className="eyebrow">{t.contactLabel}</p><h2>{t.contactTitle}<br/><em>{t.contactItalic}</em></h2><p className="contact-intro">{t.contactText}</p>
-          <a className="contact-button" href="mailto:info@marinaravliuk.com?subject=Collaboration%20with%20Marina%20Rav" aria-label={t.contactButton}>{t.contactButton}<ArrowUpRight size={22}/></a>
+          <a className="contact-button" href={`mailto:info@marinaravliuk.com?subject=${encodeURIComponent(t.contactEmailSubject)}`} aria-label={t.contactButton}>{t.contactButton}<ArrowUpRight size={22}/></a>
           <nav className="contact-social-links" aria-label={t.socialAria}>
             <a href="https://www.instagram.com/marinaravvv/" target="_blank" rel="noopener noreferrer">Instagram <ArrowUpRight size={14}/></a>
             <a href="https://www.linkedin.com/in/marina-rav-609504b9/" target="_blank" rel="noopener noreferrer">LinkedIn <ArrowUpRight size={14}/></a>
@@ -512,7 +512,7 @@ export default function App() {
   const progress = useSpring(scrollYProgress, { stiffness: 130, damping: 35 });
   useEffect(() => {
     document.documentElement.lang = route.lang === 'ua' ? 'uk' : route.lang;
-    document.title = 'Marina Rav — AI Automation & Digital Systems';
+    document.title = t.metaTitle;
     const meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
     if (meta) meta.content = t.heroIntro;
     languages.forEach((language) => {
@@ -520,7 +520,7 @@ export default function App() {
       if (!link) { link = document.createElement('link'); link.rel = 'alternate'; link.hreflang = language === 'ua' ? 'uk' : language; document.head.appendChild(link); }
       link.href = window.location.origin + `/${language}`;
     });
-  }, [route.lang, t.heroIntro]);
+  }, [route.lang, t.heroIntro, t.metaTitle]);
 
   const gotoSection = (id: string) => {
     setMenuOpen(false);
