@@ -1000,3 +1000,270 @@ body,.portfolio{font-family:var(--rav-sans)}
   .footer-identity strong{font-size:30px}
   .footer-identity span{font-size:8px}
 }
+
+
+/* JOURNEY V2 — scroll storytelling with a restrained pinned year */
+.journey-experience{
+  display:grid;
+  grid-template-columns:minmax(220px,.42fr) minmax(0,1fr);
+  gap:clamp(35px,7vw,120px);
+  align-items:start;
+}
+.journey-rail{
+  position:sticky;
+  top:135px;
+  height:clamp(320px,52svh,530px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  border-top:1px solid rgba(240,233,221,.22);
+}
+.journey-rail-index{
+  font-family:var(--rav-sans);
+  font-size:11px;
+  letter-spacing:.2em;
+  color:#B28A62;
+}
+.journey-year-display{
+  position:relative;
+  overflow:hidden;
+  width:100%;
+  min-height:clamp(105px,11vw,180px);
+  display:flex;
+  align-items:center;
+  font-family:var(--rav-serif);
+  font-size:clamp(75px,8.5vw,145px);
+  font-weight:800;
+  letter-spacing:-.085em;
+  line-height:1;
+  color:#F0E9DD;
+}
+.journey-year-display span{
+  display:block;
+  white-space:nowrap;
+}
+.journey-progress-track{
+  width:3px;
+  height:100px;
+  margin-top:12px;
+  background:rgba(240,233,221,.2);
+  overflow:hidden;
+}
+.journey-progress-track span{
+  display:block;
+  width:100%;
+  background:#B28A62;
+  transition:height .42s cubic-bezier(.22,1,.36,1);
+}
+.journey-experience .journey-timeline{
+  border-top:1px solid rgba(240,233,221,.22);
+}
+.journey-experience .journey-item{
+  display:grid;
+  grid-template-columns:36px minmax(0,1fr);
+  gap:clamp(12px,2vw,27px);
+  min-height:clamp(265px,44svh,425px);
+  padding:clamp(34px,4vw,55px) 0;
+  align-content:center;
+  align-items:start;
+  opacity:.52;
+  transform:translateY(12px);
+  border-bottom:1px solid rgba(240,233,221,.23);
+  transition:opacity .5s,transform .5s,border-color .5s;
+}
+.journey-experience .journey-item--active{
+  opacity:1;
+  transform:translateY(0);
+  border-bottom-color:rgba(178,138,98,.72);
+}
+.journey-experience .journey-number{
+  color:#B28A62;
+  padding-top:4px;
+}
+.journey-experience .journey-year{
+  display:block;
+  color:#B28A62;
+  font-family:var(--rav-sans);
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.14em;
+  padding:0;
+  margin:0 0 24px;
+}
+.journey-experience .journey-item h3{
+  font-family:var(--rav-serif);
+  font-size:clamp(26px,2.7vw,45px);
+  font-weight:800;
+  letter-spacing:-.045em;
+  line-height:1.13;
+  margin:0 0 22px;
+  color:#F0E9DD;
+}
+.journey-experience .journey-item p{
+  font-family:var(--rav-sans);
+  font-size:clamp(15px,1.2vw,19px);
+  line-height:1.7;
+  color:#CDB9A8;
+  max-width:620px;
+}
+@media(max-width:760px){
+  .journey-experience{display:flex;flex-direction:column;gap:0}
+  .journey-rail{
+    position:sticky;
+    top:70px;
+    z-index:5;
+    height:72px;
+    min-height:0;
+    width:100%;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    padding:12px 0;
+    background:#302219;
+    border-bottom:1px solid rgba(240,233,221,.26);
+    border-top:0;
+  }
+  .journey-rail-index{font-size:9px}
+  .journey-year-display{
+    min-height:0;
+    width:auto;
+    flex:1;
+    justify-content:flex-end;
+    font-size:42px;
+    letter-spacing:-.07em;
+  }
+  .journey-progress-track{height:37px;width:2px;margin:0}
+  .journey-experience .journey-timeline{width:100%}
+  .journey-experience .journey-item{
+    min-height:220px;
+    grid-template-columns:27px minmax(0,1fr);
+    padding:34px 0;
+    gap:12px;
+    opacity:.74;
+    transform:none;
+  }
+  .journey-experience .journey-item--active{opacity:1}
+  .journey-experience .journey-year{margin-bottom:16px}
+  .journey-experience .journey-item h3{font-size:clamp(24px,6.6vw,33px)}
+  .journey-experience .journey-item p{font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){
+  .journey-experience .journey-item{opacity:1;transform:none;transition:none}
+  .journey-progress-track span{transition:none}
+}
+
+/* PROJECTS V2 — lightweight 3D depth, never a full-screen WebGL scene */
+.work-preview-wrap{perspective:1400px;perspective-origin:50% 43%}
+.work-preview-depth{
+  width:100%;
+  height:100%;
+  transform-style:preserve-3d;
+  transform:rotateX(var(--preview-tilt-x,0deg)) rotateY(var(--preview-tilt-y,0deg));
+  transition:transform .34s cubic-bezier(.22,1,.36,1);
+  box-shadow:0 24px 55px rgba(48,34,25,.13);
+}
+.work-preview-depth .project-art{height:100%;border-radius:2px}
+.work-steps .work-step{min-height:clamp(420px,70svh,680px)}
+.work-step h3{font-family:var(--rav-serif);font-weight:800;letter-spacing:-.06em}
+.work-mobile-art .project-art{border-radius:2px}
+@media(max-width:760px){
+  .work-steps .work-step{min-height:0}
+  .work-mobile-art{transform:none}
+}
+@media(hover:none),(prefers-reduced-motion:reduce){
+  .work-preview-depth{transform:none!important;transition:none}
+}
+
+/* RODUS — visual exploration of a layered educational platform,
+   explicitly presented as a concept, not an actual screenshot. */
+.project-art--rodus{
+  background:#CFBCA5;
+  color:#302219;
+}
+.project-art--rodus .art-grid{
+  background-image:linear-gradient(rgba(48,34,25,.05) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(48,34,25,.05) 1px,transparent 1px);
+}
+.project-art--rodus .placeholder-note{color:#4A3428;opacity:.75}
+.rodus-layout{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  isolation:isolate;
+  perspective:1150px;
+}
+.rodus-kicker{
+  position:absolute;
+  top:7%;left:7%;
+  font-family:var(--rav-sans);
+  font-size:9px;
+  letter-spacing:.2em;
+  z-index:3;
+}
+.rodus-sheets{
+  position:relative;
+  width:min(61%,420px);
+  height:58%;
+  transform:rotate(-7deg);
+  transform-style:preserve-3d;
+}
+.rodus-sheet{
+  position:absolute;
+  inset:0;
+  padding:clamp(17px,3vw,40px);
+  box-shadow:15px 25px 45px rgba(48,34,25,.22);
+}
+.rodus-sheet--back{
+  background:#4A3428;
+  color:#E4D4C2;
+  transform:translate3d(16%,9%,-38px) rotate(9deg);
+}
+.rodus-sheet--back span{
+  font-size:10px;
+  font-family:var(--rav-sans);
+  letter-spacing:.17em;
+}
+.rodus-sheet--front{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:#F6F2EA;
+  border:1px solid rgba(48,34,25,.16);
+  transform:translateZ(30px);
+}
+.rodus-sheet--front>span{
+  font-family:var(--rav-serif);
+  font-weight:800;
+  font-size:clamp(24px,4.4vw,66px);
+  letter-spacing:-.065em;
+}
+.rodus-sheet-line{
+  width:100%;
+  height:1px;
+  background:#B28A62;
+  display:block;
+}
+.rodus-sheet--front small{
+  font-family:var(--rav-sans);
+  font-size:9px;
+  letter-spacing:.14em;
+}
+.rodus-title{
+  position:absolute;
+  bottom:4%;
+  font-family:var(--rav-serif);
+  font-weight:900;
+  font-size:clamp(65px,8vw,135px);
+  letter-spacing:-.09em;
+  opacity:.18;
+}
+@media(max-width:760px){
+  .rodus-sheets{width:min(57%,320px);height:54%}
+  .rodus-sheet--front>span{font-size:clamp(26px,8vw,54px)}
+  .rodus-title{font-size:clamp(55px,14vw,100px)}
+}
