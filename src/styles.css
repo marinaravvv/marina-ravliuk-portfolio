@@ -2607,3 +2607,21 @@ body,.portfolio{font-family:var(--rav-sans)}
 @media(prefers-reduced-motion:reduce){
   .mav8-earth-art img{transition:none}
 }
+
+
+/* SELECTED WORKS — clear editorial introduction; live projects, growing portfolio. */
+.work-section .work-head .work-intro{
+  max-width:690px;
+  margin:clamp(24px,3vw,42px) 0 0;
+  font:400 clamp(16px,1.45vw,21px)/1.7 var(--rav-sans);
+  color:#705747;
+  letter-spacing:-.012em;
+}
+@media(max-width:760px){
+  .work-section .work-head .work-intro{
+    margin-top:21px;
+    max-width:430px;
+    font-size:16px;
+    line-height:1.65;
+  }
+}
