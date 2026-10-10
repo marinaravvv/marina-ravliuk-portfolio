@@ -200,6 +200,7 @@ function WorkSection({ lang }: { lang: Language }) {
       <div className="container work-head">
         <Reveal><p className="eyebrow eyebrow--dark">{t.selectedLabel}</p></Reveal>
         <Reveal><h2 className="section-title work-title">{t.selectedTitle} <em>{t.selectedTitleItalic}</em></h2></Reveal>
+        <Reveal><p className="work-intro">{t.selectedDescription}</p></Reveal>
       </div>
       <div className="container selected-carousel"
         role="region"
