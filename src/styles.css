@@ -861,3 +861,30 @@ body{font-family:'Manrope',sans-serif}
  .work-section .section-title{font-size:clamp(37px,9vw,65px)}
  .contact-section h2{font-size:clamp(40px,10vw,70px)}
 }
+
+
+/* Official supplied brand typefaces. If the uploaded font files are not yet
+   in public/fonts, the same Montserrat / Manrope family loads from Google. */
+@font-face{font-family:'RavMontserrat';src:url('/fonts/Montserrat-Medium.ttf') format('truetype');font-style:normal;font-weight:500;font-display:swap}
+@font-face{font-family:'RavMontserrat';src:url('/fonts/Montserrat-ExtraBold.ttf') format('truetype');font-style:normal;font-weight:800;font-display:swap}
+@font-face{font-family:'RavMontserrat';src:url('/fonts/Montserrat-Black.ttf') format('truetype');font-style:normal;font-weight:900;font-display:swap}
+@font-face{font-family:'RavManrope';src:url('/fonts/Manrope-Regular.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:'RavManrope';src:url('/fonts/Manrope-Medium.ttf') format('truetype');font-style:normal;font-weight:500;font-display:swap}
+:root{
+ --rav-serif:'RavMontserrat','Montserrat',sans-serif;
+ --rav-sans:'RavManrope','Manrope',sans-serif;
+}
+body,.portfolio{font-family:var(--rav-sans)}
+.hero.hero-editorial .hero-editorial-name h1,
+.hero.hero-editorial .hero-editorial-name h1 em,
+.hero.hero-editorial .hero-motion-row,
+.about-editorial-intro h2,
+.journey-heading h2,
+.journey-item h3,
+.work-section .section-title,
+.work-step h3,
+.contact-section h2,
+.site-header .logo{font-family:var(--rav-serif)}
+.about-editorial-lead,.journey-intro,.journey-cv-link,
+.about-editorial-details p,.journey-item p,.contact-intro,
+.work-step-desc,.main-nav,.language-switch{font-family:var(--rav-sans)}
