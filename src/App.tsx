@@ -395,9 +395,7 @@ function Portfolio({ lang }: { lang: Language }) {
                 <img src="/images/marina-hero-cutout.webp" alt={t.heroPortraitAlt} decoding="async" fetchPriority="high" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-hero-black.webp'; }} />
               </motion.div>
               </div>
-            <motion.div className="hero-editorial-name" initial={reducedMotion ? false : { opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.35 }}>
-              <h1>MARINA <em>RAV</em></h1>
-            </motion.div>
+            <h1 className="hero-accessible-heading">Marina Rav — {t.heroSub}</h1>
           </div>
         </div>
       </section>
@@ -535,6 +533,7 @@ export default function App() {
   return <div className="portfolio">
     <motion.div className="scroll-progress" style={{ scaleX: progress }} />
     <header className="site-header"><div className="container header-inner">
+      <button type="button" className="logo logo-editorial" onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>MARINA RAV</button>
       <nav className={`main-nav ${menuOpen ? 'main-nav--open' : ''}`} aria-label={t.navAria}>
         {navItems.map((item) => <button type="button" key={item.id} onClick={() => gotoSection(item.id)}>{item.title}</button>)}
       </nav>
