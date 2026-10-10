@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Download, Menu, X } from 'lucide-react';
 import { expertise, languages, processSteps, projects, stack, text, type Language, type Project } from './content';
 
 type RouteState = { lang: Language; project: string | null };
@@ -177,22 +177,59 @@ function Portfolio({ lang, navigate }: { lang: Language; navigate: (lang: Langua
             <motion.div className="hero-editorial-name" initial={reducedMotion ? false : { opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.35 }}>
               <h1>MARINA <em>RAV</em></h1>
             </motion.div>
-            <div className="hero-edge-text">AI / AUTOMATION / DIGITAL SYSTEMS</div>
-          </div>
-          <div className="hero-editorial-bottom">
-            <p>{t.heroIntro}</p>
-            <button type="button" onClick={() => goSection('about')} className="hero-editorial-scroll"><span>{t.scroll}</span><ArrowDown size={19} /></button>
           </div>
         </div>
-        <div className="marquee editorial-marquee" aria-hidden="true"><div className="marquee-track">{Array.from({ length: 4 }, (_, i) => <span key={i}>AI AGENTS <b>✳</b> DIGITAL SYSTEMS <b>✳</b> AUTOMATION <b>✳</b>&nbsp;</span>)}</div></div>
       </section>
-      <section className="about-section" id="about">
-        <div className="container about-grid">
-          <Reveal className="about-left"><p className="eyebrow eyebrow--dark">{t.aboutLabel}</p><div className="about-monogram">MR<span>°</span></div></Reveal>
-          <div className="about-right">
-            <Reveal><h2 className="section-title">{t.aboutHeadingA}<br/><em>{t.aboutHeadingB}</em><br/>{t.aboutHeadingC}</h2></Reveal>
-            <div className="about-copy"><Reveal><p>{t.aboutText}</p></Reveal><Reveal delay={0.08}><p>{t.aboutSecond}</p></Reveal></div>
-            <Reveal><div className="about-location">MILANO, ITALIA <span className="location-star">✳</span> 45°27′N 9°11′E</div></Reveal>
+      <section className="about-section about-editorial" id="about">
+        <div className="container about-editorial-grid">
+          <Reveal className="about-editorial-intro">
+            <p className="eyebrow eyebrow--dark">{t.aboutLabel}</p>
+            <h2 className="section-title">{t.aboutHeadingA}<br/><em>{t.aboutHeadingB}</em><br/>{t.aboutHeadingC}</h2>
+            <p className="about-editorial-lead">{t.aboutStatement}</p>
+          </Reveal>
+          <Reveal className="about-editorial-portrait" delay={0.1}>
+            <figure className="about-photo-frame">
+              <img src="/images/marina-about.webp" alt="Marina Rav — digital products, AI and business systems" loading="lazy" decoding="async" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-hero.webp'; }} />
+              <figcaption><span>MARINA RAV</span><span>MILANO · ITALIA</span></figcaption>
+            </figure>
+          </Reveal>
+          <div className="about-editorial-details">
+            <Reveal><p>{t.aboutText}</p></Reveal>
+            <Reveal delay={0.08}><p>{t.aboutSecond}</p></Reveal>
+            <Reveal><div className="about-editorial-foot"><span>{t.aboutPhotoCaption}</span><span>45°27′N · 9°11′E</span></div></Reveal>
+          </div>
+        </div>
+      </section>
+      <section className="journey-section" id="journey">
+        <div className="container">
+          <div className="journey-heading">
+            <Reveal><p className="eyebrow">{t.journeyLabel}</p>
+              <h2>{t.journeyTitle}<br/><em>{t.journeyItalic}</em></h2>
+              <p className="journey-intro">{t.journeyIntro}</p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <a className="journey-cv-link" href="/cv-marina-ravliuk.html" target="_blank" rel="noopener noreferrer">
+                <span>{t.cvDownload}</span><Download size={21}/>
+              </a>
+            </Reveal>
+          </div>
+          <div className="journey-timeline">
+            {[
+              { year: '2024 — '+t.journeyNow, name: t.journeyAI, description: t.journeyAIDescription, number: '01' },
+              { year: '2025', name: t.journeyExit, description: t.journeyExitDescription, number: '02' },
+              { year: '2023', name: t.journeyPlatform, description: t.journeyPlatformDescription, number: '03' },
+              { year: '2021 — 2025', name: t.journeySchool, description: t.journeySchoolDescription, number: '04' },
+              { year: '2018', name: t.journeyEducation, description: t.journeyEducationDescription, number: '05' }
+            ].map((item, index) => (
+              <Reveal key={item.number} delay={index * .04}>
+                <article className="journey-item">
+                  <span className="journey-number">{item.number}</span>
+                  <span className="journey-year">{item.year}</span>
+                  <div className="journey-item-content"><h3>{item.name}</h3><p>{item.description}</p></div>
+                  <span className="journey-plus" aria-hidden="true">↗</span>
+                </article>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
@@ -261,7 +298,7 @@ export default function App() {
       window.requestAnimationFrame(() => window.requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })));
     } else document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
-  const navItems = [{ id: 'about', title: t.navAbout }, { id: 'expertise', title: t.navExpertise }, { id: 'work', title: t.navWork }, { id: 'process', title: t.navProcess }, { id: 'contact', title: t.navContact }];
+  const navItems = [{ id: 'about', title: t.navAbout }, { id: 'journey', title: t.navJourney }, { id: 'expertise', title: t.navExpertise }, { id: 'work', title: t.navWork }, { id: 'process', title: t.navProcess }, { id: 'contact', title: t.navContact }];
   return <div className="portfolio">
     <motion.div className="scroll-progress" style={{ scaleX: progress }} />
     <header className="site-header"><div className="container header-inner">
