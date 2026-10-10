@@ -113,75 +113,95 @@ function Reveal({ children, className = '', delay = 0 }: { children: React.React
 
 function WorkSection({ lang, openProject }: { lang: Language; openProject: (id: string) => void }) {
   const [active, setActive] = useState(0);
+  const [direction, setDirection] = useState(1);
   const reducedMotion = useReducedMotion();
-  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
   const t = text[lang];
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      const candidates = entries.filter((entry) => entry.isIntersecting);
-      if (candidates.length) {
-        const selected = candidates.sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        const index = Number((selected.target as HTMLElement).dataset.index);
-        if (!Number.isNaN(index)) setActive(index);
-      }
-    }, { rootMargin: '-25% 0px -25% 0px', threshold: [0, 0.15, 0.4, 0.6] });
-    stepRefs.current.forEach((element) => { if (element) observer.observe(element); });
-    return () => observer.disconnect();
-  }, []);
   const current = projects[active];
+
+  function changeSlide(next: number) {
+    const length = projects.length;
+    const target = ((next % length) + length) % length;
+    if (target === active) return;
+    setDirection(next > active ? 1 : -1);
+    setActive(target);
+  }
+
   return (
     <section className="work-section" id="work">
       <div className="container work-head">
         <Reveal><p className="eyebrow eyebrow--dark">{t.selectedLabel}</p></Reveal>
         <Reveal><h2 className="section-title work-title">{t.selectedTitle} <em>{t.selectedTitleItalic}</em></h2></Reveal>
       </div>
-      <div className="work-story container">
-        <div className="work-sticky">
-          <div className="work-preview-wrap"
-            onPointerMove={(event) => {
-              if (reducedMotion || event.pointerType !== 'mouse') return;
-              const rect = event.currentTarget.getBoundingClientRect();
-              const x = (event.clientX - rect.left) / rect.width - .5;
-              const y = (event.clientY - rect.top) / rect.height - .5;
-              event.currentTarget.style.setProperty('--preview-tilt-x', `${(-y * 4).toFixed(2)}deg`);
-              event.currentTarget.style.setProperty('--preview-tilt-y', `${(x * 5).toFixed(2)}deg`);
-            }}
-            onPointerLeave={(event) => {
-              event.currentTarget.style.removeProperty('--preview-tilt-x');
-              event.currentTarget.style.removeProperty('--preview-tilt-y');
-            }}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div key={current.id} className="work-preview"
-                initial={reducedMotion ? false : { opacity: 0, scale: .975, y: 18 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={reducedMotion ? undefined : { opacity: 0, scale: 1.015, y: -14 }}
-                transition={{ duration: .42, ease: [0.22, 1, 0.36, 1] }}>
-                <div className="work-preview-depth"><ProjectArt project={current} /></div>
+      <div className="container selected-carousel"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label={t.selectedTitle}
+        onKeyDown={(event) => {
+          if (event.target instanceof HTMLButtonElement || event.target instanceof HTMLAnchorElement) return;
+          if (event.key === 'ArrowRight') { event.preventDefault(); changeSlide(active + 1); }
+          if (event.key === 'ArrowLeft') { event.preventDefault(); changeSlide(active - 1); }
+        }}
+        tabIndex={0}
+      >
+        <div className="selected-carousel-topline">
+          <span>{String(active + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</span>
+          <span>{t.carouselHint}</span>
+        </div>
+        <div className="selected-carousel-layout">
+          <div className="selected-carousel-visual" aria-live="off">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div key={current.id} className="selected-carousel-slide"
+                initial={reducedMotion ? false : { opacity: 0, x: direction * 65, scale: .97 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={reducedMotion ? undefined : { opacity: 0, x: direction * -50, scale: .985 }}
+                transition={{ duration: reducedMotion ? 0 : .42, ease: [0.22, 1, 0.36, 1] }}
+                drag={reducedMotion ? false : 'x'}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={.18}
+                onDragEnd={(_, info) => {
+                  if (info.offset.x < -65 || info.velocity.x < -450) changeSlide(active + 1);
+                  if (info.offset.x > 65 || info.velocity.x > 450) changeSlide(active - 1);
+                }}
+              >
+                <ProjectArt project={current} />
               </motion.div>
             </AnimatePresence>
-            <div className="preview-bottom"><span>{String(active + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</span><span>{current.category[lang]}</span></div>
+            <span className="selected-carousel-visual-caption">{current.title} / {current.category[lang]}</span>
           </div>
-        </div>
-        <div className="work-steps">
-          {projects.map((project, index) => (
-            <div className={`work-step ${active === index ? 'is-active' : ''}`} data-index={index}
-              ref={(node) => { stepRefs.current[index] = node; }} key={project.id}>
-              <div className="work-step-number">{String(index + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</div>
-              <motion.div className="work-mobile-art"
-                initial={reducedMotion ? false : { opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: .18 }}
-                transition={{ duration: .55, ease: [0.22, 1, 0.36, 1] }}>
-                <ProjectArt project={project} small />
+          <div className="selected-carousel-info" aria-live="polite" aria-atomic="true">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div className="selected-carousel-info-inner" key={current.id}
+                initial={reducedMotion ? false : { opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={reducedMotion ? undefined : { opacity: 0, y: -10 }}
+                transition={{ duration: reducedMotion ? 0 : .32 }}
+              >
+                <span className="selected-carousel-category">{current.category[lang]}</span>
+                <h3>{current.title}</h3>
+                <p>{current.summary[lang]}</p>
+                {current.inDevelopment && <span className="in-dev">{t.inDevelopment}</span>}
+                <button type="button" className="text-link" onClick={() => openProject(current.id)}>
+                  {t.caseView} <ArrowUpRight size={19} />
+                </button>
               </motion.div>
-              <h3>{project.title}</h3>
-              <p className="work-step-category">{project.category[lang]}</p>
-              <p className="work-step-desc">{project.summary[lang]}</p>
-              {project.inDevelopment && <span className="in-dev">{t.inDevelopment}</span>}
-              <button type="button" className="text-link" onClick={() => openProject(project.id)}>{t.caseView} <ArrowUpRight size={18} /></button>
+            </AnimatePresence>
+            <div className="selected-carousel-bottom">
+              <div className="selected-carousel-arrows">
+                <button type="button" onClick={() => changeSlide(active - 1)} aria-label={t.carouselPrev}><ArrowLeft size={23}/></button>
+                <button type="button" onClick={() => changeSlide(active + 1)} aria-label={t.carouselNext}><ArrowRight size={23}/></button>
+              </div>
+              <div className="selected-carousel-pagination" role="group" aria-label={t.carouselChoose}>
+                {projects.map((project, index) => (
+                  <button type="button" key={project.id}
+                    className={active === index ? 'is-active' : ''}
+                    aria-label={`${t.carouselChoose}: ${project.title}`}
+                    aria-current={active === index ? 'true' : undefined}
+                    onClick={() => changeSlide(index)}
+                  />
+                ))}
+              </div>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>
@@ -191,9 +211,7 @@ function WorkSection({ lang, openProject }: { lang: Language; openProject: (id: 
 function JourneyTimeline({ lang }: { lang: Language }) {
   const t = text[lang];
   const reducedMotion = useReducedMotion();
-
-  // Chronological chapters. Several business and education projects ran in
-  // parallel; their dates are intentionally allowed to overlap.
+  const [active, setActive] = useState<number | null>(null);
   const items = [
     { year: '2018', period: '2018', title: t.journeyEducation, description: t.journeyEducationDescription },
     { year: '2019', period: '2019 — 2023', title: t.journeyEarlyTitle, description: t.journeyEarlyDescription },
@@ -205,43 +223,43 @@ function JourneyTimeline({ lang }: { lang: Language }) {
   ];
 
   return (
-    <div className="journey-story">
-      <p className="journey-story-hint">{t.journeyScrollHint}<span aria-hidden="true"> ↓</span></p>
-      <div className="journey-story-stack">
+    <div className="journey-years">
+      <p className="journey-years-hint">{t.journeyHint}</p>
+      <div className="journey-years-list">
         {items.map((item, index) => {
-          const finalChapter = index === items.length - 1;
+          const open = active === index;
+          const panelId = `journey-panel-${index}`;
           return (
-            <article
-              key={item.year + '-' + index}
-              className={`journey-story-card${finalChapter ? ' journey-story-card--final' : ''}`}
-              style={{ zIndex: index + 1 }}
-              aria-label={`${item.period}: ${item.title}`}
-            >
-              <div className="journey-story-card-inner">
-                <div className="journey-story-meta">
-                  <span>{t.journeyChapter} {String(index + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}</span>
-                  <span>{item.period}</span>
-                </div>
-                <div className="journey-story-main">
-                  <span className="journey-story-year" aria-hidden="true">{item.year}</span>
-                  <motion.div
-                    className="journey-story-copy"
-                    initial={reducedMotion ? false : { opacity: 0, y: 28 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: .25 }}
-                    transition={{ duration: .65, ease: [0.22, 1, 0.36, 1] }}
+            <article key={item.year} className={`journey-years-item${open ? ' is-open' : ''}`}>
+              <button type="button" className="journey-years-trigger"
+                aria-expanded={open} aria-controls={panelId}
+                onClick={() => setActive(open ? null : index)}
+              >
+                <span>{item.year}</span>
+                <span className="journey-years-toggle" aria-hidden="true">{open ? '−' : '+'}</span>
+              </button>
+              <AnimatePresence initial={false}>
+                {open && (
+                  <motion.div key="panel" id={panelId} className="journey-years-panel"
+                    initial={reducedMotion ? false : { height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: reducedMotion ? 0 : .38, ease: [0.22, 1, 0.36, 1] }}
+                    role="region" aria-label={item.title}
                   >
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
+                    <div className="journey-years-content">
+                      <span className="journey-years-period">{item.period}</span>
+                      <h3>{item.title}</h3>
+                      <p>{item.description}</p>
+                      {item.year === '2026' && (
+                        <a href="https://mav8.site/" target="_blank" rel="noopener noreferrer">
+                          {t.visitMav8}<ArrowUpRight size={17}/>
+                        </a>
+                      )}
+                    </div>
                   </motion.div>
-                </div>
-                <div className="journey-story-bottom">
-                  <span>MARINA RAV · MY JOURNEY</span>
-                  {finalChapter
-                    ? <a href="https://mav8.site/" target="_blank" rel="noopener noreferrer">{t.visitMav8}<ArrowUpRight size={16}/></a>
-                    : <span>{t.journeyNext} <span aria-hidden="true">↓</span></span>}
-                </div>
-              </div>
+                )}
+              </AnimatePresence>
             </article>
           );
         })}
