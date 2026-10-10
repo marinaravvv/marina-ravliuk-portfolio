@@ -2357,3 +2357,133 @@ body,.portfolio{font-family:var(--rav-sans)}
 @media(prefers-reduced-motion:reduce){
   .hero-editorial .hero-editorial-texture{transform:none}
 }
+
+
+/* TOOLS RIBBON — quiet editorial technology strip, not a logo wall. */
+.tools-ribbon{
+  position:relative;
+  padding:clamp(28px,3.6vw,52px) 0 clamp(29px,3.8vw,55px);
+  background:#EAE0D2;
+  color:#302219;
+  border-top:1px solid rgba(48,34,25,.11);
+  border-bottom:1px solid rgba(48,34,25,.12);
+  overflow:hidden;
+}
+.tools-ribbon-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:clamp(17px,2.5vw,29px);
+  font:600 10px/1.5 var(--rav-sans);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#755946;
+}
+.tools-ribbon-heading span:last-child{
+  color:#A18B78;
+  letter-spacing:.12em;
+  text-align:right;
+}
+.tools-ribbon-mask{
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+}
+.tools-ribbon-track{
+  display:flex;
+  width:max-content;
+  animation:rav-tools-drift 72s linear infinite;
+}
+.tools-ribbon:hover .tools-ribbon-track{animation-play-state:paused}
+.tools-ribbon-sequence{
+  display:flex;
+  flex:0 0 auto;
+  align-items:center;
+}
+.tools-ribbon-name{
+  display:flex;
+  align-items:center;
+  white-space:nowrap;
+  font:600 clamp(17px,1.9vw,28px)/1.15 var(--rav-serif);
+  letter-spacing:-.04em;
+  color:#4A3428;
+  padding:0 clamp(17px,2.2vw,34px);
+}
+.tools-ribbon-name::after{
+  content:'·';
+  font-family:var(--rav-sans);
+  color:#A78465;
+  font-size:17px;
+  padding-left:clamp(34px,4vw,62px);
+}
+@keyframes rav-tools-drift{
+  0%{transform:translate3d(0,0,0)}
+  100%{transform:translate3d(-50%,0,0)}
+}
+@media(max-width:760px){
+  .tools-ribbon{padding:25px 0 30px}
+  .tools-ribbon-heading{font-size:9px;margin-bottom:19px}
+  .tools-ribbon-heading span:last-child{font-size:8px;letter-spacing:.06em}
+  .tools-ribbon-name{font-size:18px;padding:0 13px}
+  .tools-ribbon-name::after{font-size:14px;padding-left:27px}
+  .tools-ribbon-track{animation-duration:61s}
+}
+@media(prefers-reduced-motion:reduce){
+  .tools-ribbon-track{animation:none}
+  .tools-ribbon-mask{overflow-x:auto;mask-image:none;-webkit-mask-image:none}
+  .tools-ribbon-sequence[aria-hidden="true"]{display:none}
+}
+
+/* USER-APPROVED BACKGROUNDS V2 — exact supplied cream and chocolate textures. */
+.hero-editorial .hero-editorial-texture{
+  background-image:
+    linear-gradient(110deg,rgba(255,250,242,.33),rgba(250,241,229,.50)),
+    url('/images/backgrounds/cream-parchment-user.webp');
+  background-size:cover;
+  background-position:center;
+  opacity:.58;
+}
+.about-section.about-editorial{
+  background-color:#F3ECE2;
+  background-image:
+    linear-gradient(120deg,rgba(250,245,238,.55),rgba(250,245,238,.66)),
+    url('/images/backgrounds/cream-parchment-user.webp');
+  background-size:cover;
+  background-position:center center;
+}
+.journey-section{
+  background-color:#241811;
+  background-image:
+    linear-gradient(110deg,rgba(29,17,12,.74),rgba(36,22,16,.69) 55%,rgba(25,14,10,.77)),
+    url('/images/backgrounds/chocolate-leather-user.webp');
+  background-size:cover;
+  background-position:40% 48%;
+}
+.mav8-section.mav8-company-section{
+  background-color:#302219;
+  background-image:
+    linear-gradient(105deg,rgba(28,17,12,.66),rgba(35,20,14,.45) 60%,rgba(23,14,11,.73)),
+    url('/images/backgrounds/chocolate-leather-user.webp');
+  background-size:cover;
+  background-position:45% 40%;
+}
+@media(max-width:760px){
+  .hero-editorial .hero-editorial-texture{
+    background-position:45% center;
+    opacity:.56;
+  }
+  .about-section.about-editorial{background-position:56% center}
+  .journey-section{
+    background-image:
+      linear-gradient(110deg,rgba(29,17,12,.84),rgba(36,22,16,.79)),
+      url('/images/backgrounds/chocolate-leather-user.webp');
+    background-position:35% center;
+  }
+  .mav8-section.mav8-company-section{
+    background-image:
+      linear-gradient(110deg,rgba(29,17,12,.75),rgba(36,22,16,.65)),
+      url('/images/backgrounds/chocolate-leather-user.webp');
+    background-position:36% center;
+  }
+}
