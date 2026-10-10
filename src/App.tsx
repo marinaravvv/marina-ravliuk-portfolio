@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import { ArrowLeft, ArrowRight, ArrowUpRight, Download, Menu, X } from 'lucide-react';
-import { expertise, languages, processSteps, projects, stack, text, type Language, type Project } from './content';
+import { languages, projects, text, type Language, type Project } from './content';
 
 type RouteState = { lang: Language; project: string | null };
 const langNames: Record<Language, string> = { ua: 'УКР', en: 'ENG', it: 'ITA' };
