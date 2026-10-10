@@ -396,32 +396,31 @@ function Portfolio({ lang }: { lang: Language }) {
                 <img src="/images/marina-hero-black.webp" alt="Marina Rav — портрет у чорному жакеті" decoding="async" fetchPriority="high" onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-hero-v3.webp'; }} />
               </motion.div>
               </div>
-            <h1 className="hero-accessible-heading">Marina Rav — AI Agents, Automation & Digital Systems</h1>
+            <motion.div className="hero-editorial-name" initial={reducedMotion ? false : { opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.35 }}>
+              <h1>MARINA <em>RAV</em></h1>
+            </motion.div>
           </div>
         </div>
       </section>
-      <section className="about-section about-editorial" id="about">
-        <div className="container about-editorial-grid">
-          <Reveal className="about-editorial-portrait">
-            <figure className="about-photo-frame">
-              <img src="/images/marina-about-beige.webp" alt="Marina Rav — editorial-портрет у білій сорочці на теплому бежевому фоні"
-                loading="lazy" decoding="async"
-                onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-about-v2.webp'; }} />
-              <figcaption><span>MARINA RAV</span><span>MILANO · ITALIA</span></figcaption>
-            </figure>
-          </Reveal>
-          <div className="about-editorial-copy">
-            <Reveal className="about-editorial-intro">
-              <p className="eyebrow eyebrow--dark">{t.aboutLabel}</p>
-              <h2 className="section-title">{t.aboutHeadingA}<br/><em>{t.aboutHeadingB}</em><br/>{t.aboutHeadingC}</h2>
-              <p className="about-editorial-lead">{t.aboutStatement}</p>
-            </Reveal>
-            <Reveal className="about-editorial-details" delay={0.09}>
-              <p>{t.aboutText}</p>
-              <div className="about-skills" aria-label="Specializations">
-                <span>AI Agents</span><span>Business Automation</span><span>Digital Systems</span><span>Digital Products</span>
-              </div>
-            </Reveal>
+      <section className="about-section about-editorial about-wide" id="about">
+        <div className="container">
+          <div className="about-wide-stage">
+            <img className="about-wide-image"
+              src="/images/marina-about-landscape.webp"
+              alt="Marina Rav — портрет у білій сорочці на теплому бежевому фоні"
+              loading="lazy" decoding="async"
+              onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/marina-about-beige.webp'; }} />
+            <div className="about-wide-copy">
+              <Reveal className="about-wide-intro">
+                <p className="eyebrow eyebrow--dark">{t.aboutLabel}</p>
+                <h2>{t.aboutHeadingA} <em>{t.aboutHeadingB}</em><br/>{t.aboutHeadingC}</h2>
+                <p className="about-wide-statement">{t.aboutStatement}</p>
+                <p className="about-wide-description">{t.aboutText}</p>
+              </Reveal>
+            </div>
+          </div>
+          <div className="about-wide-skills" aria-label="Specializations">
+            {['AI AGENTS', 'BUSINESS AUTOMATION', 'DIGITAL SYSTEMS', 'DIGITAL PRODUCTS'].map(item => <span key={item}>{item}</span>)}
           </div>
         </div>
       </section>
@@ -479,12 +478,7 @@ function Portfolio({ lang }: { lang: Language }) {
                 <img src="/images/mav8-earth-hq.webp" alt="" loading="lazy" decoding="async"
                   onError={(event) => { event.currentTarget.onerror = null; event.currentTarget.src = '/images/mav8-earth.webp'; }} />
               </div>
-              <div className="mav8-earth-brand">
-                <span className="mav8-earth-eyebrow">FOUNDER / COMPANY</span>
-                <strong>MAV8</strong>
-                <small>AI · AUTOMATION · DIGITAL SYSTEMS</small>
-                <span className="mav8-feature-view">{t.visitMav8}<ArrowUpRight size={15}/></span>
-              </div>
+              <span className="mav8-image-arrow" aria-hidden="true"><ArrowUpRight size={22}/></span>
             </a>
           </Reveal>
         </div>
