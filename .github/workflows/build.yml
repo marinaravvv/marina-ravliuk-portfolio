@@ -2,9 +2,9 @@ name: Build portfolio
 
 on:
   pull_request:
-    branches: [main]
-  push:
     branches: [main, feat/portfolio-v1]
+  push:
+    branches: [main, feat/portfolio-v1, feat/editorial-hero]
 
 jobs:
   build:

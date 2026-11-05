@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://marinaravliuk.com/ua</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://marinaravliuk.com/ua"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://marinaravliuk.com/en"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://marinaravliuk.com/it"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://marinaravliuk.com/"/>
+  </url>
+  <url>
+    <loc>https://marinaravliuk.com/en</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://marinaravliuk.com/ua"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://marinaravliuk.com/en"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://marinaravliuk.com/it"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://marinaravliuk.com/"/>
+  </url>
+  <url>
+    <loc>https://marinaravliuk.com/it</loc>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://marinaravliuk.com/ua"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://marinaravliuk.com/en"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://marinaravliuk.com/it"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://marinaravliuk.com/"/>
+  </url>
+</urlset>
