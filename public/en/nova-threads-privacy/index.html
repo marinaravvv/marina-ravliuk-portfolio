@@ -22,7 +22,9 @@
     <h2>What we collect and why</h2>
     <p>NOVA Threads retrieves replies to posts by @marinaravvv from Meta’s Threads API. This may include your public Threads username, the text and identifier of your reply, and details about the original post. We use this information to review replies, prepare draft responses and track review decisions.</p>
     <h2>How your data is handled</h2>
-    <p>The workflow runs in n8n Cloud and sends reply content to OpenAI (GPT-4.1 mini) to generate suggested responses. Drafts and review decisions are stored in an n8n Data Table. Relevant reply details and draft text are sent to Marina Ravliuk via Telegram for review. The current workflow records review decisions and runs in a test mode that skips publishing replies.</p>
+    <p>The workflow runs in n8n Cloud and sends reply content to OpenAI (GPT-4.1 mini) to generate suggested responses. Drafts and review decisions are stored in an n8n Data Table. Telegram sends Marina Ravliuk a review notification and a link to the relevant execution in n8n. The link requires signing in to n8n. The current workflow records review decisions and runs in a test mode that skips publishing replies.</p>
+    <h2>Retention</h2>
+    <p>A daily cleanup removes draft and review records from the NOVA data table once they are older than 30 days. n8n Cloud Pro automatically prunes execution logs after 30 days or earlier if storage limits are reached. These periods describe the NOVA table and n8n execution history.</p>
     <h2>Your rights</h2>
     <p>You can ask to access, correct, restrict or delete your personal data, object to processing, or request a portable copy where the applicable conditions are met. To help locate the data, you can include the link to the relevant Threads post or reply. You may also lodge a complaint with a data protection authority.</p>
   </main>
